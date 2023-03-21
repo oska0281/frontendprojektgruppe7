@@ -25,14 +25,23 @@ export function ShoppingCart({isOpen}:ShoppingCartProps){
                         <CartItem key={item.id}{...item}/>
                             ))}
                     <div className="ms-auto fw-bold fs-5">
-                        Total {" "}
-                        {format(
-                            cartItems.reduce((total, cartItem) => {
-                                const item = products.find(i => i.id === cartItem.id)
-                                return total + (item?.price || 0) * cartItem.quantity
-                            },0)
-                        )}
-                    </div>
+    Total {" "}
+    {format(
+        cartItems.reduce((total, cartItem) => {
+            const item = products.find(i => i.id === cartItem.id)
+            return total + (item?.price || 0) * cartItem.quantity
+        },0)
+    )}
+    {cartItems.reduce((total, cartItem) => {
+        const item = products.find(i => i.id === cartItem.id)
+        return total + (item?.price || 0) * cartItem.quantity
+    },0) >= 300 &&
+        ` (rebate: ${format((cartItems.reduce((total, cartItem) => {
+            const item = products.find(i => i.id === cartItem.id)
+            return total + (item?.price || 0) * cartItem.quantity
+        },0) * 0.1))})`
+    }
+</div>
                 </Stack>
             </Offcanvas.Body>
     </Offcanvas>
