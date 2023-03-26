@@ -10,7 +10,7 @@ type ProdukterProps ={
 }
 
 export function Produkter({ id,navn,pris,billedeURL}:ProdukterProps){
-    const { getVareAntal, increasekurvAntal, decreasekurvAntal, fjernFraKurv} = useKurv()
+    const { getVareAntal, increaseKurvAntal, decreaseKurvAntal, fjernFraKurv} = useKurv()
     const antal = getVareAntal(id)
     return (
     <Card className="h-100">
@@ -23,14 +23,14 @@ export function Produkter({ id,navn,pris,billedeURL}:ProdukterProps){
             </Card.Title>
             <div className="mt-auto">
                 {antal === 0 ? (
-                    <Button className="w-100" onClick={() => increasekurvAntal(id)}>+Tilføj til kurv</Button>
+                    <Button className="w-100" onClick={() => increaseKurvAntal(id)}>+Tilføj til kurv</Button>
                 ) : <div className="d-flex align-items-center flex-column" style={{gap: ".5rem"}}>
                     <div className="d-flex align-items-center justify-content-center"style={{gap: ".5rem"}}>
-                       <Button onClick={() => decreasekurvAntal(id)}>-</Button>
+                       <Button onClick={() => decreaseKurvAntal(id)}>-</Button>
                         <div>
                             <span className="fs-3">{antal}</span> in cart
                             </div>
-                       <Button onClick={() => increasekurvAntal(id)}>+</Button>
+                       <Button onClick={() => increaseKurvAntal(id)}>+</Button>
                     </div>
                     <Button variant="danger" onClick={() => fjernFraKurv(id)}>Fjern</Button>
                 </div> }
