@@ -5,10 +5,10 @@ import {Oplysninger} from "./pages/Oplysninger";
 import {Butik} from "./pages/Butik";
 import {Betaling} from "./pages/Betaling";
 import {Navigationsbar} from "./komponenter/Navigationsbar"
-import {ShoppingCartProvider} from "./kontekst/KurvKontekst";
+import {KurvProvider} from "./kontekst/KurvKontekst";
 function App(){
   return (
-  <ShoppingCartProvider>
+  <KurvProvider>
     <Navigationsbar />
     <Container className="mb-4">
     <Routes>
@@ -17,7 +17,7 @@ function App(){
       <Route path="/betaling" element={<Betaling />} />
      </Routes>
    </Container>
-  </ShoppingCartProvider>
+  </KurvProvider>
 )
 }
 

@@ -1,19 +1,19 @@
-import {useShoppingCart} from "../kontekst/KurvKontekst";
-import products from "../data/products.json"
+import {useKurv} from "../kontekst/KurvKontekst";
+import produkter from "../data/produkter.json"
 import {Button, Stack} from "react-bootstrap";
-import {format} from "../utilities/format";
+import {formater} from "../utilities/formater";
 
 
 
 type CartItemProps ={
     id:string
-    quantity:number
+    antal:number
 }
 
 
-export function Vare({id, quantity}: CartItemProps) {
-    const {removeFromCart} = useShoppingCart()
-    const item = products.find(i => i.id === id)
+export function Vare({id, antal}: CartItemProps) {
+    const {fjernFraKurv} = useKurv()
+    const item = produkter.find(i => i.id === id)
     if (item== null) return null
 
     return(
@@ -25,13 +25,13 @@ export function Vare({id, quantity}: CartItemProps) {
             <div className="me-auto">
                 <div>
                     {item.navn} <span className="text-muted" style={{fontSize:"0.60rem"}}>
-                    x{quantity}
+                    x{antal}
                 </span>
                 </div>
-                <div className="text-muted" style={{fontSize:"0.70rem"}}>{format(item.pris)}</div>
+                <div className="text-muted" style={{fontSize:"0.70rem"}}>{formater(item.pris)}</div>
             </div>
-            <div>{format(item.pris * quantity)}</div>
-            <Button variant="outline-danger" size="sm" onClick={() => removeFromCart(item.id)}>&times;</Button>
+            <div>{formater(item.pris * antal)}</div>
+            <Button variant="outline-danger" size="sm" onClick={() => fjernFraKurv(item.id)}>&times;</Button>
         </Stack>
     )
 

@@ -1,8 +1,8 @@
 import {Button, Offcanvas, Stack} from "react-bootstrap";
-import {useShoppingCart} from "../kontekst/KurvKontekst";
-import products from "../data/products.json"
+import {useKurv} from "../kontekst/KurvKontekst";
+import produkter from "../data/produkter.json"
 import {Vare} from "./Vare";
-import {format} from "../utilities/format";
+import {formater} from "../utilities/formater";
 import { Link } from 'react-router-dom'
 
 
@@ -12,7 +12,7 @@ type KurvProps = {
     erAaben: boolean
 }
 export function Kurv({ erAaben }: KurvProps) {
-  const { lukKurv, cartItems } = useShoppingCart()
+  const { lukKurv, kurvVarer } = useKurv()
 
   return (
     <Offcanvas show={erAaben} onHide={lukKurv} placement="end">
@@ -23,7 +23,7 @@ export function Kurv({ erAaben }: KurvProps) {
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
           <div style={{ flex: 1, overflowY: 'auto' }}>
             <Stack gap={4}>
-              {cartItems.map(item => (
+              {kurvVarer.map(item => (
                 <Vare key={item.id} {...item} />
               ))}
             </Stack>
@@ -31,10 +31,10 @@ export function Kurv({ erAaben }: KurvProps) {
           <div>
             <div className="ms-auto fw-bold fs-5">
               Total {" "}
-              {format(
-                cartItems.reduce((total, cartItem) => {
-                  const item = products.find(i => i.id === cartItem.id)
-                  return total + (item?.pris || 0) * cartItem.quantity
+              {formater(
+                kurvVarer.reduce((total, cartItem) => {
+                  const item = produkter.find(i => i.id === cartItem.id)
+                  return total + (item?.pris || 0) * cartItem.antal
                 }, 0)
               )}
             </div>
