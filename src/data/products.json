@@ -1,26 +1,26 @@
 [
   {
     "id": "vitamin-d-90-120",
-    "name": "D-vitamin, 90ug, 120 stk",
-    "price": 116,
-    "imageUrl": "public/images/D-vitamin, 90ug, 120 stk.jpg"
+    "navn": "D-vitamin, 90ug, 120 stk",
+    "pris": 116,
+    "billedeURL": "public/images/D-vitamin, 90ug, 120 stk.jpg"
   },
   {
     "id": "vitamin-c-500-200",
-    "name": "C-vitamin, 500mg, 200 stk",
-    "price": 150,
-    "imageUrl": "public/images/vitamin-c-500-200.jpg"
+    "navn": "C-vitamin, 500mg, 200 stk",
+    "pris": 150,
+    "billedeURL": "public/images/vitamin-c-500-200.jpg"
   },
   {
     "id": "vitamin-c-depot-500-250",
-    "name": "C-vitamin Depot, 500mg, 200 stk",
-    "price": 175,
-    "imageUrl": "public/images/vitamin-c-depot-500-250.jpg"
+    "navn": "C-vitamin Depot, 500mg, 200 stk",
+    "pris": 175,
+    "billedeURL": "public/images/vitamin-c-depot-500-250.jpg"
   },
   {
     "id": "fish-oil-1000-120",
-    "name": "Omega 3 fiskeolie, 1000mg, 120 stk",
-    "price": 69,
-    "imageUrl":"public/images/fish-oil-1000-120.jpg"
+    "navn": "Omega 3 fiskeolie, 1000mg, 120 stk",
+    "pris": 69,
+    "billedeURL":"public/images/fish-oil-1000-120.jpg"
   }
 ]

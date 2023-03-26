@@ -8,13 +8,13 @@ export function useShoppingCart(){
     return useContext(KurvKontekst)
 }
 
-type ShoppingCartProviderProps = {
+type KurvProviderProps = {
     children: ReactNode
 }
 
 type ShoppingCartContext = {
     openCart:() => void
-    closeCart:() => void
+    lukKurv:() => void
 
     cartQuantity: number
     cartItems: CartItem[]
@@ -29,16 +29,16 @@ type CartItem= {
     quantity: number
 }
 
-export function ShoppingCartProvider( { children }: ShoppingCartProviderProps ){
+export function ShoppingCartProvider( { children }: KurvProviderProps ){
     const [cartItems, setCartItems] = lokalLagring<CartItem[]>("kurv-indhold",[])
-    const [isOpen, setIsOpen] = useState(false)
+    const [erAaben, seterAaben] = useState(false)
 
 
     const cartQuantity = cartItems.reduce((quantity,item) => item.quantity + quantity,0)
 
 
-    const openCart =() => setIsOpen(true)
-    const closeCart=() => setIsOpen(false)
+    const openCart =() => seterAaben(true)
+    const lukKurv=() => seterAaben(false)
 
     function increaseCartQuantity(id: string) {
         setCartItems(currentItems => {
@@ -84,9 +84,9 @@ export function ShoppingCartProvider( { children }: ShoppingCartProviderProps ){
 
 
     return (
-        <KurvKontekst.Provider value = {{ getItemQuantity,increaseCartQuantity, decreaseCartQuantity, removeFromCart, cartItems, cartQuantity, closeCart, openCart }}>
+        <KurvKontekst.Provider value = {{ getItemQuantity,increaseCartQuantity, decreaseCartQuantity, removeFromCart, cartItems, cartQuantity, lukKurv,openCart }}>
         {children}
-            <Kurv isOpen = {isOpen} />
+            <Kurv erAaben = {erAaben} />
     </KurvKontekst.Provider>
     )
 }
