@@ -19,18 +19,18 @@ export function Vare({id, quantity}: CartItemProps) {
     return(
         <Stack direction="horizontal" gap={2} className="d-flex align-items-center">
             <img
-            src={item.imageUrl}
+            src={item.billedeURL}
             style={{width:"120px", height: "70px", objectFit:"cover"}}
             />
             <div className="me-auto">
                 <div>
-                    {item.name} <span className="text-muted" style={{fontSize:"0.60rem"}}>
+                    {item.navn} <span className="text-muted" style={{fontSize:"0.60rem"}}>
                     x{quantity}
                 </span>
                 </div>
-                <div className="text-muted" style={{fontSize:"0.70rem"}}>{format(item.price)}</div>
+                <div className="text-muted" style={{fontSize:"0.70rem"}}>{format(item.pris)}</div>
             </div>
-            <div>{format(item.price * quantity)}</div>
+            <div>{format(item.pris * quantity)}</div>
             <Button variant="outline-danger" size="sm" onClick={() => removeFromCart(item.id)}>&times;</Button>
         </Stack>
     )

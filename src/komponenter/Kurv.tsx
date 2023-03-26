@@ -8,14 +8,14 @@ import { Link } from 'react-router-dom'
 
 
 
-type ShoppingCartProps = {
-    isOpen: boolean
+type KurvProps = {
+    erAaben: boolean
 }
-export function Kurv({ isOpen }: ShoppingCartProps) {
-  const { closeCart, cartItems } = useShoppingCart()
+export function Kurv({ erAaben }: KurvProps) {
+  const { lukKurv, cartItems } = useShoppingCart()
 
   return (
-    <Offcanvas show={isOpen} onHide={closeCart} placement="end">
+    <Offcanvas show={erAaben} onHide={lukKurv} placement="end">
       <Offcanvas.Header closeButton>
         <Offcanvas.Title>Kurv</Offcanvas.Title>
       </Offcanvas.Header>
@@ -34,12 +34,12 @@ export function Kurv({ isOpen }: ShoppingCartProps) {
               {format(
                 cartItems.reduce((total, cartItem) => {
                   const item = products.find(i => i.id === cartItem.id)
-                  return total + (item?.price || 0) * cartItem.quantity
+                  return total + (item?.pris || 0) * cartItem.quantity
                 }, 0)
               )}
             </div>
             <Link to="/betaling">
-              <Button onClick={closeCart} variant="primary" className="w-100 mt-3">Næste</Button>
+              <Button onClick={lukKurv} variant="primary" className="w-100 mt-3">Næste</Button>
             </Link>
           </div>
         </div>
