@@ -84,7 +84,7 @@ export function ShoppingCartProvider( { children }: ShoppingCartProviderProps ){
 
 
     return (
-        <KurvKontekst.Provider value = {{ getItemQuantity,increaseCartQuantity, decreaseCartQuantity, removeFromCart, cartItems, cartQuantity, closeCart,openCart }}>
+        <KurvKontekst.Provider value = {{ getItemQuantity,increaseCartQuantity, decreaseCartQuantity, removeFromCart, cartItems, cartQuantity, closeCart, openCart }}>
         {children}
             <Kurv isOpen = {isOpen} />
     </KurvKontekst.Provider>
