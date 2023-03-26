@@ -1,21 +1,21 @@
 import {Button, Container, Nav, Navbar} from "react-bootstrap"
 import {NavLink} from "react-router-dom";
 import shoppingcart from 'src/assets/shoppingcart.svg'
-import {useShoppingCart} from "../context/ShoppingCartContext";
+import {useShoppingCart} from "../kontekst/KurvKontekst";
 
-export function Navigationbar() {
+export function Navigationsbar() {
     const { openCart, cartQuantity} = useShoppingCart()
     return <Navbar sticky="top" className="bg-white shadow-sm mb-3">
         <Container>
             <Nav className="me.auto">
                 <Nav.Link to="/" as={NavLink}
-                >Home
+                >Butik
                 </Nav.Link>
-                <Nav.Link to="/store" as={NavLink}
-                >Store
+                <Nav.Link to="/oplysninger" as={NavLink}
+                >Oplysninger
                 </Nav.Link>
-                <Nav.Link to="/about" as={NavLink}
-                >About
+                <Nav.Link to="/betaling" as={NavLink}
+                >Betaling
                 </Nav.Link>
             </Nav>
             <Button onClick={openCart} style={{ width: "4rem", height:"3rem", position: "relative"}}>

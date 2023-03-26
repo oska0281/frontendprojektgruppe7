@@ -1,4 +1,4 @@
-import {useShoppingCart} from "../context/ShoppingCartContext";
+import {useShoppingCart} from "../kontekst/KurvKontekst";
 import products from "../data/products.json"
 import {Button, Stack} from "react-bootstrap";
 import {format} from "../utilities/format";
@@ -11,7 +11,7 @@ type CartItemProps ={
 }
 
 
-export function CartItem({id, quantity}: CartItemProps) {
+export function Vare({id, quantity}: CartItemProps) {
     const {removeFromCart} = useShoppingCart()
     const item = products.find(i => i.id === id)
     if (item== null) return null

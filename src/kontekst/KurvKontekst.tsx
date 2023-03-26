@@ -1,11 +1,11 @@
 import {createContext, ReactNode, useContext, useState} from "react";
-import {ShoppingCart} from "../components/ShoppingCart";
-import {useLocalStorage} from "../hooks/useLocalStorage";
+import {Kurv} from "../komponenter/Kurv";
+import {lokalLagring} from "../hooks/lokalLagring";
 
-const ShoppingCartContext = createContext({} as ShoppingCartContext)
+const KurvKontekst = createContext({} as ShoppingCartContext)
 
 export function useShoppingCart(){
-    return useContext(ShoppingCartContext)
+    return useContext(KurvKontekst)
 }
 
 type ShoppingCartProviderProps = {
@@ -30,7 +30,7 @@ type CartItem= {
 }
 
 export function ShoppingCartProvider( { children }: ShoppingCartProviderProps ){
-    const [cartItems, setCartItems] = useLocalStorage<CartItem[]>("kurv-indhold",[])
+    const [cartItems, setCartItems] = lokalLagring<CartItem[]>("kurv-indhold",[])
     const [isOpen, setIsOpen] = useState(false)
 
 
@@ -84,9 +84,9 @@ export function ShoppingCartProvider( { children }: ShoppingCartProviderProps ){
 
 
     return (
-        <ShoppingCartContext.Provider value = {{ getItemQuantity,increaseCartQuantity, decreaseCartQuantity, removeFromCart, cartItems, cartQuantity, closeCart,openCart }}>
+        <KurvKontekst.Provider value = {{ getItemQuantity,increaseCartQuantity, decreaseCartQuantity, removeFromCart, cartItems, cartQuantity, closeCart,openCart }}>
         {children}
-            <ShoppingCart isOpen = {isOpen} />
-    </ShoppingCartContext.Provider>
+            <Kurv isOpen = {isOpen} />
+    </KurvKontekst.Provider>
     )
 }

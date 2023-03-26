@@ -1,20 +1,20 @@
 
 import { Routes, Route } from "react-router-dom"
 import { Container } from "react-bootstrap";
-import {Home} from "./pages/Home";
-import {Store} from "./pages/Store";
-import {About} from "./pages/About";
-import {Navigationbar} from "./components/Navigationbar"
-import {ShoppingCartProvider} from "./context/ShoppingCartContext";
+import {Oplysninger} from "./pages/Oplysninger";
+import {StartSide} from "./pages/StartSide";
+import {Betaling} from "./pages/Betaling";
+import {Navigationsbar} from "./komponenter/Navigationsbar"
+import {ShoppingCartProvider} from "./kontekst/KurvKontekst";
 function App(){
   return (
   <ShoppingCartProvider>
-    <Navigationbar />
+    <Navigationsbar />
     <Container className="mb-4">
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/store" element={<Store />} />
-      <Route path="/about" element={<About />} />
+      <Route path="/" element={<StartSide />} />
+      <Route path="/oplysninger" element={<Oplysninger />} />
+      <Route path="/betaling" element={<Betaling />} />
      </Routes>
    </Container>
   </ShoppingCartProvider>
