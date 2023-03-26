@@ -38,7 +38,7 @@ export function Kurv({ erAaben }: KurvProps) {
                 }, 0)
               )}
             </div>
-            <Link to="/betaling">
+            <Link to="/levering">
               <Button onClick={lukKurv} variant="primary" className="w-100 mt-3">Næste</Button>
             </Link>
           </div>
