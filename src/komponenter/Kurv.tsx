@@ -1,7 +1,7 @@
 import {Offcanvas, Stack} from "react-bootstrap";
-import {useShoppingCart} from "../context/ShoppingCartContext";
+import {useShoppingCart} from "../kontekst/KurvKontekst";
 import products from "../data/products.json"
-import {CartItem} from "./CartItem";
+import {Vare} from "./Vare";
 import {format} from "../utilities/format";
 
 
@@ -10,7 +10,7 @@ import {format} from "../utilities/format";
 type ShoppingCartProps = {
     isOpen: boolean
 }
-export function ShoppingCart({isOpen}:ShoppingCartProps){
+export function Kurv({isOpen}:ShoppingCartProps){
 
     const { closeCart, cartItems } = useShoppingCart()
 
@@ -22,7 +22,7 @@ export function ShoppingCart({isOpen}:ShoppingCartProps){
             <Offcanvas.Body>
                 <Stack gap={4}>
                     {cartItems.map(item => (
-                        <CartItem key={item.id}{...item}/>
+                        <Vare key={item.id}{...item}/>
                             ))}
                     <div className="ms-auto fw-bold fs-5">
                         Total {" "}

@@ -1,6 +1,6 @@
 import {Button, Card} from "react-bootstrap";
 import {format} from "../utilities/format";
-import {useShoppingCart} from "../context/ShoppingCartContext";
+import {useShoppingCart} from "../kontekst/KurvKontekst";
 
 type ProductsProps ={
     id: string,
@@ -9,7 +9,7 @@ type ProductsProps ={
     imageUrl:string
 }
 
-export function Products({ id,name,price,imageUrl}:ProductsProps){
+export function Produkter({ id,name,price,imageUrl}:ProductsProps){
     const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart} = useShoppingCart()
     const quantity = getItemQuantity(id)
     return (
