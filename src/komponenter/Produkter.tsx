@@ -23,7 +23,7 @@ export function Produkter({ id,name,price,imageUrl}:ProductsProps){
             </Card.Title>
             <div className="mt-auto">
                 {quantity === 0 ? (
-                    <Button className="w-100" onClick={() => increaseCartQuantity(id)}>+Add To Cart</Button>
+                    <Button className="w-100" onClick={() => increaseCartQuantity(id)}>+Tilføj til kurv</Button>
                 ) : <div className="d-flex align-items-center flex-column" style={{gap: ".5rem"}}>
                     <div className="d-flex align-items-center justify-content-center"style={{gap: ".5rem"}}>
                        <Button onClick={() => decreaseCartQuantity(id)}>-</Button>
@@ -32,7 +32,7 @@ export function Produkter({ id,name,price,imageUrl}:ProductsProps){
                             </div>
                        <Button onClick={() => increaseCartQuantity(id)}>+</Button>
                     </div>
-                    <Button variant="danger" onClick={() => removeFromCart(id)}>Remove</Button>
+                    <Button variant="danger" onClick={() => removeFromCart(id)}>Fjern</Button>
                 </div> }
             </div>
         </Card.Body>
