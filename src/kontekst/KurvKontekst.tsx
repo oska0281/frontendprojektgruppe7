@@ -2,9 +2,9 @@ import {createContext, ReactNode, useContext, useState} from "react";
 import {Kurv} from "../komponenter/Kurv";
 import {lokalLagring} from "../hooks/lokalLagring";
 
-const KurvKontekst = createContext({} as ShoppingCartContext)
+const KurvKontekst = createContext({} as KurvKontekst)
 
-export function useShoppingCart(){
+export function useKurv(){
     return useContext(KurvKontekst)
 }
 
@@ -12,42 +12,42 @@ type KurvProviderProps = {
     children: ReactNode
 }
 
-type ShoppingCartContext = {
-    openCart:() => void
+type KurvKontekst = {
+    aabenKurv:() => void
     lukKurv:() => void
 
-    cartQuantity: number
-    cartItems: CartItem[]
-    getItemQuantity: (id:string) => number
-    increaseCartQuantity: (id:string) => void
-    decreaseCartQuantity: (id:string) => void
-    removeFromCart: (id:string) => void
+    kurvAntal: number
+    kurvVarer: KurvVare[]
+    getVareAntal: (id:string) => number
+    increasekurvAntal: (id:string) => void
+    decreasekurvAntal: (id:string) => void
+    fjernFraKurv: (id:string) => void
 }
 
-type CartItem= {
+type KurvVare= {
     id: string
-    quantity: number
+    antal: number
 }
 
-export function ShoppingCartProvider( { children }: KurvProviderProps ){
-    const [cartItems, setCartItems] = lokalLagring<CartItem[]>("kurv-indhold",[])
+export function KurvProvider( { children }: KurvProviderProps ){
+    const [kurvVarer, setkurvVarer] = lokalLagring<KurvVare[]>("kurv-indhold",[])
     const [erAaben, seterAaben] = useState(false)
 
 
-    const cartQuantity = cartItems.reduce((quantity,item) => item.quantity + quantity,0)
+    const kurvAntal = kurvVarer.reduce((quantity,item) => item.antal + quantity,0)
 
 
-    const openCart =() => seterAaben(true)
+    const aabenKurv =() => seterAaben(true)
     const lukKurv=() => seterAaben(false)
 
-    function increaseCartQuantity(id: string) {
-        setCartItems(currentItems => {
+    function increasekurvAntal(id: string) {
+        setkurvVarer(currentItems => {
             if (currentItems.find(item => item.id === id) == null) {
-                return [...currentItems, { id, quantity: 1}]
+                return [...currentItems, { id, antal: 1}]
             } else{
                 return currentItems.map(item=> {
                     if (item.id === id){
-                        return {...item, quantity: item.quantity + 1}
+                        return {...item, antal: item.antal + 1}
                     } else {
                         return item
                     }
@@ -56,14 +56,14 @@ export function ShoppingCartProvider( { children }: KurvProviderProps ){
         })
     }
 
-    function decreaseCartQuantity(id: string) {
-        setCartItems(currentItems => {
-            if (currentItems.find(item => item.id === id)?.quantity === 1) {
+    function decreasekurvAntal(id: string) {
+        setkurvVarer(currentItems => {
+            if (currentItems.find(item => item.id === id)?.antal === 1) {
                 return currentItems.filter(item => item.id !==id)
             } else{
                 return currentItems.map(item=> {
                     if (item.id === id){
-                        return {...item, quantity: item.quantity - 1}
+                        return {...item, antal: item.antal - 1}
                     } else {
                         return item
                     }
@@ -72,19 +72,19 @@ export function ShoppingCartProvider( { children }: KurvProviderProps ){
         })
     }
 
-    function getItemQuantity(id: string)  {
-        return cartItems.find(item => item.id === id)?.quantity || 0
+    function getVareAntal(id: string)  {
+        return kurvVarer.find(item => item.id === id)?.antal || 0
     }
 
-    function removeFromCart(id: string){
-        setCartItems(currentItems => {
+    function fjernFraKurv(id: string){
+        setkurvVarer(currentItems => {
             return currentItems.filter(item => item.id !== id)
         })
     }
 
 
     return (
-        <KurvKontekst.Provider value = {{ getItemQuantity,increaseCartQuantity, decreaseCartQuantity, removeFromCart, cartItems, cartQuantity, lukKurv,openCart }}>
+        <KurvKontekst.Provider value = {{ getVareAntal,increasekurvAntal, decreasekurvAntal, fjernFraKurv, kurvVarer, kurvAntal, lukKurv,aabenKurv }}>
         {children}
             <Kurv erAaben = {erAaben} />
     </KurvKontekst.Provider>

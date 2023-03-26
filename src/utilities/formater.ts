@@ -1,6 +1,6 @@
 
 const FORMATTER = new Intl.NumberFormat(undefined, { currency:"DKK", style:"currency"})
 
-export function format(number: number){
+export function formater(number: number){
     return FORMATTER.format(number)
 }
