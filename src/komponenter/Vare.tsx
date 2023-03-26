@@ -5,13 +5,13 @@ import {formater} from "../utilities/formater";
 
 
 
-type CartItemProps ={
+type KurvVareProps ={
     id:string
     antal:number
 }
 
 
-export function Vare({id, antal}: CartItemProps) {
+export function Vare({id, antal}: KurvVareProps) {
     const {fjernFraKurv} = useKurv()
     const item = produkter.find(i => i.id === id)
     if (item== null) return null

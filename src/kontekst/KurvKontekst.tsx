@@ -19,8 +19,8 @@ type KurvKontekst = {
     kurvAntal: number
     kurvVarer: KurvVare[]
     getVareAntal: (id:string) => number
-    increasekurvAntal: (id:string) => void
-    decreasekurvAntal: (id:string) => void
+    increaseKurvAntal: (id:string) => void
+    decreaseKurvAntal: (id:string) => void
     fjernFraKurv: (id:string) => void
 }
 
@@ -31,16 +31,16 @@ type KurvVare= {
 
 export function KurvProvider( { children }: KurvProviderProps ){
     const [kurvVarer, setkurvVarer] = lokalLagring<KurvVare[]>("kurv-indhold",[])
-    const [erAaben, seterAaben] = useState(false)
+    const [erAaben, setErAaben] = useState(false)
 
 
-    const kurvAntal = kurvVarer.reduce((quantity,item) => item.antal + quantity,0)
+    const kurvAntal = kurvVarer.reduce((antal,item) => item.antal + antal,0)
 
 
-    const aabenKurv =() => seterAaben(true)
-    const lukKurv=() => seterAaben(false)
+    const aabenKurv =() => setErAaben(true)
+    const lukKurv=() => setErAaben(false)
 
-    function increasekurvAntal(id: string) {
+    function increaseKurvAntal(id: string) {
         setkurvVarer(currentItems => {
             if (currentItems.find(item => item.id === id) == null) {
                 return [...currentItems, { id, antal: 1}]
@@ -56,7 +56,7 @@ export function KurvProvider( { children }: KurvProviderProps ){
         })
     }
 
-    function decreasekurvAntal(id: string) {
+    function decreaseKurvAntal(id: string) {
         setkurvVarer(currentItems => {
             if (currentItems.find(item => item.id === id)?.antal === 1) {
                 return currentItems.filter(item => item.id !==id)
@@ -84,7 +84,7 @@ export function KurvProvider( { children }: KurvProviderProps ){
 
 
     return (
-        <KurvKontekst.Provider value = {{ getVareAntal,increasekurvAntal, decreasekurvAntal, fjernFraKurv, kurvVarer, kurvAntal, lukKurv,aabenKurv }}>
+        <KurvKontekst.Provider value = {{ getVareAntal,increaseKurvAntal, decreaseKurvAntal, fjernFraKurv, kurvVarer, kurvAntal, lukKurv,aabenKurv }}>
         {children}
             <Kurv erAaben = {erAaben} />
     </KurvKontekst.Provider>
