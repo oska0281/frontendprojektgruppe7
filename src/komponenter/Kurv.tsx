@@ -1,7 +1,4 @@
-
-import { Offcanvas, Stack } from "react-bootstrap";
-import products from "../data/produkter.json";
-import {formater} from "../utilities/formater";
+import {Button, Offcanvas, Stack} from "react-bootstrap";
 import {useKurv} from "../kontekst/KurvKontekst";
 import React from "react";
 import {Vare} from "./Vare";
@@ -16,14 +13,6 @@ type ShoppingCartProps = {
 export function Kurv({ erAaben }: ShoppingCartProps) {
   const { lukKurv, kurvVarer } = useKurv();
 
-  const total = kurvVarer.reduce((total, kurvVarer) => {
-    const item = products.find((i) => i.id === kurvVarer.id);
-    return total + (item?.pris || 0) * kurvVarer.antal;
-  }, 0);
-const calculateTax = (itemPrice: number) => {
-  const taxRate = 0.25; // 25% moms
-  return itemPrice * taxRate;
-};
 
 const totalTax = kurvVarer.reduce((taxTotal, kurvVarer) => {
   const item = products.find((i) => i.id === kurvVarer.id);
