@@ -32,9 +32,9 @@ export function Kurv({ erAaben }: KurvProps) {
             <div className="ms-auto fw-bold fs-5">
               Total {" "}
               {formater(
-                kurvVarer.reduce((total, cartItem) => {
-                  const item = produkter.find(i => i.id === cartItem.id)
-                  return total + (item?.pris || 0) * cartItem.antal
+                kurvVarer.reduce((total, kurvVare) => {
+                  const item = produkter.find(i => i.id === kurvVare.id)
+                  return total + (item?.pris || 0) * kurvVare.antal
                 }, 0)
               )}
             </div>
