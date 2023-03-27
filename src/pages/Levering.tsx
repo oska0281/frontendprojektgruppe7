@@ -1,50 +1,40 @@
 import {Button} from "react-bootstrap";
 import {Link} from "react-router-dom";
 
-interface LeveringProps {
-  navn: string;
-  email: string;
-  telefonnummer: number;
-  adresse: string;
-  postnummer:number;
-  by:string;
-  land:string;
-}
 
-export function Levering(props: LeveringProps) {
-  const { navn,email,telefonnummer,adresse,postnummer,by,land } = props;
 
+export function Levering() {
   return (
 
     <form style={{padding:"10px"}}>
         <h1 style={{padding:"20px"}}>Levering</h1>
       <div style={{marginBottom:"20px"}}>
         <label>Navn:</label>
-        <input type="text" value={navn} />
+        <input type="text" />
       </div>
       <div style={{marginBottom:"20px"}}>
         <label>Email:</label>
-        <input type="text"  value={email} />
+        <input type="text" />
       </div>
       <div style={{marginBottom:"20px"}}>
         <label>Telefonnummer:</label>
-        <input type="text" value={telefonnummer} />
+        <input type="text" />
       </div>
       <div style={{marginBottom:"20px"}}>
         <label>Adresse:</label>
-        <input type="text" value={adresse} />
+        <input type="text"  />
       </div>
       <div style={{marginBottom:"20px"}}>
         <label>Postnummer:</label>
-        <input type="text" value={postnummer} />
+        <input type="text" />
       </div>
       <div style={{marginBottom:"20px"}}>
         <label>By:</label>
-        <input type="text" value={by} />
+        <input type="text"  />
       </div>
       <div style={{marginBottom:"20px"}}>
         <label>Land:</label>
-        <input type="text" value={land} />
+        <input type="text"  />
       </div>
         <Link to="/betaling">
               <Button variant="primary" style={{width:"300px"}}>Til Betaling</Button>

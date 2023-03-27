@@ -6,6 +6,7 @@ import {Butik} from "./pages/Butik";
 import {Betaling} from "./pages/Betaling";
 import {Navigationsbar} from "./komponenter/Navigationsbar"
 import {KurvProvider} from "./kontekst/KurvKontekst";
+
 function App(){
   return (
   <KurvProvider>
@@ -13,7 +14,7 @@ function App(){
     <Container className="mb-4">
     <Routes>
       <Route path="/" element={<Butik />} />
-      <Route path="/levering" element={<Levering navn="" email="" telefonnummer={0} adresse="" postnummer={0} by="" land="" />} />
+        <Route path="/levering" element={<Levering  />} />
       <Route path="/betaling" element={<Betaling />} />
      </Routes>
    </Container>
