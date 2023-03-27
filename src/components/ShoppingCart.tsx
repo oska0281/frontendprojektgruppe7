@@ -6,7 +6,6 @@ import { format } from "../utilities/format";
 
 
 
-
 type ShoppingCartProps = {
   isOpen: boolean;
 };
@@ -81,4 +80,5 @@ return (
       </Stack>
     </Offcanvas.Body>
   </Offcanvas>
-);}
+);
+}
