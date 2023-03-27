@@ -57,7 +57,7 @@ const totalPrice = adjustedTotal - rebate;
 return (
   <Offcanvas show={erAaben} onHide={lukKurv} placement="end">
     <Offcanvas.Header closeButton>
-      <Offcanvas.Title>Cart</Offcanvas.Title>
+      <Offcanvas.Title>Kurv</Offcanvas.Title>
     </Offcanvas.Header>
     <Offcanvas.Body>
       <Stack gap={4}>
