@@ -13,7 +13,7 @@ function App(){
     <Container className="mb-4">
     <Routes>
       <Route path="/" element={<Butik />} />
-      <Route path="/levering" element={<Levering />} />
+      <Route path="/levering" element={<Levering navn="" email="" telefonnummer={0} adresse="" postnummer={0} by="" land="" />} />
       <Route path="/betaling" element={<Betaling />} />
      </Routes>
    </Container>
