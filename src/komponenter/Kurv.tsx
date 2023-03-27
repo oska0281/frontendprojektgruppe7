@@ -1,9 +1,9 @@
-import {Button, Offcanvas, Stack} from "react-bootstrap";
-import {useKurv} from "../kontekst/KurvKontekst";
+import { Offcanvas, Stack } from "react-bootstrap";
+import products from "../data/produkter.json";
+import {formater} from "../utilities/formater";
+import {KurvProvider, useKurv} from "../kontekst/KurvKontekst";
 import React from "react";
 import {Vare} from "./Vare";
-
-
 
 type ShoppingCartProps = {
   erAaben: boolean;
@@ -13,6 +13,14 @@ type ShoppingCartProps = {
 export function Kurv({ erAaben }: ShoppingCartProps) {
   const { lukKurv, kurvVarer } = useKurv();
 
+  const total = kurvVarer.reduce((total, kurvVarer) => {
+    const item = products.find((i) => i.id === kurvVarer.id);
+    return total + (item?.pris || 0) * kurvVarer.antal;
+  }, 0);
+const calculateTax = (itemPrice: number) => {
+  const taxRate = 0.25; // 25% moms
+  return itemPrice * taxRate;
+};
 
 const totalTax = kurvVarer.reduce((taxTotal, kurvVarer) => {
   const item = products.find((i) => i.id === kurvVarer.id);
@@ -51,8 +59,8 @@ return (
     </Offcanvas.Header>
     <Offcanvas.Body>
       <Stack gap={4}>
-        {kurvVarer.map((item) => (
-          <Vare key={item.id} {...item} />
+        {kurvVarer.map(item => (
+                <Vare key={item.id} {...item} />
         ))}
         {adjustedTotal >= 300 && (
           <div className="ms-auto fw-bold fs-5 text-muted">

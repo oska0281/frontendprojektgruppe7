@@ -12,7 +12,7 @@ interface LeveringProps {
 }
 
 export function Levering(props: LeveringProps) {
-  const { navn, email, telefonnummer, adresse,postnummer,by,land } = props;
+  const { navn,email,telefonnummer,adresse,postnummer,by,land } = props;
 
   return (
 
