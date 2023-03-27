@@ -36,6 +36,8 @@ export function Levering() {
         <label>Land:</label>
         <input type="text"  />
       </div>
+
+
         <Link to="/betaling">
               <Button variant="primary" style={{width:"300px"}}>Til Betaling</Button>
             </Link>
