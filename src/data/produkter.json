@@ -3,24 +3,40 @@
     "id": "vitamin-d-90-120",
     "navn": "D-vitamin, 90ug, 120 stk",
     "pris": 116,
-    "billedeURL": "public/images/D-vitamin, 90ug, 120 stk.jpg"
+    "billedeURL": "public/images/D-vitamin, 90ug, 120 stk.jpg",
+     "currency": "DKK",
+    "rebateQuantity": 3,
+    "rebatePercent": 10,
+    "upsellProductId": null
   },
   {
     "id": "vitamin-c-500-200",
     "navn": "C-vitamin, 500mg, 200 stk",
     "pris": 150,
-    "billedeURL": "public/images/vitamin-c-500-200.jpg"
+    "billedeURL": "public/images/vitamin-c-500-200.jpg",
+     "currency": "DKK",
+    "rebateQuantity": 2,
+    "rebatePercent": 25,
+    "upsellProductId": "vitamin-c-depot-500-250"
   },
   {
     "id": "vitamin-c-depot-500-250",
     "navn": "C-vitamin Depot, 500mg, 200 stk",
     "pris": 175,
-    "billedeURL": "public/images/vitamin-c-depot-500-250.jpg"
+    "billedeURL": "public/images/vitamin-c-depot-500-250.jpg",
+     "currency": "DKK",
+    "rebateQuantity": 3,
+    "rebatePercent": 10,
+    "upsellProductId": null
   },
   {
     "id": "fish-oil-1000-120",
     "navn": "Omega 3 fiskeolie, 1000mg, 120 stk",
     "pris": 69,
-    "billedeURL":"public/images/fish-oil-1000-120.jpg"
+    "billedeURL":"public/images/fish-oil-1000-120.jpg",
+     "currency": "DKK",
+    "rebateQuantity": 5,
+    "rebatePercent": 10,
+    "upsellProductId": null
   }
 ]
