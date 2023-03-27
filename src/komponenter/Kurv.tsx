@@ -6,13 +6,14 @@ import React from "react";
 import {Vare} from "./Vare";
 import {Link} from "react-router-dom";
 
+
 type ShoppingCartProps = {
   erAaben: boolean;
 };
 
 
 export function Kurv({ erAaben }: ShoppingCartProps) {
-  const { lukKurv, kurvVarer } = useKurv();
+  const { lukKurv, kurvVarer,kurvAntal } = useKurv();
 
   const total = kurvVarer.reduce((total, kurvVarer) => {
     const item = products.find((i) => i.id === kurvVarer.id);
@@ -77,9 +78,13 @@ return (
         <div className="ms-auto fw-bold fs-5 font-weight-bold">
           Total: {formater(totalPrice)}
         </div>
-        <Link to="/levering">
+
+        {kurvAntal > 0 && (
+                <Link to="/levering">
               <Button onClick={lukKurv} variant="primary" className="w-100 mt-3">Næste</Button>
             </Link>
+                )}
+
       </Stack>
     </Offcanvas.Body>
   </Offcanvas>
