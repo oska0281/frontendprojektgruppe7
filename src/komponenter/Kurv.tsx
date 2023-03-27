@@ -1,9 +1,10 @@
-import { Offcanvas, Stack } from "react-bootstrap";
+import {Button, Offcanvas, Stack} from "react-bootstrap";
 import products from "../data/produkter.json";
 import {formater} from "../utilities/formater";
 import {KurvProvider, useKurv} from "../kontekst/KurvKontekst";
 import React from "react";
 import {Vare} from "./Vare";
+import {Link} from "react-router-dom";
 
 type ShoppingCartProps = {
   erAaben: boolean;
@@ -48,10 +49,10 @@ const totalDiscount = kurvVarer.reduce((discountTotal, cartItem) => {
   return discountTotal + calculateDiscount(price, quantity, rebateQuantity, rebatePercent);
 }, 0);
 
-
 const adjustedTotal = total - totalDiscount;
 const rebate = adjustedTotal >= 300 ? adjustedTotal * 0.1 : 0;
 const totalPrice = adjustedTotal - rebate;
+
 return (
   <Offcanvas show={erAaben} onHide={lukKurv} placement="end">
     <Offcanvas.Header closeButton>
@@ -76,6 +77,9 @@ return (
         <div className="ms-auto fw-bold fs-5 font-weight-bold">
           Total: {formater(totalPrice)}
         </div>
+        <Link to="/levering">
+              <Button onClick={lukKurv} variant="primary" className="w-100 mt-3">Næste</Button>
+            </Link>
       </Stack>
     </Offcanvas.Body>
   </Offcanvas>
