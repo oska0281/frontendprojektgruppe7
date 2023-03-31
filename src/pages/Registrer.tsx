@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import { Nav } from "react-bootstrap";
 import {NavLink, useNavigate} from "react-router-dom";
 import {Registervalidering} from "../utilities/Registrervalidering"
@@ -11,37 +11,37 @@ interface values {
   kodeord: string;
 }
 export function Registrer(){
-  const [values, setValues] = useState<values>({
-    navn:"",
+
+
+    const [values, setValues] = useState<values>({
+        navn:"",
     email: "",
     kodeord: ""
   });
 
-  const [errors,setErrors] = useState({
-    navn:"",
-    email: "",
-    kodeord: ""
-  })
 
-  const navigate = useNavigate();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setErrors(Registervalidering(values));
-  }
+    const [errors,setErrors] = useState({
+        navn:"",
+        email: "",
+        kodeord: ""
+    })
+    const navigate = useNavigate();
+    const handleSubmit=(event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        setErrors(Registervalidering(values));
 
-  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setValues(prev=> ({...prev,[event.target.name]: event.target.value}))
-
-  useEffect(() => {
-    if(errors.navn === "" && errors.email === "" && errors.kodeord === ""){
-      axios.post("http://localhost:5173/registrer",values)
-        .then(res => {
-          navigate("/login")
-        })
-        .catch(err => console.log(err));
+        if(errors.navn === "" && errors.email === "" && errors.kodeord === ""){
+            axios.post("http://localhost:5173/registrer",values)
+                .then(res => {
+                            navigate("/login")
+                    })
+                .catch(err => console.log(err));
+        }
     }
-  }, [errors, navigate, values]);
+const handleInput=(event: React.ChangeEvent<HTMLInputElement>) =>
+    setValues(prev=> ({...prev,[event.target.name]: [event.target.value]}))
+
 
 
 
