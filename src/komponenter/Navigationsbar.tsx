@@ -10,6 +10,9 @@ export function Navigationsbar() {
                 <Nav.Link to="/" as={NavLink} style={{ fontSize: '20px', fontFamily: 'Arial, sans-serif' }}>
                 Butik
                 </Nav.Link>
+                <Nav.Link to="/logind" as={NavLink} style={{ marginLeft:"480px",fontSize: '20px', fontFamily: 'Arial, sans-serif' }}>
+                Log Ind
+                </Nav.Link>
             </Nav>
             <Button onClick={aabenKurv} style={{ width: "4rem", height:"3rem", position: "relative"}}>
                 Kurv
