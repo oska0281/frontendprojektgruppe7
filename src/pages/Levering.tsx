@@ -1,17 +1,41 @@
-import {Button} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import React, { useState } from 'react';
 import "../styling/Levering.css"
 
 export function Levering() {
   const [isChecked, setIsChecked] = useState(false);
+  const [isFormFilled, setIsFormFilled] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
+  const [isCheckedMessage, setIsCheckedMessage] = useState(false);
 
   const handleCheck = () => {
     setIsChecked(!isChecked);
+    setIsCheckedMessage(false);
   };
 
+  const handleFormChange = () => {
+    const formFields = document.querySelectorAll('input[type="text"]');
+    const filledFields = Array.from(formFields).filter((field) => (field as HTMLInputElement).value !== '');
+    setIsFormFilled(filledFields.length === formFields.length);
+  };
+
+  const handleSubmit = () => {
+    if (!isFormFilled) {
+      setShowMessage(true);
+      return;
+    }
+
+    if (!isChecked) {
+      setIsCheckedMessage(true);
+      return;
+    }
+
+    // All form fields are filled and checkbox is checked, proceed to payment page
+  }
+
   return (
-    <form>
+    <form onChange={handleFormChange} onSubmit={handleSubmit}>
 
       <h1 className="titel">Levering</h1>
       <div>
@@ -49,19 +73,27 @@ export function Levering() {
         <input className="inputfelt" type="text" required/>
       </div>
 
+      {showMessage && (
+        <div className="message">Udfyld venligst alle felterne</div>
+      )}
+
       <div>
-        <input className="inputbox" type="checkbox" checked={isChecked} onChange={handleCheck} />
+        <input className="inputbox" type="checkbox"  onChange={handleCheck} />
         <text>Jeg acceptere betingelserne</text>
       </div>
 
+      {isCheckedMessage && (
+        <div className="message">Du skal acceptere betingelserne for at fortsætte</div>
+      )}
+
       {isChecked ? (
-        <Link to="/betaling">
-          <Button className="btn" variant="primary">
+        <Link to={isFormFilled ? "/betaling" : ""}>
+          <Button className="btn" variant="primary" disabled={!isFormFilled} onClick={handleSubmit}>
             Til Betaling
           </Button>
         </Link>
       ) : (
-        <Button variant="primary" disabled={!isChecked}>
+        <Button   variant="primary"  onClick={handleSubmit}>
           Til Betaling
         </Button>
       )}
