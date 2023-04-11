@@ -1,6 +1,7 @@
 import {Button} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import React, { useState } from 'react';
+import "../styling/Levering.css"
 
 export function Levering() {
   const [isChecked, setIsChecked] = useState(false);
@@ -10,48 +11,57 @@ export function Levering() {
   };
 
   return (
-    <form style={{padding:"10px"}}>
-      <h1 style={{padding:"20px"}}>Levering</h1>
-      <div style={{marginBottom:"20px"}}>
+    <form>
+
+      <h1 className="titel">Levering</h1>
+      <div>
         <label>Navn:</label>
-        <input type="text" required/>
+        <input className="inputfelt" type="text" required/>
       </div>
-      <div style={{marginBottom:"20px"}}>
+
+      <div>
         <label>Email:</label>
-        <input type="text" required/>
+        <input className="inputfelt" type="text" required/>
       </div>
-      <div style={{marginBottom:"20px"}}>
+
+      <div>
         <label>Telefonnummer:</label>
-        <input type="text" required/>
+        <input className="inputfelt" type="text" required/>
       </div>
-      <div style={{marginBottom:"20px"}}>
+
+      <div>
         <label>Adresse:</label>
-        <input type="text"  required/>
+        <input className="inputfelt" type="text"  required/>
       </div>
-      <div style={{marginBottom:"20px"}}>
+
+      <div>
         <label>Postnummer:</label>
-        <input type="text" required/>
+        <input className="inputfelt" type="text" required/>
       </div>
-      <div style={{marginBottom:"20px"}}>
+
+      <div>
         <label>By:</label>
-        <input type="text" required/>
+        <input className="inputfelt" type="text" required/>
       </div>
-      <div style={{marginBottom:"20px"}}>
+
+      <div>
         <label>Land:</label>
-        <input type="text" required/>
+        <input className="inputfelt" type="text" required/>
       </div>
-      <div style={{marginBottom:"20px"}}>
-        <input type="checkbox" checked={isChecked} onChange={handleCheck} />
-        <label>Jeg accepterer betingelserne</label>
+
+      <div>
+        <input className="inputbox" type="checkbox" checked={isChecked} onChange={handleCheck} />
+        <text>Jeg acceptere betingelserne</text>
       </div>
+
       {isChecked ? (
         <Link to="/betaling">
-          <Button variant="primary" style={{width:"300px"}}>
+          <Button className="btn" variant="primary">
             Til Betaling
           </Button>
         </Link>
       ) : (
-        <Button variant="primary" style={{width:"300px"}} disabled={!isChecked}>
+        <Button variant="primary" disabled={!isChecked}>
           Til Betaling
         </Button>
       )}

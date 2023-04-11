@@ -17,7 +17,7 @@ function App(){
     <Container className="mb-4">
     <Routes>
       <Route path="/" element={<Butik />} />
-        <Route path="/levering" element={<Levering  />} />
+        <Route path="/levering"  element={<Levering  />} />
       <Route path="/betaling" element={<Betaling />} />
         <Route path="/logind" element={<Logind />} />
       <Route path="/registrer" element={<Registrer/>}/>

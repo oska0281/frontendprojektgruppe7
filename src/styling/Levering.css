@@ -1,0 +1,37 @@
+
+
+
+.titel{
+  margin-bottom: 50px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  margin-right: 10px;
+  width: 100px;
+}
+
+.inputfelt {
+  padding: 5px;
+  margin-bottom: 10px;
+  width: 300px;
+  margin-left: 120px;
+}
+
+text {
+  margin-left: 10px;
+}
+
+.btn{
+  margin-top: 30px;
+  width: 600px;
+}
+
+.inputbox{
+  margin-top: 30px;
+}
