@@ -88,7 +88,7 @@ export function Levering() {
 
       {isChecked ? (
         <Link to={isFormFilled ? "/betaling" : ""}>
-          <Button className="btn" variant="primary" disabled={!isFormFilled} onClick={handleSubmit}>
+          <Button className="til-betaling-btn" variant="primary" disabled={!isFormFilled} onClick={handleSubmit}>
             Til Betaling
           </Button>
         </Link>
