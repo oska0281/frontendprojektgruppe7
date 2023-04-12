@@ -32,6 +32,12 @@ text {
   width: 600px;
 }
 
+.til-betaling-btn-disabled {
+  margin-top: 30px;
+  width: 600px;
+  opacity: 0.5;
+}
+
 .inputbox{
   margin-top: 30px;
   margin-bottom: 20px;

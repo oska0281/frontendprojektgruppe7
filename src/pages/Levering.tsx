@@ -102,7 +102,7 @@ export function Levering() {
           </Button>
         </Link>
       ) : (
-        <Button   variant="primary"  onClick={handleSubmit}>
+        <Button  className="til-betaling-btn-disabled" disabled variant="primary"  onClick={handleSubmit}>
           Til Betaling
         </Button>
       )}
