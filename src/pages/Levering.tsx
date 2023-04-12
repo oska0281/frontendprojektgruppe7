@@ -31,7 +31,8 @@ export function Levering() {
       return;
     }
 
-    // All form fields are filled and checkbox is checked, proceed to payment page
+
+
   }
 
   return (
@@ -79,12 +80,20 @@ export function Levering() {
 
       <div>
         <input className="inputbox" type="checkbox"  onChange={handleCheck} />
-        <text>Jeg acceptere betingelserne</text>
+        <text>Jeg bekræfter at have læst og accepteret købsbetingelserne</text>
       </div>
 
-      {isCheckedMessage && (
-        <div className="message">Du skal acceptere betingelserne for at fortsætte</div>
+        {isCheckedMessage && (
+        <div className="message">Accepter venligst købsbetingelserne</div>
       )}
+
+        <div>
+        <input className="inputbox" type="checkbox"  />
+        <text>Jeg ønsker at modtage fremtidige mails med tilbud</text>
+      </div>
+
+
+
 
       {isChecked ? (
         <Link to={isFormFilled ? "/betaling" : ""}>
