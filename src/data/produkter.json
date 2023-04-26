@@ -1,5 +1,8 @@
+
+
 [
   {
+    "//THIS_IS_A_COMMENT": "This .json is no longer in use, since the implementation of the api call to the link provided by Lars",
     "id": "vitamin-d-90-120",
     "navn": "D-vitamin, 90ug, 120 stk",
     "pris": 116,

@@ -1,0 +1,72 @@
+.item-row {
+    display: grid;
+    grid-template-columns: 50px 1fr auto;
+    grid-gap: 1rem;
+    align-items: center;
+    max-width: 100%;
+    font-size: 1rem;
+    padding: 0 1rem 1rem;
+}
+  
+.item-img-con {
+    position: relative;
+}
+  
+.item-img-con > img {
+    max-width: 50px;
+    max-height: 50px;
+}
+  
+.item-amount {
+    position: absolute;
+    top: -10px;
+    right: -5px;
+    background-color: rgb(14, 204, 14);
+    color: rgb(255, 255, 255);
+    padding: 3px 5px;
+    border-radius: 5px;
+    font-size: 0.75rem;
+}
+  
+.item-details {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px; 
+}
+  
+.item-name {
+    font-weight: bold;
+}
+  
+.item-row > button {
+    align-self: center;
+    margin-left: 1rem;
+}
+  
+.item-price {
+}
+  
+.item-total {
+    font-weight: bold;
+}
+
+.item-btn-remove {
+    background-color: rgb(255, 255, 255);
+    color: rgb(252, 22, 22);
+    font-size: 1rem;
+    border: 2px solid rgb(252, 22, 22);
+    border-radius: 20%;
+    padding: 0 0.5rem 3px;
+}
+
+.item-btn-remove:hover {
+    background-color: rgb(252, 22, 22);
+    color: rgb(255, 255, 255);
+    border: 2px solid rgb(252, 22, 22);
+}
+  
+.item-btn-remove:focus {
+    background-color: rgb(212, 14, 14);
+    color: rgb(255, 255, 255);
+    border: 2px solid rgb(212, 14, 14);
+}

@@ -1,0 +1,29 @@
+
+.store-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .store-item {
+    flex: 0 0 calc(33.333% - 1rem);
+    margin-bottom: 1rem;
+  }
+  
+  @media screen and (max-width: 1200px) {
+    .item {
+      flex: 0 0 calc(50% - 1rem);
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .item {
+      flex: 0 0 100%;
+    }
+  }
+  
+  .store-padding-top {
+    padding-top: 30px;
+  }

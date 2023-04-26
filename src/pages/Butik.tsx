@@ -1,16 +1,40 @@
-import produkter from "../data/produkter.json"
-import {Col, Row} from "react-bootstrap";
-import {Produkter} from "../komponenter/Produkter";
+import { Produkter } from "../komponenter/Produkter";
+import { useEffect, useState } from "react";
+import "../css/store.css";
 
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  currency: string;
+  rebateQuantity: number;
+  rebatePercent: number;
+  upsellProductId: string | null;
+  imageUrl: string;
+}
 
 export function Butik() {
-    return (
-    <> <h1 style={{ paddingTop: '30px' }}></h1>
-    <Row md={2} xs={1} lg={3} className="g-3">
-        {produkter.map(produkt =>(
-            <Col key ={produkt.id}><Produkter {...produkt} /></Col>
+  const [produkter, setProdukter] = useState<Product[]>([]);
+
+  useEffect(() => {
+    fetch(
+      "https://raw.githubusercontent.com/larsthorup/checkout-data/main/product-v2.json"
+    )
+      .then((response) => response.json())
+      .then((data: Product[]) => setProdukter(data))
+      .catch((error) => console.error(error));
+  }, []);
+
+  return (
+    <>
+      <div className="store-padding-top"></div>
+      <div className="store-container">
+        {produkter.map((produkt) => (
+          <div key={produkt.id} className="store-item">
+            <Produkter {...produkt} />
+          </div>
         ))}
-    </Row>
+      </div>
     </>
-  )
+  );
 }

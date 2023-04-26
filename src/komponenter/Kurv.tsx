@@ -1,91 +1,135 @@
-import {Button, Offcanvas, Stack} from "react-bootstrap";
-import products from "../data/produkter.json";
-import {formater} from "../utilities/formater";
-import {KurvProvider, useKurv} from "../kontekst/KurvKontekst";
-import React from "react";
-import {Vare} from "./Vare";
-import {Link} from "react-router-dom";
-
+import { formater } from "../utilities/formater";
+import { useKurv } from "../kontekst/KurvKontekst";
+import { useState, useEffect } from "react";
+import { Vare } from "./Vare";
+import { Link } from "react-router-dom";
+import "../css/cart.css";
 
 type ShoppingCartProps = {
   erAaben: boolean;
 };
 
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  currency: string;
+  rebateQuantity: number;
+  rebatePercent: number;
+  upsellProductId: string | null;
+  imageUrl: string;
+  antal?: number;
+}
 
 export function Kurv({ erAaben }: ShoppingCartProps) {
-  const { lukKurv, kurvVarer,kurvAntal } = useKurv();
+  const { lukKurv, kurvVarer, kurvAntal } = useKurv();
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    fetch(
+      "https://raw.githubusercontent.com/larsthorup/checkout-data/main/product-v2.json"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setProducts(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   const total = kurvVarer.reduce((total, kurvVarer) => {
     const item = products.find((i) => i.id === kurvVarer.id);
-    return total + (item?.pris || 0) * kurvVarer.antal;
+    return total + (item?.price || 0) * kurvVarer.antal;
   }, 0);
-const calculateTax = (itemPrice: number) => {
-  const taxRate = 0.25; // 25% moms
-  return itemPrice * taxRate;
-};
 
-const totalTax = kurvVarer.reduce((taxTotal, kurvVarer) => {
-  const item = products.find((i) => i.id === kurvVarer.id);
-  let price = item?.pris || 0;
+  const calculateTax = (itemPrice: number) => {
+    const taxRate = 0.25; // 25% moms
+    return itemPrice * taxRate;
+  };
 
-  const itemTotal = price * kurvVarer.antal;
-  const itemTax = calculateTax(itemTotal);
+  const totalTax = kurvVarer.reduce((taxTotal, kurvVarer) => {
+    const item = products.find((i) => i.id === kurvVarer.id);
+    let price = item?.price || 0;
 
-  return taxTotal + itemTax;
-}, 0);
-const calculateDiscount = (itemPrice: number, itemQuantity: number, rebateQuantity?: number, rebatePercent?: number) => {
-  if (rebateQuantity && itemQuantity >= rebateQuantity) {
-    return itemPrice * itemQuantity * (rebatePercent! / 100);
-  }
-  return 0;
-};
+    const itemTotal = price * kurvVarer.antal;
+    const itemTax = calculateTax(itemTotal);
 
-const totalDiscount = kurvVarer.reduce((discountTotal, cartItem) => {
-  const item = products.find((i) => i.id === cartItem.id);
-  let price = item?.pris || 0;
-  let rebateQuantity = item?.rebateQuantity;
-  let rebatePercent = item?.rebatePercent;
-  let quantity = cartItem.antal;
+    return taxTotal + itemTax;
+  }, 0);
 
-  return discountTotal + calculateDiscount(price, quantity, rebateQuantity, rebatePercent);
-}, 0);
+  const calculateDiscount = (
+    itemPrice: number,
+    itemQuantity: number,
+    rebateQuantity?: number,
+    rebatePercent?: number
+  ) => {
+    if (rebateQuantity && itemQuantity >= rebateQuantity) {
+      return itemPrice * itemQuantity * (rebatePercent! / 100);
+    }
+    return 0;
+  };
 
-const adjustedTotal = total - totalDiscount;
-const rebate = adjustedTotal >= 300 ? adjustedTotal * 0.1 : 0;
-const totalPrice = adjustedTotal - rebate;
+  const totalDiscount = kurvVarer.reduce((discountTotal, cartItem) => {
+    const item = products.find((i) => i.id === cartItem.id);
+    let price = item?.price || 0;
+    let rebateQuantity = item?.rebateQuantity;
+    let rebatePercent = item?.rebatePercent;
+    let quantity = cartItem.antal;
 
-return (
-  <Offcanvas show={erAaben} onHide={lukKurv} placement="end">
-    <Offcanvas.Header closeButton>
-      <Offcanvas.Title>Kurv</Offcanvas.Title>
-    </Offcanvas.Header>
-    <Offcanvas.Body>
-      <Stack gap={4}>
-        {kurvVarer.map(item => (
-                <Vare key={item.id} {...item} />
-        ))}
+    return (
+      discountTotal +
+      calculateDiscount(price, quantity, rebateQuantity, rebatePercent)
+    );
+  }, 0);
+
+  const adjustedTotal = total - totalDiscount;
+  const rebate = adjustedTotal >= 300 ? adjustedTotal * 0.1 : 0;
+  const totalPrice = adjustedTotal - rebate;
+
+  return (
+    <div className={`cart-offcanvas ${erAaben ? "show" : ""}`}>
+      <div className="cart-offcanvas-header">
+        <h5 className="cart-offcanvas-title">Din indkøbskurv</h5>
+        <button type="button" className="cart-close" onClick={lukKurv}>
+          &times;
+        </button>
+      </div>
+      <div className="cart-offcanvas-body">
+        <div className="cart-item-list">
+          {kurvVarer.map((item) => {
+            const product = products.find((product) => product.id === item.id);
+            return (
+              <Vare
+                key={item.id}
+                id={item.id}
+                navn={product?.name || ""}
+                pris={product?.price || 0}
+                antal={item.antal}
+                imageUrl={product?.imageUrl || ""}
+              />
+            );
+          })}
+        </div>
+        <div className="total-sb-cart">Sum: <span className="cart-sb-total">{formater(totalPrice)}</span></div>
+        <div className="titles-sb-cart">Moms: <span className="cart-sb-values">{formater(totalTax)}</span></div>
+        <div className="titles-sb-cart">
+          Mængderabat: <span className="cart-sb-values">{formater(totalDiscount)}</span>
+        </div>
         {adjustedTotal >= 300 && (
-          <div className="ms-auto fw-bold fs-5 text-muted">
-            Rabat over 300: {formater(rebate)}
+          <div className="titles-sb-cart">
+            Rabat over 300: <span className="cart-sb-values">{formater(rebate)}</span>
           </div>
         )}
-        <div className="ms-auto fw-bold fs-5 text-muted">
-          Heraf moms: {formater(totalTax)}
-        </div>
-        <div className="ms-auto fw-bold fs-5 text-muted">
-          Mængderabat: {formater(totalDiscount)}
-        </div>
-        <div className="ms-auto fw-bold fs-5 font-weight-bold">
-          Total: {formater(totalPrice)}
-        </div>
-
+        
         {kurvAntal > 0 && (
-                <Link to="/levering">
-              <Button onClick={lukKurv} variant="primary" className="w-100 mt-3">Næste</Button>
-            </Link>
-                )}
-
-      </Stack>
-    </Offcanvas.Body>
-  </Offcanvas>
-);}
+          <Link to="/levering">
+            <button onClick={lukKurv} className="cart-btn-next">
+              FORTSÆT TIL KASSEN
+            </button>
+          </Link>
+        )}
+      </div>
+    </div>
+  );
+};  

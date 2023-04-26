@@ -1,38 +1,31 @@
-import {useKurv} from "../kontekst/KurvKontekst";
-import produkter from "../data/produkter.json"
-import {Button, Stack} from "react-bootstrap";
-import {formater} from "../utilities/formater";
+import { useKurv } from "../kontekst/KurvKontekst";
+import { formater } from "../utilities/formater";
+import "../css/item.css";
 
+type KurvVareProps = {
+  id: string;
+  navn: string;
+  antal: number;
+  pris: number;
+  imageUrl?: string;
+};
 
+export function Vare({ id, navn, antal, pris, imageUrl }: KurvVareProps) {
+  const { fjernFraKurv } = useKurv();
 
-type KurvVareProps ={
-    id:string
-    antal:number
-}
-
-
-export function Vare({id, antal}: KurvVareProps) {
-    const {fjernFraKurv} = useKurv()
-    const item = produkter.find(i => i.id === id)
-    if (item== null) return null
-
-    return(
-        <Stack direction="horizontal" gap={2} className="d-flex align-items-center">
-            <img
-            src={item.billedeURL}
-            style={{width:"120px", height: "70px", objectFit:"cover"}}
-            />
-            <div className="me-auto">
-                <div>
-                    {item.navn} <span className="text-muted" style={{fontSize:"0.60rem"}}>
-                    x{antal}
-                </span>
-                </div>
-                <div className="text-muted" style={{fontSize:"0.70rem"}}>{formater(item.pris)}</div>
-            </div>
-            <div>{formater(item.pris * antal)}</div>
-            <Button variant="outline-danger" size="sm" onClick={() => fjernFraKurv(item.id)}>&times;</Button>
-        </Stack>
-    )
-
-}
+  return (
+    <div className="item-row">
+      <div className="item-img-con">
+        <img src={imageUrl} alt={navn} />
+        <span className="item-amount">{antal}</span>
+      </div>
+      <div className="item-details">
+        <span className="item-name">{navn}</span>
+        <span className="item-price">Stk. pris {pris} DKK </span>
+        <span className="item-total">Total: {pris * antal} DKK</span>
+      </div>
+      <button className="item-btn-remove" onClick={() => fjernFraKurv(id)}>x</button>
+    </div>
+  );
+               
+};

@@ -2,6 +2,7 @@ import {createContext, ReactNode, useContext, useState} from "react";
 import {Kurv} from "../komponenter/Kurv";
 import {lokalLagring} from "../hooks/lokalLagring";
 
+
 const KurvKontekst = createContext({} as KurvKontekst)
 
 export function useKurv(){
