@@ -1,23 +1,47 @@
 import {Button, Container, Nav, Navbar} from "react-bootstrap"
+import { useState, useEffect } from "react";
 import {NavLink} from "react-router-dom";
 import {useKurv} from "../kontekst/KurvKontekst";
 
 export function Navigationsbar() {
-    const { aabenKurv, kurvAntal} = useKurv()
-    return <Navbar sticky="top" className="bg-white shadow-sm mb-3 custom-nav" style={{ height: "5rem" }}>
-        <Container>
-            <Nav className="me.auto">
-                <Nav.Link to="/" as={NavLink} style={{ fontSize: '20px', fontFamily: 'Arial, sans-serif' }}>
-                Butik
-                </Nav.Link>
-            </Nav>
-            <Button onClick={aabenKurv} style={{ width: "4rem", height:"3rem", position: "relative"}}>
-                Kurv
-                {kurvAntal > 0 && (
-                <div className="rounded-circle bg-danger d-flex justify-content-center
-                 align-items-center" style={{ color: "white", width: "1.5rem", height: "1.5rem", position: "absolute", bottom: 0, right: 0, transform:"translate(40%, 30%)"}}>{kurvAntal}</div>
-                )}
-            </Button>
-        </Container>
-    </Navbar>
-}
+    const { aabenKurv, kurvAntal } = useKurv();
+    const isOverNine = kurvAntal >= 10;
+    const adjustedPadding = isOverNine ? { padding: "2px 5px" } : {};
+    const displayAntal = isOverNine ? "9+" : kurvAntal;
+  
+    const [lastScrollTop, setLastScrollTop] = useState(0);
+    const [hidden, setHidden] = useState(false);
+  
+    useEffect(() => {
+      const handleScroll = () => {
+        const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        setHidden(currentScrollTop > lastScrollTop && currentScrollTop > 0);
+        setLastScrollTop(currentScrollTop);
+      };
+  
+      window.addEventListener("scroll", handleScroll);
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }, [lastScrollTop]);
+  
+    return (
+      <nav className={`navbar-nav ${hidden ? "navbar-hidden" : ""}`}>
+        <div className="navbar-con">
+          <div className="navbar-div-navlink">
+            <NavLink to="/" className="navbar-navlink">
+              Butik
+            </NavLink>
+          </div>
+          <button onClick={aabenKurv} className="navbar-btn-cart">
+            <img className="navbar-shop-cart" src="../public/images/shopping-cart.svg" alt="Shopping-cart" />
+            {kurvAntal > 0 && (
+              <div className="navbar-amount-cart" style={{ ...adjustedPadding }}>
+                {displayAntal}
+              </div>
+            )}
+          </button>
+        </div>
+      </nav>
+    );
+  }
