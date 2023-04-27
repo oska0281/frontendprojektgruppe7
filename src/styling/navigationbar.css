@@ -43,6 +43,13 @@
     color: #ffffff;
 }
 
+.navbar-login {
+    margin-left: 350px;
+    padding-top: 20px;
+    color: #ffffff;
+
+}
+
 .navbar-btn-cart{
     position: relative;
     border: none;

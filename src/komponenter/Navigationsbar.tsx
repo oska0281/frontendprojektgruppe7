@@ -34,6 +34,9 @@ export function Navigationsbar() {
             <NavLink to="/" className="navbar-navlink">
               Butik
             </NavLink>
+              <NavLink to="/logind"  className="navbar-login">
+                       Log ind
+              </NavLink>
           </div>
           <button onClick={aabenKurv} className="navbar-btn-cart">
             <img className="navbar-shop-cart" src="../public/images/shopping-cart.svg" alt="Shopping-cart" />
