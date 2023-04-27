@@ -6,6 +6,10 @@ import {Butik} from "./pages/Butik";
 import {Betaling} from "./pages/Betaling";
 import {Navigationsbar} from "./komponenter/Navigationsbar"
 import {KurvProvider} from "./kontekst/KurvKontekst";
+import {useEffect, useState} from "react";
+import {Registrer} from "./pages/Registrer";
+import {Logind} from "./pages/Logind";
+
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
