@@ -9,7 +9,9 @@ body {
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
+    margin-bottom: 1.5rem !important;
 }
+
   
 @media (min-width: 576px) {
     .app-con {
@@ -34,8 +36,3 @@ body {
         max-width: 1140px;
     }
 }
-  
-.mb {
-    margin-bottom: 1.5rem !important;
-}
-  
