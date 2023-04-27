@@ -47,8 +47,12 @@
     margin-left: 350px;
     padding-top: 20px;
     color: #ffffff;
-
 }
+
+.navbar-login:hover{
+    color: #ffffff;
+}
+
 
 .navbar-btn-cart{
     position: relative;

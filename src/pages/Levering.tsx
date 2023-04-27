@@ -1,57 +1,108 @@
-import {Button} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import React, { useState } from 'react';
-import "../styling/delivery.css";
+import "../styling/Levering.css"
+
 export function Levering() {
   const [isChecked, setIsChecked] = useState(false);
+  const [isFormFilled, setIsFormFilled] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
+  const [isCheckedMessage, setIsCheckedMessage] = useState(false);
 
   const handleCheck = () => {
     setIsChecked(!isChecked);
+    setIsCheckedMessage(false);
   };
 
+  const handleFormChange = () => {
+    const formFields = document.querySelectorAll('input[type="text"]');
+    const filledFields = Array.from(formFields).filter((field) => (field as HTMLInputElement).value !== '');
+    setIsFormFilled(filledFields.length === formFields.length);
+  };
+
+  const handleSubmit = () => {
+    if (!isFormFilled) {
+      setShowMessage(true);
+      return;
+    }
+
+    if (!isChecked) {
+      setIsCheckedMessage(true);
+      return;
+    }
+
+
+
+  }
+
   return (
-    <form style={{padding:"10px"}}>
-      <h1 style={{padding:"20px"}}>Levering</h1>
-      <div style={{marginBottom:"20px"}}>
+    <form onChange={handleFormChange} onSubmit={handleSubmit}>
+
+      <h1 className="titel">Levering</h1>
+      <div>
         <label>Navn:</label>
-        <input type="text" required/>
+        <input className="inputfelt" type="text" required/>
       </div>
-      <div style={{marginBottom:"20px"}}>
+
+      <div>
         <label>Email:</label>
-        <input type="text" required/>
+        <input className="inputfelt" type="text" required/>
       </div>
-      <div style={{marginBottom:"20px"}}>
+
+      <div>
         <label>Telefonnummer:</label>
-        <input type="text" required/>
+        <input className="inputfelt" type="text" required/>
       </div>
-      <div style={{marginBottom:"20px"}}>
+
+      <div>
         <label>Adresse:</label>
-        <input type="text"  required/>
+        <input className="inputfelt" type="text"  required/>
       </div>
-      <div style={{marginBottom:"20px"}}>
+
+      <div>
         <label>Postnummer:</label>
-        <input type="text" required/>
+        <input className="inputfelt" type="text" required/>
       </div>
-      <div style={{marginBottom:"20px"}}>
+
+      <div>
         <label>By:</label>
-        <input type="text" required/>
+        <input className="inputfelt" type="text" required/>
       </div>
-      <div style={{marginBottom:"20px"}}>
+
+      <div>
         <label>Land:</label>
-        <input type="text" required/>
+        <input className="inputfelt" type="text" required/>
       </div>
-      <div style={{marginBottom:"20px"}}>
-        <input type="checkbox" checked={isChecked} onChange={handleCheck} />
-        <label>Jeg accepterer betingelserne</label>
+
+      {showMessage && (
+        <div className="message">Udfyld venligst alle felterne</div>
+      )}
+
+      <div>
+        <input className="inputbox" type="checkbox"  onChange={handleCheck} />
+        <text>Jeg bekræfter at have læst og accepteret købsbetingelserne</text>
       </div>
+
+        {isCheckedMessage && (
+        <div className="message">Accepter venligst købsbetingelserne</div>
+      )}
+
+        <div>
+        <input className="inputbox" type="checkbox"  />
+        <text>Jeg ønsker at modtage fremtidige mails med tilbud</text>
+      </div>
+
+
+
+
       {isChecked ? (
-        <Link to="/betaling">
-          <Button variant="primary" style={{width:"300px"}}>
+        <Link to={isFormFilled ? "/betaling" : ""}>
+          <Button className="til-betaling-btn" variant="primary" disabled={!isFormFilled} onClick={handleSubmit}>
             Til Betaling
           </Button>
         </Link>
       ) : (
-        <Button variant="primary" style={{width:"300px"}} disabled={!isChecked}>
+        <Button  className="til-betaling-btn-disabled"  variant="primary"  onClick={handleSubmit}>
           Til Betaling
         </Button>
       )}
