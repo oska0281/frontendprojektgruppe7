@@ -14,6 +14,8 @@ interface Product {
   imageUrl: string;
 }
 
+
+
 export function Butik() {
   const [produkter, setProdukter] = useState<Product[]>([]);
 
