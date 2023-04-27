@@ -1,7 +1,7 @@
 import {Button} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import React, { useState } from 'react';
-
+import "../styling/delivery.css";
 export function Levering() {
   const [isChecked, setIsChecked] = useState(false);
 

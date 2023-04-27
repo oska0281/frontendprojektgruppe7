@@ -1,6 +1,5 @@
 import { useKurv } from "../kontekst/KurvKontekst";
-import { formater } from "../utilities/formater";
-import "../css/item.css";
+import "../styling/item.css";
 
 type KurvVareProps = {
   id: string;

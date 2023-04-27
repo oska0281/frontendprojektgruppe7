@@ -1,7 +1,7 @@
-import {Button, Card} from "react-bootstrap";
+
 import {formater} from "../utilities/formater";
 import {useKurv} from "../kontekst/KurvKontekst";
-import '../css/products.css';
+import '../styling/products.css';
 
 interface Product {
     id: string;

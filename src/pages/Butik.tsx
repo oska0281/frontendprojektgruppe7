@@ -1,6 +1,6 @@
 import { Produkter } from "../komponenter/Produkter";
 import { useEffect, useState } from "react";
-import "../css/store.css";
+import "../styling/store.css";
 
 interface Product {
   id: string;

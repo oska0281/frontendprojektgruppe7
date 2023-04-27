@@ -3,7 +3,7 @@ import { useKurv } from "../kontekst/KurvKontekst";
 import { useState, useEffect } from "react";
 import { Vare } from "./Vare";
 import { Link } from "react-router-dom";
-import "../css/cart.css";
+import "../styling/cart.css";
 
 type ShoppingCartProps = {
   erAaben: boolean;

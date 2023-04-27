@@ -1,8 +1,8 @@
-import {Button, Container, Nav, Navbar} from "react-bootstrap"
+
 import { useState, useEffect } from "react";
 import {NavLink} from "react-router-dom";
 import {useKurv} from "../kontekst/KurvKontekst";
-import '../css/navigationbar.css';
+import '../styling/navigationbar.css';
 
 export function Navigationsbar() {
     const { aabenKurv, kurvAntal } = useKurv();

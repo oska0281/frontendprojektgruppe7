@@ -1,5 +1,5 @@
 import React from "react";
-
+import "../styling/payment.css";
 export function Betaling() {
   return (
     <div className="paym-root">
@@ -16,11 +16,3 @@ export function Betaling() {
     </div>
   );
 }
-
-const inputStyle = {
-  width: "400px",
-  margin: "10px",
-  padding: "10px",
-  border: "1px solid #ccc",
-  borderRadius: "5px",
-};
