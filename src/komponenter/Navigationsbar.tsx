@@ -5,6 +5,7 @@ import {useKurv} from "../kontekst/KurvKontekst";
 import '../styling/navigationbar.css';
 
 export function Navigationsbar() {
+
     const { aabenKurv, kurvAntal } = useKurv();
     const isOverNine = kurvAntal >= 10;
     const adjustedPadding = isOverNine ? { padding: "2px 5px" } : {};
