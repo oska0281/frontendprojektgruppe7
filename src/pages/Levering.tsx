@@ -106,6 +106,7 @@ export function Levering() {
           Til Betaling
         </Button>
       )}
+
     </form>
   );
 }
