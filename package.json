@@ -10,7 +10,10 @@
     "test": "tsc && vitest --run --coverage && vite build"
   },
   "dependencies": {
+    "axios": "^1.4.0",
+    "body-parser": "^1.20.2",
     "bootstrap": "^5.2.3",
+    "express": "^4.18.2",
     "jsdom": "^21.1.1",
     "mock-local-storage": "^1.1.23",
     "react": "^18.2.0",
