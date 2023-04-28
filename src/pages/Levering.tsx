@@ -5,9 +5,9 @@ import "../styling/Levering.css";
 
 export function Levering() {
     const [isChecked, setIsChecked] = useState(false);
-    const [isFormFilled, setIsFormFilled] = useState(false);
-    const [showMessage, setShowMessage] = useState(false);
-    const [isCheckedMessage, setIsCheckedMessage] = useState(false);
+  const [isFormFilled, setIsFormFilled] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
+  const [isCheckedMessage, setIsCheckedMessage] = useState(false);
     const [zipCodeError, setZipCodeError] = useState(false);
     const [deliveryAddress, setDeliveryAddress] = useState({
         country: 'Denmark',
@@ -22,30 +22,33 @@ export function Levering() {
         companyVATNumber: '',
     });
 
-    const handleCheck = () => {
-        setIsChecked(!isChecked);
-        setIsCheckedMessage(false);
-    };
+   const handleCheck = () => {
+    setIsChecked(!isChecked);
+    setIsCheckedMessage(false);
+  };
 
-    const handleFormChange = () => {
-        const formFields = document.querySelectorAll('input[type="text"]');
-        const filledFields = Array.from(formFields).filter((field) => (field as HTMLInputElement).value !== '');
-        setIsFormFilled(filledFields.length === formFields.length);
-    };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+  const handleFormChange = () => {
+    const formFields = document.querySelectorAll('input[type="text"]');
+    const filledFields = Array.from(formFields).filter((field) => (field as HTMLInputElement).value !== '');
+    setIsFormFilled(filledFields.length === formFields.length);
+  };
 
-        if (!isFormFilled) {
-            setShowMessage(true);
-            return;
-        }
+    const handleSubmit = () => {
+    if (!isFormFilled) {
+      setShowMessage(true);
+      return;
+    }
 
-        if (!isChecked) {
-            setIsCheckedMessage(true);
-            return;
-        }
-    };
+    if (!isChecked) {
+      setIsCheckedMessage(true);
+      return;
+    }
+
+
+
+  }
+
 
     const validateZipCode = async (zipCode: string): Promise<boolean> => {
         if (!zipCode) {
@@ -109,29 +112,33 @@ export function Levering() {
             {showMessage && (
                 <div className="message">Udfyld venligst alle felterne</div>
             )}
+ <div>
+        <input className="inputbox" type="checkbox"  onChange={handleCheck} />
+        <text>Jeg bekræfter at have læst og accepteret købsbetingelserne</text>
+      </div>
 
-            <div>
-                <input className="inputbox" type="checkbox" onChange={handleCheck}/>
-                <text>Jeg bekræfter at have læst og accepteret købsbetingelserne</text>
-            </div>
+        {isCheckedMessage && (
+        <div className="message">Accepter venligst købsbetingelserne</div>
+      )}
 
-            {isChecked ? (
-                <Link to={isFormFilled && !zipCodeError ? "/betaling" : ""}>
-                    <Button className="til-betaling-btn" variant="primary" disabled={!isFormFilled}
-                            onClick={handleSubmit}>
-                        Til Betaling
-                    </Button>
-                </Link>
-            ) : (
-                <Button
-                    className="til-betaling-btn"
-                    variant="primary"
-                    disabled={!isFormFilled || zipCodeError || !isChecked}
-                    onClick={handleSubmit}
-                >
-                    Til Betaling
-                </Button>
-            )}
-        </form>
-    );
+        <div>
+        <input className="inputbox" type="checkbox"  />
+        <text>Jeg ønsker at modtage fremtidige mails med tilbud</text>
+      </div>
+
+
+
+      {isChecked ? (
+        <Link to={isFormFilled ? "/betaling" : ""}>
+          <Button className="til-betaling-btn" variant="primary" disabled={!isFormFilled} onClick={handleSubmit}>
+            Til Betaling
+          </Button>
+        </Link>
+      ) : (
+        <Button  className="til-betaling-btn-disabled"  variant="primary"  onClick={handleSubmit}>
+          Til Betaling
+        </Button>
+      )}
+    </form>
+  );
 }
