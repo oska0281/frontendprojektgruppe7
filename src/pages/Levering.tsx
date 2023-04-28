@@ -1,4 +1,3 @@
-import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import React, { useState } from 'react';
 import "../styling/Levering.css";
@@ -91,13 +90,14 @@ export function Levering() {
                 <input className="inputfelt" type="text" required/>
             </div>
 
-            <div>
-                <label>
-                    Postnummer
-                    <input type="text" name="zipcode" required onChange={handleZipCodeChange}/>
-                    {zipCodeError && <span className="error">Ugyldigt postnummer</span>}
-                </label>
-            </div>
+            <div className="form-row">
+    <div>
+        <label htmlFor="zipcode">Postnummer:</label>
+        <input id="zipcode" className="inputfelt" type="text" name="zipcode" required
+               onChange={handleZipCodeChange}/>
+    </div>
+    {zipCodeError && <span className="error">Ugyldigt postnummer</span>}
+</div>
 
             <div>
                 <label>By:</label>
@@ -126,19 +126,17 @@ export function Levering() {
         <text>Jeg ønsker at modtage fremtidige mails med tilbud</text>
       </div>
 
-
-
-      {isChecked ? (
-        <Link to={isFormFilled ? "/betaling" : ""}>
-          <Button className="til-betaling-btn" variant="primary" disabled={!isFormFilled} onClick={handleSubmit}>
-            Til Betaling
-          </Button>
-        </Link>
-      ) : (
-        <Button  className="til-betaling-btn-disabled"  variant="primary"  onClick={handleSubmit}>
+ {isChecked ? (
+    <Link to={isFormFilled ? "/betaling" : ""}>
+            <button className="til-betaling-btn" onClick={handleSubmit}>
+                Til Betaling
+            </button>
+     </Link>
+       ) : (
+           <button  className="til-betaling-btn-disabled">
           Til Betaling
-        </Button>
-      )}
-    </form>
-  );
+        </button>
+     )}
+        </form>
+    );
 }

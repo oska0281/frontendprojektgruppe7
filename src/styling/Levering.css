@@ -10,6 +10,15 @@ form {
   flex-direction: column;
   align-items: center;
 }
+.titel {
+  margin-bottom: 50px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 label {
   margin-right: 10px;
@@ -20,10 +29,22 @@ label {
   padding: 5px;
   margin-bottom: 10px;
   width: 300px;
-  margin-left: 120px;
 }
 
-text {
+.form-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row label {
+  width: 100px;
+}
+
+.form-row input {
+  width: 300px;
+}
+
+.text {
   margin-left: 10px;
 }
 
@@ -38,11 +59,11 @@ text {
   opacity: 0.5;
 }
 
-.inputbox{
+.inputbox {
   margin-top: 30px;
   margin-bottom: 20px;
 }
 
-.message{
+.message {
   color: #dc0b0b;
 }
