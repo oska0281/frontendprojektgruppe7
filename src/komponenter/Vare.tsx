@@ -27,4 +27,4 @@ export function Vare({ id, navn, antal, pris, imageUrl }: KurvVareProps) {
     </div>
   );
                
-};
+}

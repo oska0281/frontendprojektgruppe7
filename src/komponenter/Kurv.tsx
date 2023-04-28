@@ -132,4 +132,4 @@ export function Kurv({ erAaben }: ShoppingCartProps) {
       </div>
     </div>
   );
-};  
+}
