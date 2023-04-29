@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styling/Levering.css';
+import '../styling/delivery.css';
 
 export function Levering() {
   const [isChecked, setIsChecked] = useState(false);

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Logindvalidering } from "../utilities/Logindvalidering";
+import "../styling/login.css";
 
 interface values {
   email: string;

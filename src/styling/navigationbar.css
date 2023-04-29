@@ -30,7 +30,7 @@
     display: flex;
 }
 
-.navbar-navlink {
+.navbar-navlink-store {
     display: inline-block;
     padding: 0.5rem 1rem;
     color: #ffffff;
@@ -39,9 +39,15 @@
     font-size: 2rem;
 }
 
-.navbar-navlink:hover {
+.navbar-navlink-store:hover {
     color: #ffffff;
 }
+
+.navbar-navlink-login{
+
+}
+
+
 
 .navbar-btn-cart{
     position: relative;

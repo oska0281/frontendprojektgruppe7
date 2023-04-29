@@ -5,6 +5,7 @@ import { Levering } from "./pages/Levering";
 import { Butik } from "./pages/Butik";
 import { Betaling } from "./pages/Betaling";
 import Loading from './komponenter/Loading';
+import { Logind } from "./pages/Logind";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -33,6 +34,8 @@ function App() {
         return <Levering />;
       case '/betaling':
         return <Betaling />;
+      case '/logind': // added case for logind page
+        return <Logind />;
       default:
         return <Butik />;
     }

@@ -33,10 +33,21 @@ export function Navigationsbar(props: NavigationsbarProps) {
     <nav className={`navbar-nav ${hidden ? "navbar-hidden" : ""}`}>
       <div className="navbar-con">
         <div className="navbar-div-navlink">
-          <a href="/" onClick={() => props.onNavClick("/")} className="navbar-navlink">
+          <a
+            href="/"
+            onClick={() => props.onNavClick("/")}
+            className="navbar-navlink-store"
+          >
             Butik
           </a>
+          <a
+            href="/logind"
+            onClick={() => props.onNavClick("/logind")}
+            className="navbar-navlink-login">
+            Log ind
+          </a>
         </div>
+
         <button onClick={aabenKurv} className="navbar-btn-cart">
           <img
             className="navbar-shop-cart"
