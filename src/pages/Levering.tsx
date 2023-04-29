@@ -28,11 +28,24 @@ export function Levering () {
     };
 
 
-    const handleFormChange = () => {
-        const formFields = document.querySelectorAll ( 'input[type="text"]' );
-        const filledFields = Array.from ( formFields ).filter ( ( field ) => ( field as HTMLInputElement ).value !== '' );
-        setIsFormFilled ( filledFields.length === formFields.length );
-    };
+    const handleFormChange = async () => {
+  const formFields = document.querySelectorAll('input[type="text"]');
+  const filledFields = Array.from(formFields).filter(
+    (field) => (field as HTMLInputElement).value !== ''
+  );
+  setIsFormFilled(filledFields.length === formFields.length);
+  if (deliveryAddress.zipCode) {
+    const isValidZipCode = await validateZipCode(deliveryAddress.zipCode);
+    setZipCodeError(!isValidZipCode);
+    setIsZipCodeValid(isValidZipCode);
+    if (isValidZipCode) {
+      setDeliveryAddress((prevState) => ({
+        ...prevState,
+        city: city,
+      }));
+    }
+  }
+};
 
     const handleButtonClick = async () => {
   if (isFormFilled && isChecked && isZipCodeValid) {
@@ -65,9 +78,9 @@ export function Levering () {
         }
     };
 
-    useEffect ( () => {
-        setDeliveryAddress ( ( prevState ) => ( { ... prevState , city : city } ) );
-    } , [ city ] );
+   useEffect(() => {
+  setDeliveryAddress((prevState) => ({ ...prevState, city: city }));
+}, [city, setDeliveryAddress]);
 
     const handleZipCodeChange = async ( e : React.ChangeEvent<HTMLInputElement> ) => {
         setDeliveryAddress ( ( prevState ) => ( { ... prevState , zipCode : e.target.value } ) );
@@ -107,9 +120,9 @@ export function Levering () {
       </div>
 { zipCodeError && <span className="error">Ugyldigt postnummer</span> }
       <div>
-        <label>By:</label>
-        <input className="inputfelt" type="text" required />
-      </div>
+                <label>By:</label>
+                <input className="inputfelt" type="text" value={ city } readOnly/>
+            </div>
 
       <div>
         <label>Land:</label>
