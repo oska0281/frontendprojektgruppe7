@@ -1,27 +1,42 @@
-import React, { useState } from 'react';
-import '../styling/delivery.css';
+import { Link } from "react-router-dom";
+import React , { useEffect , useState } from 'react';
+import "../styling/Levering.css";
 
-export function Levering() {
-  const [isChecked, setIsChecked] = useState(false);
-  const [isFormFilled, setIsFormFilled] = useState(false);
-  const [showMessage, setShowMessage] = useState(false);
-  const [isCheckedMessage, setIsCheckedMessage] = useState(false);
+export function Levering () {
+    const [ isChecked , setIsChecked ] = useState ( false );
+    const [ isFormFilled , setIsFormFilled ] = useState ( false );
+    const [ showMessage , setShowMessage ] = useState ( false );
+    const [ isCheckedMessage , setIsCheckedMessage ] = useState ( false );
+    const [ zipCodeError , setZipCodeError ] = useState ( false );
+    const [ isZipCodeValid , setIsZipCodeValid ] = useState ( false );
+    const [ city , setCity ] = useState ( '' );
+    const [ deliveryAddress , setDeliveryAddress ] = useState ( {
+        country : 'Denmark' ,
+        zipCode : '' ,
+        city : '' ,
+        addressLine1 : '' ,
+        addressLine2 : '' ,
+        name : '' ,
+        phone : '' ,
+        email : '' ,
+        companyName : '' ,
+        companyVATNumber : '' ,
+    } );
 
-  const handleCheck = () => {
-    setIsChecked(!isChecked);
-    setIsCheckedMessage(false);
-  };
+    const handleCheck = () => {
+        setIsChecked ( !isChecked );
+        setIsCheckedMessage ( false );
+    };
 
-  const handleFormChange = () => {
-    const formFields = document.querySelectorAll('input[type="text"]');
-    const filledFields = Array.from(formFields).filter(
-      (field) => (field as HTMLInputElement).value !== ''
-    );
-    setIsFormFilled(filledFields.length === formFields.length);
-  };
 
-  const handleButtonClick = () => {
-    if (isFormFilled && isChecked) {
+    const handleFormChange = () => {
+        const formFields = document.querySelectorAll ( 'input[type="text"]' );
+        const filledFields = Array.from ( formFields ).filter ( ( field ) => ( field as HTMLInputElement ).value !== '' );
+        setIsFormFilled ( filledFields.length === formFields.length );
+    };
+
+    const handleButtonClick = () => {
+    if (isFormFilled && isChecked && !isZipCodeValid ) {
       window.location.href = "/betaling";
     } else {
       setShowMessage(!isFormFilled);
@@ -29,7 +44,37 @@ export function Levering() {
     }
   }
 
-  return (
+
+    const validateZipCode = async ( zipCode : string ) : Promise<boolean> => {
+        if ( !zipCode ) {
+            return false;
+        }
+
+        const response = await fetch ( `https://api.dataforsyningen.dk/postnumre/${ zipCode }` );
+        const data = await response.json ();
+
+        if ( response.ok && data && data.nr === zipCode ) {
+            setCity ( data.navn );
+            return true;
+        } else {
+            setCity ( '' );
+            return false;
+        }
+    };
+
+    useEffect ( () => {
+        setDeliveryAddress ( ( prevState ) => ( { ... prevState , city : city } ) );
+    } , [ city ] );
+
+    const handleZipCodeChange = async ( e : React.ChangeEvent<HTMLInputElement> ) => {
+        setDeliveryAddress ( ( prevState ) => ( { ... prevState , zipCode : e.target.value } ) );
+
+        const isValidZipCode = await validateZipCode ( e.target.value );
+        setZipCodeError ( !isValidZipCode );
+        setIsZipCodeValid ( isValidZipCode );
+
+    };
+     return (
     <form onChange={handleFormChange} onSubmit={(event) => event.preventDefault()}>
       <h1 className="titel">Levering</h1>
       <div>
@@ -87,3 +132,4 @@ export function Levering() {
     </form>
   );
 }
+

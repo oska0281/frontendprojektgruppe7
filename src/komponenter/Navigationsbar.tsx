@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useKurv } from "../kontekst/KurvKontekst";
 import "../styling/navigationbar.css";
