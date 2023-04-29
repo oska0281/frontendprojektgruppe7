@@ -3,8 +3,8 @@ import { render, screen } from '@testing-library/react';
 // @ts-ignore
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
-import { Products } from '../komponenter/Produkter';
-import { CartProvider } from '../kontekst/KurvKontekst';
+import { Products } from '../komponenter/Products';
+import { CartProvider } from '../kontekst/CartContext';
 
 describe('Produkter', () => {
   const defaultProps = {

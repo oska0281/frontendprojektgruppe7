@@ -1,7 +1,7 @@
 import 'mock-local-storage';
 import { renderHook, act } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { CartProvider, useCart } from '../kontekst/KurvKontekst';
+import { CartProvider, useCart } from '../kontekst/CartContext';
 import React from 'react';
 
 

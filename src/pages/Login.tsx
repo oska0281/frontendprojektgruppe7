@@ -9,7 +9,7 @@ interface values {
   kodeord: string;
 }
 
-export function Logind() {
+export function Login() {
   const [values, setValues] = useState<values>({
     email: "",
     kodeord: ""

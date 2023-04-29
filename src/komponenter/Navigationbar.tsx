@@ -1,10 +1,10 @@
 
 import { useState, useEffect } from "react";
 import {NavLink} from "react-router-dom";
-import {useCart} from "../kontekst/KurvKontekst";
+import {useCart} from "../kontekst/CartContext";
 import '../styling/navigationbar.css';
 
-export function Navigationsbar() {
+export function Navigationbar() {
 
     const { openCart, cartQuantity } = useCart();
     const isOverNine = cartQuantity >= 10;

@@ -1,7 +1,7 @@
 import { formater } from "../utilities/formater";
-import { useCart } from "../kontekst/KurvKontekst";
+import { useCart } from "../kontekst/CartContext";
 import { useState, useEffect } from "react";
-import { Vare } from "./Vare";
+import { Item } from "./Item";
 import { Link } from "react-router-dom";
 import "../styling/cart.css";
 
@@ -100,7 +100,7 @@ export function Cart({ isOpen }: ShoppingCartProps) {
           {cartProducts.map((item) => {
             const product = products.find((product) => product.id === item.id);
             return (
-              <Vare
+              <Item
                 key={item.id}
                 id={item.id}
                 name={product?.name || ""}

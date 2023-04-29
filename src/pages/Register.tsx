@@ -10,7 +10,7 @@ interface values {
   email: string;
   kodeord: string;
 }
-export function Registrer(){
+export function Register(){
 
 
     const [values, setValues] = useState<values>({
@@ -67,7 +67,7 @@ const handleInput=(event: React.ChangeEvent<HTMLInputElement>) =>
                     </div>
                     <button type="submit" className="btn btn-success w-100">Opret Profil</button>
                     <p>Ved brug erklærer du dig enig i vores vilkår</p>
-                    <Nav.Link to="/login" as={NavLink}  className="btn btn-default border w-100">Log Ind</Nav.Link>
+                    <Nav.Link to="/logind" as={NavLink}  className="btn btn-default border w-100">Log Ind</Nav.Link>
                 </form>
             </div>
         </div>

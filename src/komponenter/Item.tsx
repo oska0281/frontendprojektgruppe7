@@ -1,4 +1,4 @@
-import { useCart } from "../kontekst/KurvKontekst";
+import { useCart } from "../kontekst/CartContext";
 import "../styling/item.css";
 
 type CartProductProps = {
@@ -9,7 +9,7 @@ type CartProductProps = {
   imageUrl?: string;
 };
 
-export function Vare({ id, name, quantity, price, imageUrl }: CartProductProps) {
+export function Item({ id, name, quantity, price, imageUrl }: CartProductProps) {
   const { removeFromCart } = useCart();
 
   return (

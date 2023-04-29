@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from "react-router-dom";
-import { Levering } from "./pages/Levering";
+import { Delivery } from "./pages/Delivery";
 import { Butik } from "./pages/Butik";
-import { Betaling } from "./pages/Betaling";
-import { Navigationsbar } from "./komponenter/Navigationsbar";
-import { CartProvider } from "./kontekst/KurvKontekst";
+import { Payment } from "./pages/Payment";
+import { Navigationbar } from "./komponenter/Navigationbar";
+import { CartProvider } from "./kontekst/CartContext";
 import Loading from './komponenter/Loading';
-import {Logind} from "./pages/Logind";
-import {Registrer} from "./pages/Registrer";
+import {Login} from "./pages/Login";
+import {Register} from "./pages/Register";
 
 
 function App() {
@@ -27,14 +27,14 @@ function App() {
         <Loading />
       ) : (
         <>
-          <Navigationsbar />
+          <Navigationbar />
           <div className="app-con">
             <Routes>
       <Route path="/" element={<Butik />} />
-        <Route path="/levering"  element={<Levering  />} />
-      <Route path="/betaling" element={<Betaling />} />
-        <Route path="/logind" element={<Logind />} />
-      <Route path="/registrer" element={<Registrer/>}/>
+        <Route path="/levering"  element={<Delivery  />} />
+      <Route path="/betaling" element={<Payment />} />
+        <Route path="/logind" element={<Login />} />
+      <Route path="/registrer" element={<Register/>}/>
      </Routes>
           </div>
         </>

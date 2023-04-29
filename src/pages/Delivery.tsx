@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import React , { useEffect , useState } from 'react';
 import "../styling/Levering.css";
 
-export function Levering () {
+export function Delivery () {
     const [ isChecked , setIsChecked ] = useState ( false );
     const [ isFormFilled , setIsFormFilled ] = useState ( false );
     const [ showMessage , setShowMessage ] = useState ( false );

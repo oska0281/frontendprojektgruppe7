@@ -1,4 +1,4 @@
-import { Products } from "../komponenter/Produkter";
+import { Products } from "../komponenter/Products";
 import { useEffect, useState } from "react";
 import "../styling/store.css";
 

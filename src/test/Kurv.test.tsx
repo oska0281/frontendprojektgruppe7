@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { Cart } from '../komponenter/Kurv';
-import { CartProvider } from '../kontekst/KurvKontekst';
+import { Cart } from '../komponenter/Cart';
+import { CartProvider } from '../kontekst/CartContext';
 
 describe('Kurv', () => {
   it('renders cart with closed state', () => {

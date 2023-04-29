@@ -1,5 +1,5 @@
 import {createContext, ReactNode, useContext, useState} from "react";
-import {Cart} from "../komponenter/Kurv";
+import {Cart} from "../komponenter/Cart";
 import {lokalLagring} from "../hooks/lokalLagring";
 
 

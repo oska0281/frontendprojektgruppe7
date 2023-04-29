@@ -1,5 +1,5 @@
 import {formater} from "../utilities/formater";
-import {useCart} from "../kontekst/KurvKontekst";
+import {useCart} from "../kontekst/CartContext";
 import '../styling/products.css';
 
 interface Product {
