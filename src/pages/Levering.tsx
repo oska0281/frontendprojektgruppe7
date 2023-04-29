@@ -112,7 +112,7 @@ export function Levering () {
 
             <div>
                 <label>By:</label>
-                <input className="inputfelt" type="text" value={ city } readOnly/>
+                <input className="inputfelt" type="text" value={ city } required/>
             </div>
 
             <div>
