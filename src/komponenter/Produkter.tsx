@@ -1,5 +1,5 @@
 import {formater} from "../utilities/formater";
-import {useKurv} from "../kontekst/KurvKontekst";
+import {useCart} from "../kontekst/KurvKontekst";
 import '../styling/products.css';
 
 interface Product {
@@ -13,7 +13,7 @@ interface Product {
     imageUrl: string;
 }
 
-type ProdukterProps = Product;
+type ProductsProps = Product;
 
 export function Produkter({
     id,
@@ -22,13 +22,13 @@ export function Produkter({
     imageUrl,
     rebateQuantity,
     rebatePercent
-}: ProdukterProps) {
+}: ProductsProps) {
 
-    const { getVareAntal, increaseKurvAntal, decreaseKurvAntal, fjernFraKurv } =
-        useKurv();
+    const { getProductQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart } =
+        useCart();
 
-    const antal = getVareAntal(id);
-    const discountedPrice = antal >= rebateQuantity ? price * (1 - rebatePercent / 100) : price;
+    const quantity = getProductQuantity(id);
+    const discountedPrice = quantity >= rebateQuantity ? price * (1 - rebatePercent / 100) : price;
 
     return (
         <div className="products-card">
@@ -40,11 +40,11 @@ export function Produkter({
                     <span className="products-card-item-price">{formater(discountedPrice)}</span>
                 </div>
 
-                {antal > 0 && rebatePercent > 0 && (
+                {quantity > 0 && rebatePercent > 0 && (
                     <div className="products-card-bulk-discount" style={{ textAlign: 'center', marginTop: '10px' }}>
-                        {antal < rebateQuantity ? (
+                        {quantity < rebateQuantity ? (
                             <span>
-                                Køb {rebateQuantity - antal} mere for at få {rebatePercent}% mængderabat
+                                Køb {rebateQuantity - quantity} mere for at få {rebatePercent}% mængderabat
                             </span>
                         ) : (
                             <span>
@@ -55,22 +55,22 @@ export function Produkter({
                 )}
 
                 <div className="products-card-interact">
-                    {antal === 0 ? (
-                        <button className="products-card-btn-add" onClick={() => increaseKurvAntal(id)}>
+                    {quantity === 0 ? (
+                        <button className="products-card-btn-add" onClick={() => increaseCartQuantity(id)}>
                             Tilføj til kurv
                         </button>
                     ) : (
                         <div className="products-card-div-edit">
                             <div className="products-card-div-id">
-                                <button className="products-card-btn-decrease" onClick={() => decreaseKurvAntal(id)}>-</button>
+                                <button className="products-card-btn-decrease" onClick={() => decreaseCartQuantity(id)}>-</button>
                                 <div>
-                                    <span className="products-card-span-amount">{antal}</span> in cart
+                                    <span className="products-card-span-amount">{quantity}</span> in cart
                                 </div>
-                                <button className="products-card-btn-increase" onClick={() => increaseKurvAntal(id)}>+</button>
+                                <button className="products-card-btn-increase" onClick={() => increaseCartQuantity(id)}>+</button>
                             </div>
                             <button
                                 className="products-card-btn-remove"
-                                onClick={() => fjernFraKurv(id)}>
+                                onClick={() => removeFromCart(id)}>
                                 Fjern
                             </button>
                         </div>

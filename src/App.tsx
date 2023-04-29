@@ -4,7 +4,7 @@ import { Levering } from "./pages/Levering";
 import { Butik } from "./pages/Butik";
 import { Betaling } from "./pages/Betaling";
 import { Navigationsbar } from "./komponenter/Navigationsbar";
-import { KurvProvider } from "./kontekst/KurvKontekst";
+import { CartProvider } from "./kontekst/KurvKontekst";
 import Loading from './komponenter/Loading';
 import {Logind} from "./pages/Logind";
 import {Registrer} from "./pages/Registrer";
@@ -22,7 +22,7 @@ function App() {
   }, []);
 
   return (
-    <KurvProvider>
+    <CartProvider>
       {isLoading ? (
         <Loading />
       ) : (
@@ -39,7 +39,7 @@ function App() {
           </div>
         </>
       )}
-    </KurvProvider>
+    </CartProvider>
   );
 }
 

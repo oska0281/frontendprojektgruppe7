@@ -1,15 +1,15 @@
 
 import { useState, useEffect } from "react";
 import {NavLink} from "react-router-dom";
-import {useKurv} from "../kontekst/KurvKontekst";
+import {useCart} from "../kontekst/KurvKontekst";
 import '../styling/navigationbar.css';
 
 export function Navigationsbar() {
 
-    const { aabenKurv, kurvAntal } = useKurv();
-    const isOverNine = kurvAntal >= 10;
+    const { openCart, cartQuantity } = useCart();
+    const isOverNine = cartQuantity >= 10;
     const adjustedPadding = isOverNine ? { padding: "2px 5px" } : {};
-    const displayAntal = isOverNine ? "9+" : kurvAntal;
+    const displayQuantity = isOverNine ? "9+" : cartQuantity;
   
     const [lastScrollTop, setLastScrollTop] = useState(0);
     const [hidden, setHidden] = useState(false);
@@ -38,11 +38,11 @@ export function Navigationsbar() {
                        Log ind
               </NavLink>
           </div>
-          <button onClick={aabenKurv} className="navbar-btn-cart">
+          <button onClick={openCart} className="navbar-btn-cart">
             <img className="navbar-shop-cart" src="../public/images/shopping-cart.svg" alt="Shopping-cart" />
-            {kurvAntal > 0 && (
+            {cartQuantity > 0 && (
               <div className="navbar-amount-cart" style={{ ...adjustedPadding }}>
-                {displayAntal}
+                {displayQuantity}
               </div>
             )}
           </button>

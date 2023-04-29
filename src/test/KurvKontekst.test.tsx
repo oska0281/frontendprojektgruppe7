@@ -1,14 +1,14 @@
 import 'mock-local-storage';
 import { renderHook, act } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { KurvProvider, useKurv } from '../kontekst/KurvKontekst';
+import { CartProvider, useCart } from '../kontekst/KurvKontekst';
 import React from 'react';
 
 
 describe('KurvKontekst', () => {
   it('should increase cart quantity', () => {
-    const wrapper = ({ children }: { children: React.ReactNode }) => <KurvProvider>{children}</KurvProvider>;
-    const { result } = renderHook(() => useKurv(), { wrapper });
+    const wrapper = ({ children }: { children: React.ReactNode }) => <CartProvider>{children}</CartProvider>;
+    const { result } = renderHook(() => useCart(), { wrapper });
 
     act(() => {
       result.current.increaseKurvAntal('1');
