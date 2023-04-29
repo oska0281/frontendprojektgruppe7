@@ -3,8 +3,8 @@ import { render, screen } from '@testing-library/react';
 // @ts-ignore
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
-import { Produkter } from '../komponenter/Produkter';
-import { KurvProvider } from '../kontekst/KurvKontekst';
+import { Products } from '../komponenter/Produkter';
+import { CartProvider } from '../kontekst/KurvKontekst';
 
 describe('Produkter', () => {
   const defaultProps = {
@@ -16,9 +16,9 @@ describe('Produkter', () => {
 
   test('renders product correctly', () => {
     render(
-      <KurvProvider>
-        <Produkter {...defaultProps} />
-      </KurvProvider>,
+      <CartProvider>
+        <Products {...defaultProps} />
+      </CartProvider>,
     );
 
     expect(screen.getByText('Test Product')).toBeInTheDocument();
@@ -28,9 +28,9 @@ describe('Produkter', () => {
 
   test('adds product to cart', () => {
     render(
-      <KurvProvider>
-        <Produkter {...defaultProps} />
-      </KurvProvider>,
+      <CartProvider>
+        <Products {...defaultProps} />
+      </CartProvider>,
     );
 
     const addButton = screen.getByText('+Tilføj til kurv');

@@ -15,7 +15,7 @@ interface Product {
 
 type ProductsProps = Product;
 
-export function Produkter({
+export function Products({
     id,
     name,
     price,
