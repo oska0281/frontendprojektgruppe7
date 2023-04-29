@@ -1,4 +1,4 @@
-import { Produkter } from "../komponenter/Produkter";
+import { Products } from "../komponenter/Produkter";
 import { useEffect, useState } from "react";
 import "../styling/store.css";
 
@@ -10,7 +10,7 @@ interface Product {
   rebateQuantity: number;
   rebatePercent: number;
   upsellProductId: string | null;
-  imageUrl: string;
+  imageURL: string;
 }
 
 export function Butik() {
@@ -31,7 +31,7 @@ export function Butik() {
       <div className="store-container">
         {produkter.map((produkt) => (
           <div key={produkt.id} className="store-item">
-            <Produkter {...produkt} />
+            <Products {...produkt} />
           </div>
         ))}
       </div>

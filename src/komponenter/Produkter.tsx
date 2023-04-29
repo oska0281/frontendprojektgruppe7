@@ -10,7 +10,7 @@ interface Product {
     rebateQuantity: number;
     rebatePercent: number;
     upsellProductId: string | null;
-    imageUrl: string;
+    imageURL: string;
 }
 
 type ProductsProps = Product;
@@ -19,7 +19,7 @@ export function Products({
     id,
     name,
     price,
-    imageUrl,
+    imageURL,
     rebateQuantity,
     rebatePercent
 }: ProductsProps) {
@@ -32,7 +32,7 @@ export function Products({
 
     return (
         <div className="products-card">
-            <div className="products-card-img" style={{ backgroundImage: `url(${imageUrl})` }}></div>
+            <div className="products-card-img" style={{ backgroundImage: `url(${imageURL})` }}></div>
 
             <div className="products-card-body">
                 <div className="products-card-title">

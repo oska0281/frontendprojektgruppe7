@@ -9,9 +9,9 @@ import { CartProvider } from '../kontekst/KurvKontekst';
 describe('Produkter', () => {
   const defaultProps = {
     id: '1',
-    navn: 'Test Product',
-    pris: 100,
-    billedeURL: 'https://example.com/test-image.jpg',
+    name: 'Test Product',
+    price: 100,
+    imageURL: 'https://example.com/test-image.jpg',
   };
 
   test('renders product correctly', () => {
