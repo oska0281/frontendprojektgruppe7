@@ -2,7 +2,6 @@ import { formater } from "../utilities/formater";
 import { useKurv } from "../kontekst/KurvKontekst";
 import { useState, useEffect } from "react";
 import { Vare } from "./Vare";
-import { Link } from "react-router-dom";
 import "../styling/cart.css";
 
 type ShoppingCartProps = {
@@ -87,49 +86,54 @@ export function Kurv({ erAaben }: ShoppingCartProps) {
   const rebate = adjustedTotal >= 300 ? adjustedTotal * 0.1 : 0;
   const totalPrice = adjustedTotal - rebate;
 
-  return (
-    <div className={`cart-offcanvas ${erAaben ? "show" : ""}`}>
-      <div className="cart-offcanvas-header">
-        <h5 className="cart-offcanvas-title">Din indkøbskurv</h5>
-        <button type="button" className="cart-close" onClick={lukKurv}>
-          &times;
-        </button>
-      </div>
-      <div className="cart-offcanvas-body">
-        <div className="cart-item-list">
-          {kurvVarer.map((item) => {
-            const product = products.find((product) => product.id === item.id);
-            return (
-              <Vare
-                key={item.id}
-                id={item.id}
-                navn={product?.name || ""}
-                pris={product?.price || 0}
-                antal={item.antal}
-                imageUrl={product?.imageUrl || ""}
-              />
-            );
-          })}
-        </div>
-        <div className="total-sb-cart">Sum: <span className="cart-sb-total">{formater(totalPrice)}</span></div>
-        <div className="titles-sb-cart">Moms: <span className="cart-sb-values">{formater(totalTax)}</span></div>
-        <div className="titles-sb-cart">
-          Mængderabat: <span className="cart-sb-values">{formater(totalDiscount)}</span>
-        </div>
-        {adjustedTotal >= 300 && (
-          <div className="titles-sb-cart">
-            Rabat over 300: <span className="cart-sb-values">{formater(rebate)}</span>
-          </div>
-        )}
-        
-        {kurvAntal > 0 && (
-          <Link to="/levering">
-            <button onClick={lukKurv} className="cart-btn-next">
-              FORTSÆT TIL KASSEN
-            </button>
-          </Link>
-        )}
-      </div>
+  const handleCheckoutClick = () => {
+    lukKurv();
+    window.location.href = '/levering';
+  };
+
+
+
+return (
+  <div className={`cart-offcanvas ${erAaben ? "show" : ""}`}>
+    <div className="cart-offcanvas-header">
+      <h5 className="cart-offcanvas-title">Din indkøbskurv</h5>
+      <button type="button" className="cart-close" onClick={lukKurv}>
+        &times;
+      </button>
     </div>
-  );
-};  
+    <div className="cart-offcanvas-body">
+      <div className="cart-item-list">
+        {kurvVarer.map((item) => {
+          const product = products.find((product) => product.id === item.id);
+          return (
+            <Vare
+              key={item.id}
+              id={item.id}
+              navn={product?.name || ""}
+              pris={product?.price || 0}
+              antal={item.antal}
+              imageUrl={product?.imageUrl || ""}
+            />
+          );
+        })}
+      </div>
+      <div className="total-sb-cart">Sum: <span className="cart-sb-total">{formater(totalPrice)}</span></div>
+      <div className="titles-sb-cart">Moms: <span className="cart-sb-values">{formater(totalTax)}</span></div>
+      <div className="titles-sb-cart">
+        Mængderabat: <span className="cart-sb-values">{formater(totalDiscount)}</span>
+      </div>
+      {adjustedTotal >= 300 && (
+        <div className="titles-sb-cart">
+          Rabat over 300: <span className="cart-sb-values">{formater(rebate)}</span>
+        </div>
+      )}
+
+      {kurvAntal > 0 && (
+        <button onClick={handleCheckoutClick} className="cart-btn-next">
+          FORTSÆT TIL KASSEN
+        </button>
+      )}
+    </div>
+  </div>
+);
+}

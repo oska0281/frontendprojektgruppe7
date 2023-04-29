@@ -1,25 +1,57 @@
+import React, { useState, useEffect } from 'react';
+import { KurvProvider } from "./kontekst/KurvKontekst";
+import { Navigationsbar } from "./komponenter/Navigationsbar";
+import { Levering } from "./pages/Levering";
+import { Butik } from "./pages/Butik";
+import { Betaling } from "./pages/Betaling";
+import Loading from './komponenter/Loading';
 
-import { Routes, Route } from "react-router-dom"
-import { Container } from "react-bootstrap";
-import {Levering} from "./pages/Levering";
-import {Butik} from "./pages/Butik";
-import {Betaling} from "./pages/Betaling";
-import {Navigationsbar} from "./komponenter/Navigationsbar"
-import {KurvProvider} from "./kontekst/KurvKontekst";
+function App() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [path, setPath] = useState(window.location.pathname);
 
-function App(){
+  useEffect(() => {
+    const handlePopstate = () => {
+      setPath(window.location.pathname);
+    };
+
+    window.addEventListener('popstate', handlePopstate);
+    return () => window.removeEventListener('popstate', handlePopstate);
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const renderPage = () => {
+    switch (path) {
+      case '/levering':
+        return <Levering />;
+      case '/betaling':
+        return <Betaling />;
+      default:
+        return <Butik />;
+    }
+  };
+
   return (
-  <KurvProvider>
-    <Navigationsbar />
-    <Container className="mb-4">
-    <Routes>
-      <Route path="/" element={<Butik />} />
-        <Route path="/levering" element={<Levering  />} />
-      <Route path="/betaling" element={<Betaling />} />
-     </Routes>
-   </Container>
-  </KurvProvider>
-)
+    <KurvProvider>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <Navigationsbar onNavClick={setPath} />
+          <div className="app-con">
+            {renderPage()}
+          </div>
+        </>
+      )}
+    </KurvProvider>
+  );
 }
 
 export default App;

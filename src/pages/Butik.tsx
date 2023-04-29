@@ -2,7 +2,6 @@ import { Produkter } from "../komponenter/Produkter";
 import { useEffect, useState } from "react";
 import "../styling/store.css";
 
-
 interface Product {
   id: string;
   name: string;
@@ -13,8 +12,6 @@ interface Product {
   upsellProductId: string | null;
   imageUrl: string;
 }
-
-
 
 export function Butik() {
   const [produkter, setProdukter] = useState<Product[]>([]);

@@ -5,7 +5,11 @@ export function Betaling() {
     <div className="paym-root">
       <h1 className="paym-heading">Betaling</h1>
       <form className="paym-form">
-        <input type="text" placeholder="Kreditkortnummer" className="paym-input" />
+        <input
+          type="text"
+          placeholder="Kreditkortnummer"
+          className="paym-input"
+        />
         <br />
         <input type="text" placeholder="Udløbsdato" className="paym-input" />
         <br />

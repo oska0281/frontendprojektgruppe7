@@ -42,6 +42,3 @@ describe('Kurv', () => {
   });
 });
 
-
-/* Some problems with the second and third test cases, everything used to work but since editing the components and creating separate CSS 
-files the test file has not been it self, we will have to fix it */ 

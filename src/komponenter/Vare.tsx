@@ -23,8 +23,9 @@ export function Vare({ id, navn, antal, pris, imageUrl }: KurvVareProps) {
         <span className="item-price">Stk. pris {pris} DKK </span>
         <span className="item-total">Total: {pris * antal} DKK</span>
       </div>
-      <button className="item-btn-remove" onClick={() => fjernFraKurv(id)}>x</button>
+      <button className="item-btn-remove" onClick={() => fjernFraKurv(id)}>
+        x
+      </button>
     </div>
   );
-               
-};
+}
