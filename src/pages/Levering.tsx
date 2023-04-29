@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import React , { useEffect , useState } from 'react';
 import "../styling/Levering.css";
 
@@ -35,14 +34,18 @@ export function Levering () {
         setIsFormFilled ( filledFields.length === formFields.length );
     };
 
-    const handleButtonClick = () => {
-    if (isFormFilled && isChecked && !isZipCodeValid ) {
-      window.location.href = "/betaling";
-    } else {
-      setShowMessage(!isFormFilled);
-      setIsCheckedMessage(isChecked);
+    const handleButtonClick = async () => {
+  if (isFormFilled && isChecked && isZipCodeValid) {
+    window.location.href = "/betaling";
+  } else {
+    setShowMessage(!isFormFilled);
+    setIsCheckedMessage(!isChecked);
+    if (!isZipCodeValid) {
+      setZipCodeError(true);
     }
   }
+};
+
 
 
     const validateZipCode = async ( zipCode : string ) : Promise<boolean> => {
@@ -99,9 +102,10 @@ export function Levering () {
 
       <div>
         <label>Postnummer:</label>
-        <input className="inputfelt" type="text" required />
+        <input id="zipcode" className="inputfelt" type="text" name="zipcode" required
+                           onChange={ handleZipCodeChange }/>
       </div>
-
+{ zipCodeError && <span className="error">Ugyldigt postnummer</span> }
       <div>
         <label>By:</label>
         <input className="inputfelt" type="text" required />
@@ -119,14 +123,15 @@ export function Levering () {
         <text>Jeg bekræfter at have læst og accepteret købsbetingelserne</text>
       </div>
 
-      {isCheckedMessage && <div className="message">Accepter venligst købsbetingelserne</div>}
-
+      { isCheckedMessage && (
+                <div className="message">Accepter venligst købsbetingelserne</div>
+            ) }
       <div>
         <input className="inputbox" type="checkbox" />
         <text>Jeg ønsker at modtage fremtidige mails med tilbud</text>
       </div>
 
-      <button className="til-betaling-btn" disabled={!isFormFilled} onClick={handleButtonClick}>
+      <button className="til-betaling-btn" disabled={!isFormFilled && !isZipCodeValid} onClick={handleButtonClick}>
         Til Betaling
       </button>
     </form>
