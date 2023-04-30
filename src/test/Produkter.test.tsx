@@ -1,9 +1,9 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react'; // Tilføj denne linje
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { Products } from '../components/Products';
-import { KurvProvider } from '../context/KurvKontekst';
+import { CartProvider } from '../context/CartContext';
 
 describe('Produkter', () => {
   const defaultProps = {
@@ -15,9 +15,9 @@ describe('Produkter', () => {
 
   test('renders product correctly', () => {
     render(
-      <KurvProvider>
+      <CartProvider>
         <Products {...defaultProps} />
-      </KurvProvider>,
+      </CartProvider>,
     );
 
     expect(screen.getByText('Test Product')).toBeInTheDocument();
@@ -27,16 +27,15 @@ describe('Produkter', () => {
 
   test('adds product to cart', () => {
     render(
-      <KurvProvider>
+      <CartProvider>
         <Products {...defaultProps} />
-      </KurvProvider>,
+      </CartProvider>,
     );
 
     const addButton = screen.getByText('+Tilføj til kurv');
-    userEvent.click(addButton);
+    fireEvent.click(addButton); // Brug fireEvent i stedet for userEvent
     expect(screen.getByText('1 in cart')).toBeInTheDocument();
   });
 });
-
 
 //        Virker ikke i øjeblikket, pga ændringer i import filer
