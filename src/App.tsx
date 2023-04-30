@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { OrderSummary } from "./pages/OrderSummary";
-import { Delivery } from "./pages/Delivery";
-import { Payment } from "./pages/Payment";
+import { Checkout} from "./pages/Checkout";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { CartProvider } from "./context/CartContext";
@@ -33,10 +32,8 @@ function App() {
 
   const renderPage = () => {
     switch (path) {
-      case '/delivery':
-        return <Delivery />;
-      case '/payment':
-        return <Payment />;
+      case '/checkout':
+        return <Checkout />;
       case '/login':
         return <Login />;
       case '/register':
