@@ -115,7 +115,7 @@ export function OrderSummary() {
       </table>
     </div>
     <div className="order-summary__totals">
-      <h1 className="order-summary__heading">Total Price</h1>
+      <h1 className="order-summary__heading">Samlet pris</h1>
       <table>
         <tfoot>
           <tr>
