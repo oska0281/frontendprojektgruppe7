@@ -35,11 +35,16 @@ text {
 }
 
 .payment-btn {
-  margin-top: 30px;
-  width: 600px;
-  background-color: #0d6efd;
-  border: 2px solid #0d6efd;
-  color: #fff;
+ margin-top: 120px;
+  background-color: #0070ba;
+  width: 400px;
+  padding: 10px;
+  margin: 10px auto 0;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
 }
 
 

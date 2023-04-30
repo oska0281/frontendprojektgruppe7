@@ -89,7 +89,7 @@ export function Cart({ isOpen }: ShoppingCartProps) {
 
   const handleCheckoutClick = () => {
     closeCart();
-    window.location.href = '/delivery';
+    window.location.href = '/ordersummary';
   };
 
 
@@ -131,7 +131,7 @@ return (
 
       {cartQuantity > 0 && (
         <button onClick={handleCheckoutClick} className="cart-btn-next">
-          FORTSÆT TIL KASSEN
+          Fortsæt
         </button>
       )}
     </div>

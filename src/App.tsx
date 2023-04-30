@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { KurvProvider } from "./kontekst/KurvKontekst";
-import { Navigationsbar } from "./komponenter/Navigationsbar";
-import { Levering } from "./pages/Levering";
-import { Butik } from "./pages/Butik";
-import { Betaling } from "./pages/Betaling";
-import Loading from './komponenter/Loading';
-import { Logind } from "./pages/Logind";
+
 import { OrderSummary } from "./pages/OrderSummary";
+import { Delivery } from "./pages/Delivery";
+import { Payment } from "./pages/Payment";
+import { Login } from "./pages/Login";
+import { Register } from "./pages/Register";
+import { CartProvider } from "./context/CartContext";
+import { Store } from "./pages/Store";
+import Loading from "./components/Loading";
+import { Navigationsbar } from "./components/NavigationBar";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -35,14 +37,15 @@ function App() {
         return <Delivery />;
       case '/payment':
         return <Payment />;
-      case '/login': // added case for login page
+      case '/login':
         return <Login />;
       case '/register':
         return <Register />;
+          case '/ordersummary':
+      return <OrderSummary />;
+
       default:
         return <Store />;
-        case '/ordersummary': // added case for ordersummary page
-      return <OrderSummary />;
 
     }
   };

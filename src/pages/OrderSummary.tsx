@@ -1,5 +1,5 @@
 import { format } from "../utilities/format";
-import { useKurv } from "../kontekst/KurvKontekst";
+import { useCart } from "../context/CartContext";
 import { useEffect, useState } from "react";
 import "../styling/ordersummary.css";
 
@@ -16,7 +16,7 @@ interface Product {
 }
 
 export function OrderSummary() {
-  const { kurvVarer } = useKurv ();
+  const { cartProducts } = useCart ();
   const [ products , setProducts ] = useState<Product[]> ( [] );
 
   useEffect ( () => {
@@ -32,9 +32,9 @@ export function OrderSummary() {
         } );
   } , [] );
 
-  const total = kurvVarer.reduce ( ( total , kurvVarer ) => {
-    const item = products.find ( ( i ) => i.id === kurvVarer.id );
-    return total + ( item?.price || 0 ) * kurvVarer.antal;
+  const total = cartProducts.reduce ( ( total , cartProducts ) => {
+    const item = products.find ( ( i ) => i.id === cartProducts.id );
+    return total + ( item?.price || 0 ) * cartProducts.quantity;
   } , 0 );
 
   const calculateTax = ( itemPrice : number ) => {
@@ -42,11 +42,11 @@ export function OrderSummary() {
     return itemPrice * taxRate;
   };
 
-  const totalTax = kurvVarer.reduce ( ( taxTotal , kurvVarer ) => {
-    const item = products.find ( ( i ) => i.id === kurvVarer.id );
+  const totalTax = cartProducts.reduce ( ( taxTotal , cartProducts ) => {
+    const item = products.find ( ( i ) => i.id === cartProducts.id );
     let price = item?.price || 0;
 
-    const itemTotal = price * kurvVarer.antal;
+    const itemTotal = price * cartProducts.quantity;
     const itemTax = calculateTax ( itemTotal );
 
     return taxTotal + itemTax;
@@ -64,12 +64,12 @@ export function OrderSummary() {
     return 0;
   };
 
-  const totalDiscount = kurvVarer.reduce ( ( discountTotal , cartItem ) => {
+  const totalDiscount = cartProducts.reduce ( ( discountTotal , cartItem ) => {
     const item = products.find ( ( i ) => i.id === cartItem.id );
     let price = item?.price || 0;
     let rebateQuantity = item?.rebateQuantity;
     let rebatePercent = item?.rebatePercent;
-    let quantity = cartItem.antal;
+    let quantity = cartItem.quantity;
 
     return (
         discountTotal +
@@ -82,7 +82,7 @@ export function OrderSummary() {
   const totalPrice = adjustedTotal - rebate;
 
     const handleButtonClick = async () => {
-      window.location.href = "/payment";
+      window.location.href = "/delivery";
     }
 
  return (
@@ -99,13 +99,13 @@ export function OrderSummary() {
           </tr>
         </thead>
         <tbody>
-         {kurvVarer.map((item) => {
+         {cartProducts.map((item) => {
   const product = products.find((product) => product.id === item.id);
-  const itemTotal = (item?.antal || 0) * (product?.price || 0);
+  const itemTotal = (item?.quantity || 0) * (product?.price || 0);
   return (
     <tr key={item.id} className="order-summary__row">
       <td className="order-summary__product">{product?.name}</td>
-      <td className="order-summary__quantity">{item?.antal || 0}</td>
+      <td className="order-summary__quantity">{item?.quantity || 0}</td>
       <td className="order-summary__price">{format(product?.price || 0)}</td>
       <td className="order-summary__total">{format(itemTotal)}</td>
     </tr>
@@ -142,7 +142,7 @@ export function OrderSummary() {
           </tr>
         </tfoot>
       </table>
-      <button className="continue-to-Payment__button" onClick={handleButtonClick}>Forsæt til betaling</button>
+      <button className="continue-to-Delivery__button" onClick={handleButtonClick}>Forsæt til levering</button>
     </div>
   </div>
 );
