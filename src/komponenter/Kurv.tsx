@@ -6,6 +6,7 @@ import "../styling/cart.css";
 
 type ShoppingCartProps = {
   erAaben: boolean;
+
 };
 
 interface Product {
