@@ -43,7 +43,7 @@ describe('KurvKontekst', () => {
         result.current.removeFromCart('1');
       });
       
-      expect(result.current.cartProducts).toEqual([{ id: '2', antal: 1 }]);
+      expect(result.current.cartProducts).toEqual([{ id: '2', quantity: 1 }]);
     });
    
     it('should update cart total correctly', () => {

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "../styling/delivery.css";
-
 import PhoneInput from "react-phone-number-input";
 
 export function Delivery() {
@@ -11,6 +10,9 @@ export function Delivery() {
   const [zipCodeError, setZipCodeError] = useState(false);
   const [isZipCodeValid, setIsZipCodeValid] = useState(false);
   const [city, setCity] = useState("");
+  const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(false);
+  const [isCompany, setIsCompany] = useState(false);
+  const [isCompanyVATNumberValid, setIsCompanyVATNumberValid] = useState(false);
   const [deliveryAddress, setDeliveryAddress] = useState({
     country: "Denmark",
     zipCode: "",
@@ -46,10 +48,18 @@ export function Delivery() {
         }));
       }
     }
+    if (!isCompany && !deliveryAddress.name) {
+      setIsFormFilled(false);
+    }
   };
 
   const handleButtonClick = async () => {
-    if (isFormFilled && isChecked && isZipCodeValid) {
+    if (
+      isFormFilled &&
+      isChecked &&
+      isZipCodeValid &&
+      (!isCompany || isCompanyVATNumberValid)
+    ) {
       window.location.href = "/payment";
     } else {
       setShowMessage(!isFormFilled);
@@ -96,13 +106,29 @@ export function Delivery() {
     setIsZipCodeValid(isValidZipCode);
   };
 
-  const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(false);
   const [value, setValue] = useState<string | undefined>();
 
   const handlePhoneInputChange = (value: string) => {
     setValue(value);
-    const isPhoneNumberValid = !!value && value.replace(/\D/g, "").length === 10;
+    const isPhoneNumberValid =
+      !!value && value.replace(/\D/g, "").length === 10;
     setIsPhoneNumberValid(isPhoneNumberValid);
+  };
+
+  const handleIsCompanyChange = () => {
+    setIsCompany(!isCompany);
+    if (isCompany) {
+      setIsCompanyVATNumberValid(false);
+    }
+  };
+  
+
+  const handleCompanyVATNumberInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const companyVATNumber = e.target.value;
+    const isValidCompanyVATNumber = /^\d{8}$/.test(companyVATNumber);
+    setIsCompanyVATNumberValid(isValidCompanyVATNumber);
   };
 
   return (
@@ -111,10 +137,53 @@ export function Delivery() {
       onSubmit={(event) => event.preventDefault()}
     >
       <h1 className="titel">Delivery</h1>
-      <div>
-        <label>Name:</label>
-        <input className="inputfelt" type="text" required />
+      <div className="company-container">
+        <input
+          className="company-checkbox"
+          type="checkbox"
+          checked={isCompany}
+          onChange={handleIsCompanyChange}
+        />
+        <label>Company</label>
       </div>
+
+      {!isCompany && (
+        <div>
+          <label>Name:</label>
+          <input
+            className="inputfelt"
+            type="text"
+            value={deliveryAddress.name}
+            onChange={(e) =>
+              setDeliveryAddress((prevState) => ({
+                ...prevState,
+                name: e.target.value,
+              }))
+            }
+            required
+          />
+        </div>
+      )}
+
+      {isCompany && (
+        <div>
+          <label>Company:</label>
+          <input className="inputfelt" type="text" required />
+        </div>
+      )}
+
+      {isCompany && (
+        <div>
+          <label>VAT No.:</label>
+          <input
+            className="inputfelt"
+            maxLength={8}
+            type="text"
+            required
+            onChange={handleCompanyVATNumberInputChange}
+          />
+        </div>
+      )}
 
       <div>
         <label>Email:</label>
@@ -169,7 +238,9 @@ export function Delivery() {
 
       <div>
         <input className="inputbox" type="checkbox" onChange={handleCheck} />
-        <text>I confirm that I have read and accepted the terms of purchase</text>
+        <text>
+          I confirm that I have read and accepted the terms of purchase
+        </text>
       </div>
 
       {isCheckedMessage && (
@@ -182,7 +253,12 @@ export function Delivery() {
 
       <button
         className="payment-btn"
-        disabled={!isFormFilled || !isZipCodeValid || !isPhoneNumberValid}
+        disabled={
+          !isFormFilled ||
+          !isZipCodeValid ||
+          !isPhoneNumberValid ||
+          (isCompany && !isCompanyVATNumberValid)
+        }
         onClick={handleButtonClick}
       >
         Payment
