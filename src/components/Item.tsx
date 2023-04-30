@@ -1,4 +1,4 @@
-import { useCart } from "../context/KurvKontekst";
+import { useCart } from "../context/CartContext";
 import "../styling/item.css";
 
 type KurvVareProps = {

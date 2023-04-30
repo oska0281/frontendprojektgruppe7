@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "../styling/delivery.css";
+
 import PhoneInput from "react-phone-number-input";
 
-export function Levering() {
+export function Delivery() {
   const [isChecked, setIsChecked] = useState(false);
   const [isFormFilled, setIsFormFilled] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
@@ -49,7 +50,7 @@ export function Levering() {
 
   const handleButtonClick = async () => {
     if (isFormFilled && isChecked && isZipCodeValid) {
-      window.location.href = "/betaling";
+      window.location.href = "/payment";
     } else {
       setShowMessage(!isFormFilled);
       setIsCheckedMessage(!isChecked);

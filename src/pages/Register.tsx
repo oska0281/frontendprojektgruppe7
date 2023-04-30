@@ -1,31 +1,31 @@
 import React, { useState } from "react";
-import { Registervalidering } from "../utilities/Registrervalidering";
+import ValidationRegister, { Registervalidering } from "../utilities/ValidationRegister";
 import axios from "axios";
 
 interface values {
-  navn: string;
+  name: string;
   email: string;
-  kodeord: string;
+  password: string;
 }
 
-export function Registrer() {
+export function Register() {
   const [values, setValues] = useState<values>({
-    navn: "",
+    name: "",
     email: "",
-    kodeord: "",
+    password: "",
   });
 
   const [errors, setErrors] = useState({
-    navn: "",
+    name: "",
     email: "",
-    kodeord: "",
+    password: "",
   });
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setErrors(Registervalidering(values));
+    setErrors(ValidationRegister(values));
 
-    if (errors.navn === "" && errors.email === "" && errors.kodeord === "") {
+    if (errors.name === "" && errors.email === "" && errors.password === "") {
       axios
         .post("http://localhost:5173/registrer", values)
         .then((res) => {
@@ -44,16 +44,16 @@ export function Registrer() {
         <form action="" onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="name">
-              <strong>Navn</strong>
+              <strong>name</strong>
             </label>
             <input
               onChange={handleInput}
-              name="navn"
+              name="name"
               className="form-control rouded-0"
               type="text"
-              placeholder="Indtast Navn"
+              placeholder="Indtast name"
             />
-            {errors.navn && <span className="text-danger">{errors.navn}</span>}
+            {errors.name && <span className="text-danger">{errors.name}</span>}
           </div>
           <div className="mb-3">
             <label htmlFor="email">
@@ -72,17 +72,17 @@ export function Registrer() {
           </div>
           <div className="mb-3">
             <label htmlFor="password">
-              <strong>Kodeord</strong>
+              <strong>password</strong>
             </label>
             <input
               onChange={handleInput}
-              name="kodeord"
+              name="password"
               className="form-control rouded-0"
               type="password"
-              placeholder="Indtast Kodeord"
+              placeholder="Indtast password"
             />
-            {errors.kodeord && (
-              <span className="text-danger">{errors.kodeord}</span>
+            {errors.password && (
+              <span className="text-danger">{errors.password}</span>
             )}
           </div>
           <button type="submit" className="btn btn-success w-100">

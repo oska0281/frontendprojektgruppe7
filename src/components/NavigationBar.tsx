@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useKurv } from "../kontekst/KurvKontekst";
+import { useCart } from "../context/CartContext";
 import "../styling/navigationbar.css";
 
 interface NavigationsbarProps {
@@ -7,10 +7,10 @@ interface NavigationsbarProps {
 }
 
 export function Navigationsbar(props: NavigationsbarProps) {
-  const { aabenKurv, kurvAntal } = useKurv();
-  const isOverNine = kurvAntal >= 10;
+  const { openCart, cartQuantity } = useCart();
+  const isOverNine = cartQuantity >= 10;
   const adjustedPadding = isOverNine ? { padding: "2px 5px" } : {};
-  const displayAntal = isOverNine ? "9+" : kurvAntal;
+  const displayAntal = isOverNine ? "9+" : cartQuantity;
 
   const [lastScrollTop, setLastScrollTop] = useState(0);
   const [hidden, setHidden] = useState(false);
@@ -41,13 +41,13 @@ export function Navigationsbar(props: NavigationsbarProps) {
             Butik
           </a>
 
-          <button onClick={aabenKurv} className="navbar-btn-cart">
+          <button onClick={openCart} className="navbar-btn-cart">
           <img
             className="navbar-shop-cart"
             src="../public/images/shopping-cart.svg"
             alt="Shopping-cart"
           />
-          {kurvAntal > 0 && (
+          {cartQuantity > 0 && (
             <div className="navbar-amount-cart" style={{ ...adjustedPadding }}>
               {displayAntal}
             </div>
@@ -56,7 +56,7 @@ export function Navigationsbar(props: NavigationsbarProps) {
         
           <a
             href="/logind"
-            onClick={() => props.onNavClick("/logind")}
+            onClick={() => props.onNavClick("/login")}
             className="navbar-navlink-login">
             <img className="navbar-user-login" src="../public/images/login.svg" alt="login" />
           </a>

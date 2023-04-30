@@ -1,5 +1,5 @@
 import { format } from "../utilities/format";
-import { useCart } from "../context/KurvKontekst";
+import { useCart } from "../context/CartContext";
 import { useState, useEffect } from "react";
 import { Item } from "./Item";
 import "../styling/cart.css";
@@ -89,7 +89,7 @@ export function Cart({ isOpen }: ShoppingCartProps) {
 
   const handleCheckoutClick = () => {
     closeCart();
-    window.location.href = '/levering';
+    window.location.href = '/delivery';
   };
 
 

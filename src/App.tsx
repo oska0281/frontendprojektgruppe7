@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CartProvider } from "./context/KurvKontekst";
+import { CartProvider } from "./context/CartContext";
 import { Navigationsbar } from "./components/NavigationBar";
 import { Delivery } from "./pages/Delivery";
 import { Store } from "./pages/Store";
