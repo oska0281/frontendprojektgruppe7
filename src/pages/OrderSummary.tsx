@@ -1,4 +1,4 @@
-import { formater } from "../utilities/formater";
+import { format } from "../utilities/format";
 import { useKurv } from "../kontekst/KurvKontekst";
 import { useEffect, useState } from "react";
 import "../styling/ordersummary.css";
@@ -82,7 +82,7 @@ export function OrderSummary() {
   const totalPrice = adjustedTotal - rebate;
 
     const handleButtonClick = async () => {
-      window.location.href = "/betaling";
+      window.location.href = "/payment";
     }
 
  return (
@@ -106,8 +106,8 @@ export function OrderSummary() {
     <tr key={item.id} className="order-summary__row">
       <td className="order-summary__product">{product?.name}</td>
       <td className="order-summary__quantity">{item?.antal || 0}</td>
-      <td className="order-summary__price">{formater(product?.price || 0)}</td>
-      <td className="order-summary__total">{formater(itemTotal)}</td>
+      <td className="order-summary__price">{format(product?.price || 0)}</td>
+      <td className="order-summary__total">{format(itemTotal)}</td>
     </tr>
   );
 })}
@@ -120,25 +120,25 @@ export function OrderSummary() {
         <tfoot>
           <tr>
             <td>Total før rabat:</td>
-            <td>{formater(total)}</td>
+            <td>{format(total)}</td>
           </tr>
           <tr>
             <td>Heraf moms:</td>
-            <td>{formater(totalTax)}</td>
+            <td>{format(totalTax)}</td>
           </tr>
           <tr>
             <td>Mængderabat:</td>
-            <td>{formater(totalDiscount)}</td>
+            <td>{format(totalDiscount)}</td>
           </tr>
           {adjustedTotal >= 300 && (
             <tr>
               <td>Rabat over 300:</td>
-              <td>{formater(rebate)}</td>
+              <td>{format(rebate)}</td>
             </tr>
           )}
           <tr>
             <td>Efter rabat:</td>
-            <td>{formater(totalPrice)}</td>
+            <td>{format(totalPrice)}</td>
           </tr>
         </tfoot>
       </table>

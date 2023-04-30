@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-// @ts-ignore
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { Products } from '../components/Products';
