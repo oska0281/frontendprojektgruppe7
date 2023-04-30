@@ -1,7 +1,7 @@
-import "../styling/checkout.css";
+
 import React, { useEffect, useState } from "react";
 import PhoneInput from "react-phone-number-input";
-
+import "../styling/checkout.css";
 export function Checkout() {
   const [isChecked, setIsChecked] = useState(false);
   const [isFormFilled, setIsFormFilled] = useState(false);
@@ -53,7 +53,7 @@ export function Checkout() {
     }
   };
 
-  const handleButtonClick = async () => {
+  const handlePaymentButton = async () => {
     if (
       isFormFilled &&
       isChecked &&
@@ -129,6 +129,9 @@ export function Checkout() {
     const isValidCompanyVATNumber = /^\d{8}$/.test(companyVATNumber);
     setIsCompanyVATNumberValid(isValidCompanyVATNumber);
   };
+const handleMobilePayButton = async () => {
+      window.location.href = "/mobilepay";
+    }
 
   return (
     <div className="paym-root">
@@ -236,7 +239,7 @@ export function Checkout() {
 
             {showMessage && (
               <div className="message">
-                Please fill out every field in the form
+                Udfyld venligst alle felterne
               </div>
             )}
 
@@ -246,16 +249,16 @@ export function Checkout() {
                 onChange={handleCheck}
               />
               <text className="del-text">
-                I confirm that I have read and accepted the terms of purchase
+                Jeg bekræfter at have læst købsbetingelserne
               </text>
             </div>
 
             {isCheckedMessage && (
-              <div className="message">Please accept the terms of purchase</div>
+              <div className="message">Jeg accepterer købsbetingelserne</div>
             )}
             <div>
               <input type="checkbox" />
-              <text className="del-text">I want to receive future emails with offers</text>
+              <text className="del-text">Jeg vil gerne modtage reklamer</text>
             </div>
 
             <button
@@ -266,7 +269,7 @@ export function Checkout() {
                 !isPhoneNumberValid ||
                 (isCompany && !isCompanyVATNumberValid)
               }
-              onClick={handleButtonClick}
+              onClick={handlePaymentButton}
             >
               Fortsæt til betaling
             </button>
@@ -315,7 +318,7 @@ export function Checkout() {
                 className="paym-ap-l"
               />
             </button>
-            <button className="paym-alt-pm">
+            <button className="paym-alt-pm"onClick={handleMobilePayButton}>
               <img
                 src="../public/images/mobilepay-logo.svg"
                 alt="Mobile Pay"
