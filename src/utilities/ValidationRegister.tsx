@@ -2,29 +2,29 @@
 
 interface values {
 
-    navn:string;
+    name:string;
     email: string;
-    kodeord: string;
+    password: string;
 }
 
 export function Registervalidering(values:values){
 
 
 let error ={
-    navn:"",
+    name:"",
    email:"",
-    kodeord:""
+    password:""
 }
 
 
     const email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    const kodeord_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/
+    const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/
 
-    if(values.navn === ""){
-        error.navn = "Navn skal udfyldes"
+    if(values.name === ""){
+        error.name = "name skal udfyldes"
     }
      else {
-        error.navn = ""
+        error.name = ""
     }
 
     if(values.email === ""){
@@ -36,13 +36,13 @@ let error ={
         error.email = ""
     }
 
-    if(values.kodeord === ""){
-        error.kodeord = "Kodeord skal udfyldes"
+    if(values.password === ""){
+        error.password = "password skal udfyldes"
     }
-    else if(!kodeord_pattern.test(values.kodeord)){
-        error.kodeord = "Kodeord matcher ikke"
+    else if(!password_pattern.test(values.password)){
+        error.password = "password matcher ikke"
     } else {
-        error.kodeord = ""
+        error.password = ""
     }
 
     return error

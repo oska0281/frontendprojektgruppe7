@@ -1,4 +1,4 @@
-import { Produkter } from "../komponenter/Produkter";
+import { Products } from "../components/Products";
 import { useEffect, useState } from "react";
 import "../styling/store.css";
 
@@ -13,7 +13,7 @@ interface Product {
   imageUrl: string;
 }
 
-export function Butik() {
+export function Store() {
   const [produkter, setProdukter] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export function Butik() {
       <div className="store-container">
         {produkter.map((produkt) => (
           <div key={produkt.id} className="store-item">
-            <Produkter {...produkt} />
+            <Products {...produkt} />
           </div>
         ))}
       </div>

@@ -1,14 +1,14 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { Kurv } from '../komponenter/Kurv';
-import { KurvProvider } from '../kontekst/KurvKontekst';
+import { Cart } from '../components/Cart';
+import { KurvProvider } from '../context/KurvKontekst';
 
 describe('Kurv', () => {
   it('renders cart with closed state', () => {
     render(
       <KurvProvider>
-        <Kurv erAaben={false} />
+        <Cart isOpen={false} />
       </KurvProvider>
     );
 
@@ -19,7 +19,7 @@ describe('Kurv', () => {
   it('renders cart with open state', () => {
     render(
       <KurvProvider>
-        <Kurv erAaben={true} />
+        <Cart isOpen={true} />
       </KurvProvider>
     );
 
@@ -30,7 +30,7 @@ describe('Kurv', () => {
   it('closes the cart when close button is clicked', () => {
     render(
       <KurvProvider>
-        <Kurv erAaben={true} />
+        <Cart isOpen={true} />
       </KurvProvider>
     );
 

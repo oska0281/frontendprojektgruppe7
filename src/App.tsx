@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { KurvProvider } from "./kontekst/KurvKontekst";
-import { Navigationsbar } from "./komponenter/Navigationsbar";
-import { Levering } from "./pages/Levering";
-import { Butik } from "./pages/Butik";
-import { Betaling } from "./pages/Betaling";
-import Loading from './komponenter/Loading';
-import { Logind } from "./pages/Logind";
+import { CartProvider } from "./context/KurvKontekst";
+import { Navigationsbar } from "./components/NavigationBar";
+import { Delivery } from "./pages/Delivery";
+import { Store } from "./pages/Store";
+import { Payment } from "./pages/Payment";
+import Loading from './components/Loading';
+import { Login } from "./pages/Login";
+import {Register} from "./pages/Register";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -30,19 +31,21 @@ function App() {
 
   const renderPage = () => {
     switch (path) {
-      case '/levering':
-        return <Levering />;
-      case '/betaling':
-        return <Betaling />;
-      case '/logind': // added case for logind page
-        return <Logind />;
+      case '/delivery':
+        return <Delivery />;
+      case '/payment':
+        return <Payment />;
+      case '/login': // added case for login page
+        return <Login />;
+      case '/register':
+        return <Register />;
       default:
-        return <Butik />;
+        return <Store />;
     }
   };
 
   return (
-    <KurvProvider>
+    <CartProvider>
       {isLoading ? (
         <Loading />
       ) : (
@@ -53,7 +56,7 @@ function App() {
           </div>
         </>
       )}
-    </KurvProvider>
+    </CartProvider>
   );
 }
 

@@ -1,11 +1,11 @@
-import { formater } from "../utilities/formater";
-import { useKurv } from "../kontekst/KurvKontekst";
+import { format } from "../utilities/format";
+import { useCart } from "../context/KurvKontekst";
 import { useState, useEffect } from "react";
-import { Vare } from "./Vare";
+import { Item } from "./Item";
 import "../styling/cart.css";
 
 type ShoppingCartProps = {
-  erAaben: boolean;
+  isOpen: boolean;
 
 };
 
@@ -18,11 +18,11 @@ interface Product {
   rebatePercent: number;
   upsellProductId: string | null;
   imageUrl: string;
-  antal?: number;
+  quantity?: number;
 }
 
-export function Kurv({ erAaben }: ShoppingCartProps) {
-  const { lukKurv, kurvVarer, kurvAntal } = useKurv();
+export function Cart({ isOpen }: ShoppingCartProps) {
+  const { closeCart, cartProducts, cartQuantity } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -38,9 +38,9 @@ export function Kurv({ erAaben }: ShoppingCartProps) {
       });
   }, []);
 
-  const total = kurvVarer.reduce((total, kurvVarer) => {
-    const item = products.find((i) => i.id === kurvVarer.id);
-    return total + (item?.price || 0) * kurvVarer.antal;
+  const total = cartProducts.reduce((total, cartProducts) => {
+    const item = products.find((i) => i.id === cartProducts.id);
+    return total + (item?.price || 0) * cartProducts.quantity;
   }, 0);
 
   const calculateTax = (itemPrice: number) => {
@@ -48,11 +48,11 @@ export function Kurv({ erAaben }: ShoppingCartProps) {
     return itemPrice * taxRate;
   };
 
-  const totalTax = kurvVarer.reduce((taxTotal, kurvVarer) => {
-    const item = products.find((i) => i.id === kurvVarer.id);
+  const totalTax = cartProducts.reduce((taxTotal, cartProducts) => {
+    const item = products.find((i) => i.id === cartProducts.id);
     let price = item?.price || 0;
 
-    const itemTotal = price * kurvVarer.antal;
+    const itemTotal = price * cartProducts.quantity;
     const itemTax = calculateTax(itemTotal);
 
     return taxTotal + itemTax;
@@ -70,12 +70,12 @@ export function Kurv({ erAaben }: ShoppingCartProps) {
     return 0;
   };
 
-  const totalDiscount = kurvVarer.reduce((discountTotal, cartItem) => {
+  const totalDiscount = cartProducts.reduce((discountTotal, cartItem) => {
     const item = products.find((i) => i.id === cartItem.id);
     let price = item?.price || 0;
     let rebateQuantity = item?.rebateQuantity;
     let rebatePercent = item?.rebatePercent;
-    let quantity = cartItem.antal;
+    let quantity = cartItem.quantity;
 
     return (
       discountTotal +
@@ -88,48 +88,48 @@ export function Kurv({ erAaben }: ShoppingCartProps) {
   const totalPrice = adjustedTotal - rebate;
 
   const handleCheckoutClick = () => {
-    lukKurv();
+    closeCart();
     window.location.href = '/levering';
   };
 
 
 
 return (
-  <div className={`cart-offcanvas ${erAaben ? "show" : ""}`}>
+  <div className={`cart-offcanvas ${isOpen ? "show" : ""}`}>
     <div className="cart-offcanvas-header">
       <h5 className="cart-offcanvas-title">Din indkøbskurv</h5>
-      <button type="button" className="cart-close" onClick={lukKurv}>
+      <button type="button" className="cart-close" onClick={closeCart}>
         &times;
       </button>
     </div>
     <div className="cart-offcanvas-body">
       <div className="cart-item-list">
-        {kurvVarer.map((item) => {
+        {cartProducts.map((item) => {
           const product = products.find((product) => product.id === item.id);
           return (
-            <Vare
+            <Item
               key={item.id}
               id={item.id}
-              navn={product?.name || ""}
-              pris={product?.price || 0}
-              antal={item.antal}
+              name={product?.name || ""}
+              price={product?.price || 0}
+              quantity={item.quantity}
               imageUrl={product?.imageUrl || ""}
             />
           );
         })}
       </div>
-      <div className="total-sb-cart">Sum: <span className="cart-sb-total">{formater(totalPrice)}</span></div>
-      <div className="titles-sb-cart">Moms: <span className="cart-sb-values">{formater(totalTax)}</span></div>
+      <div className="total-sb-cart">Sum: <span className="cart-sb-total">{format(totalPrice)}</span></div>
+      <div className="titles-sb-cart">Moms: <span className="cart-sb-values">{format(totalTax)}</span></div>
       <div className="titles-sb-cart">
-        Mængderabat: <span className="cart-sb-values">{formater(totalDiscount)}</span>
+        Mængderabat: <span className="cart-sb-values">{format(totalDiscount)}</span>
       </div>
       {adjustedTotal >= 300 && (
         <div className="titles-sb-cart">
-          Rabat over 300: <span className="cart-sb-values">{formater(rebate)}</span>
+          Rabat over 300: <span className="cart-sb-values">{format(rebate)}</span>
         </div>
       )}
 
-      {kurvAntal > 0 && (
+      {cartQuantity > 0 && (
         <button onClick={handleCheckoutClick} className="cart-btn-next">
           FORTSÆT TIL KASSEN
         </button>

@@ -1,6 +1,6 @@
 import React from "react";
 import "../styling/payment.css";
-export function Betaling() {
+export function Payment() {
   return (
     <div className="paym-root">
       <h1 className="paym-heading">Betaling</h1>
