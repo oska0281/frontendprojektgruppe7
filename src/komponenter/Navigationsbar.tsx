@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useKurv } from "../kontekst/KurvKontekst";
 import "../styling/navigationbar.css";
@@ -41,15 +40,8 @@ export function Navigationsbar(props: NavigationsbarProps) {
           >
             Butik
           </a>
-          <a
-            href="/logind"
-            onClick={() => props.onNavClick("/logind")}
-            className="navbar-navlink-login">
-            Log ind
-          </a>
-        </div>
 
-        <button onClick={aabenKurv} className="navbar-btn-cart">
+          <button onClick={aabenKurv} className="navbar-btn-cart">
           <img
             className="navbar-shop-cart"
             src="../public/images/shopping-cart.svg"
@@ -61,6 +53,16 @@ export function Navigationsbar(props: NavigationsbarProps) {
             </div>
           )}
         </button>
+        
+          <a
+            href="/logind"
+            onClick={() => props.onNavClick("/logind")}
+            className="navbar-navlink-login">
+            <img className="navbar-user-login" src="../public/images/login.svg" alt="login" />
+          </a>
+        </div>
+
+        
       </div>
     </nav>
   );

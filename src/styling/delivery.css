@@ -1,6 +1,3 @@
-
-
-
 .titel{
   margin-bottom: 50px;
 }
@@ -23,20 +20,28 @@ label {
   margin-left: 120px;
 }
 
+.phone-input {
+  padding: 5px;
+  margin-bottom: 10px;
+  width: 300px;
+  margin-left: 120px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
 text {
   margin-left: 10px;
 }
 
-.til-betaling-btn {
+.payment-btn {
   margin-top: 30px;
   width: 600px;
+  background-color: #0d6efd;
+  border: 2px solid #0d6efd;
+  color: #fff;
 }
 
-.til-betaling-btn-disabled {
-  margin-top: 30px;
-  width: 600px;
-  opacity: 0.5;
-}
 
 .inputbox{
   margin-top: 30px;
@@ -45,4 +50,46 @@ text {
 
 .message{
   color: #dc0b0b;
+}
+
+.PhoneInput {
+	display: inline-flex;
+	flex-direction: row;
+	align-items: stretch;
+  background-color: #fff;
+  border: #505050 1px solid;
+}
+
+.PhoneInputCountry {
+	display: inline-flex;
+	flex-direction: row;
+	align-items: center;
+	cursor: pointer;
+	margin-right: 0.5em;
+}
+
+.PhoneInputCountryIcon {
+	display: inline-flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.PhoneInputCountryIcon img {
+	height: 1em;
+	width: 1.5em;
+}
+
+
+.PhoneInputCountrySelect {
+	display: none;
+}
+
+.PhoneInputInput {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	border: none;
+	background: transparent;
+	outline: none;
+	width: 100%;
 }

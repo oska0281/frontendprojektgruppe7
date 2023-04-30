@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Nav } from "react-bootstrap";
 import { Registervalidering } from "../utilities/Registrervalidering";
 import axios from "axios";
 
