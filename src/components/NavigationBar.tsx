@@ -55,7 +55,7 @@ export function Navigationsbar(props: NavigationsbarProps) {
         </button>
         
           <a
-            href="/logind"
+            href="/login"
             onClick={() => props.onNavClick("/login")}
             className="navbar-navlink-login">
             <img className="navbar-user-login" src="../public/images/login.svg" alt="login" />
