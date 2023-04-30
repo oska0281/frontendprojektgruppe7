@@ -112,7 +112,6 @@ export function Levering () {
         <label>Adresse:</label>
         <input className="inputfelt" type="text" required />
       </div>
-
       <div>
         <label>Postnummer:</label>
         <input id="zipcode" className="inputfelt" type="text" name="zipcode" required
