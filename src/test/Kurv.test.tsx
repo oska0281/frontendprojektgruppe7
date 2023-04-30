@@ -2,14 +2,15 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { Cart } from '../components/Cart';
-import { KurvProvider } from '../context/KurvKontekst';
+import { CartProvider } from '../context/CartContext';
+
 
 describe('Kurv', () => {
   it('renders cart with closed state', () => {
     render(
-      <KurvProvider>
+      <CartProvider>
         <Cart isOpen={false} />
-      </KurvProvider>
+      </CartProvider>
     );
 
     const cartTitle = screen.queryByText('Kurv');
@@ -18,9 +19,9 @@ describe('Kurv', () => {
 
   it('renders cart with open state', () => {
     render(
-      <KurvProvider>
+      <CartProvider>
         <Cart isOpen={true} />
-      </KurvProvider>
+      </CartProvider>
     );
 
     const cartTitle = screen.getByText('Kurv');
@@ -29,9 +30,9 @@ describe('Kurv', () => {
 
   it('closes the cart when close button is clicked', () => {
     render(
-      <KurvProvider>
+      <CartProvider>
         <Cart isOpen={true} />
-      </KurvProvider>
+      </CartProvider>
     );
 
     const closeButton = screen.getByRole('button', { name: /close/i });
