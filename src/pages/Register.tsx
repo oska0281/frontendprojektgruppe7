@@ -38,13 +38,13 @@ export function Register() {
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) =>
     setValues((prev) => ({ ...prev, [event.target.name]: event.target.value }));
   return (
-    <div className="d-flex justify-content-center align-items-center bg-primary vh-100">
+    <div className="d-flex justify-content-center align-items-center  vh-100">
       <div className="bg-white p-3 rounded w-25">
         <h2>Opret bruger</h2>
         <form action="" onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="name">
-              <strong>name</strong>
+              <strong>navn</strong>
             </label>
             <input
               onChange={handleInput}
@@ -72,7 +72,7 @@ export function Register() {
           </div>
           <div className="mb-3">
             <label htmlFor="password">
-              <strong>password</strong>
+              <strong>kodeord</strong>
             </label>
             <input
               onChange={handleInput}
