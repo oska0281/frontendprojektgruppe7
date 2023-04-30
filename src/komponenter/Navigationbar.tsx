@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import {NavLink} from "react-router-dom";
 import {useCart} from "../kontekst/CartContext";
 import '../styling/navigationbar.css';
+import "../styling/navigationbar.css";
 
 export function Navigationbar() {
 
@@ -10,23 +11,23 @@ export function Navigationbar() {
     const isOverNine = cartQuantity >= 10;
     const adjustedPadding = isOverNine ? { padding: "2px 5px" } : {};
     const displayQuantity = isOverNine ? "9+" : cartQuantity;
-  
+
     const [lastScrollTop, setLastScrollTop] = useState(0);
     const [hidden, setHidden] = useState(false);
-  
+
     useEffect(() => {
       const handleScroll = () => {
         const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
         setHidden(currentScrollTop > lastScrollTop && currentScrollTop > 0);
         setLastScrollTop(currentScrollTop);
       };
-  
+
       window.addEventListener("scroll", handleScroll);
       return () => {
         window.removeEventListener("scroll", handleScroll);
       };
     }, [lastScrollTop]);
-  
+
     return (
       <nav className={`navbar-nav ${hidden ? "navbar-hidden" : ""}`}>
         <div className="navbar-con">

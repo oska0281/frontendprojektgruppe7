@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import React , { useEffect , useState } from 'react';
 import "../styling/Levering.css";
 
@@ -29,25 +28,38 @@ export function Delivery () {
     };
 
 
-    const handleFormChange = () => {
-        const formFields = document.querySelectorAll ( 'input[type="text"]' );
-        const filledFields = Array.from ( formFields ).filter ( ( field ) => ( field as HTMLInputElement ).value !== '' );
-        setIsFormFilled ( filledFields.length === formFields.length );
-    };
-
-    const handleSubmit = () => {
-        if ( !isFormFilled || !isZipCodeValid ) {
-            setShowMessage ( true );
-            return;
-        }
-
-        if ( !isChecked ) {
-            setIsCheckedMessage ( true );
-            return;
-        }
-
-
+    const handleFormChange = async () => {
+  const formFields = document.querySelectorAll('input[type="text"]');
+  const filledFields = Array.from(formFields).filter(
+    (field) => (field as HTMLInputElement).value !== ''
+  );
+  setIsFormFilled(filledFields.length === formFields.length);
+  if (deliveryAddress.zipCode) {
+    const isValidZipCode = await validateZipCode(deliveryAddress.zipCode);
+    setZipCodeError(!isValidZipCode);
+    setIsZipCodeValid(isValidZipCode);
+    if (isValidZipCode) {
+      setDeliveryAddress((prevState) => ({
+        ...prevState,
+        city: city,
+      }));
     }
+  }
+};
+
+    const handleButtonClick = async () => {
+  if (isFormFilled && isChecked && isZipCodeValid) {
+    window.location.href = "/betaling";
+  } else {
+    setShowMessage(!isFormFilled);
+    setIsCheckedMessage(!isChecked);
+    if (!isZipCodeValid) {
+      setZipCodeError(true);
+    }
+  }
+};
+
+
 
     const validateZipCode = async ( zipCode : string ) : Promise<boolean> => {
         if ( !zipCode ) {
@@ -66,9 +78,9 @@ export function Delivery () {
         }
     };
 
-    useEffect ( () => {
-        setDeliveryAddress ( ( prevState ) => ( { ... prevState , city : city } ) );
-    } , [ city ] );
+   useEffect(() => {
+  setDeliveryAddress((prevState) => ({ ...prevState, city: city }));
+}, [city, setDeliveryAddress]);
 
     const handleZipCodeChange = async ( e : React.ChangeEvent<HTMLInputElement> ) => {
         setDeliveryAddress ( ( prevState ) => ( { ... prevState , zipCode : e.target.value } ) );
@@ -78,77 +90,63 @@ export function Delivery () {
         setIsZipCodeValid ( isValidZipCode );
 
     };
-    return (
-        <form onChange={ handleFormChange } onSubmit={ handleSubmit }>
-            <h1 className="titel">Levering</h1>
-            <div>
-                <label>Navn:</label>
-                <input className="inputfelt" type="text" required/>
-            </div>
+     return (
+    <form onChange={handleFormChange} onSubmit={(event) => event.preventDefault()}>
+      <h1 className="titel">Levering</h1>
+      <div>
+        <label>Navn:</label>
+        <input className="inputfelt" type="text" required />
+      </div>
 
-            <div>
-                <label>Email:</label>
-                <input className="inputfelt" type="text" required/>
-            </div>
+      <div>
+        <label>Email:</label>
+        <input className="inputfelt" type="text" required />
+      </div>
 
-            <div>
-                <label>Telefonnummer:</label>
-                <input className="inputfelt" type="text" required/>
-            </div>
+      <div>
+        <label>Telefonnummer:</label>
+        <input className="inputfelt" type="text" required />
+      </div>
 
-            <div>
-                <label>Adresse:</label>
-                <input className="inputfelt" type="text" required/>
-            </div>
-
-            <div className="form-row">
-                <div>
-                    <label htmlFor="zipcode">Postnummer:</label>
-                    <input id="zipcode" className="inputfelt" type="text" name="zipcode" required
+      <div>
+        <label>Adresse:</label>
+        <input className="inputfelt" type="text" required />
+      </div>
+      <div>
+        <label>Postnummer:</label>
+        <input id="zipcode" className="inputfelt" type="text" name="zipcode" required
                            onChange={ handleZipCodeChange }/>
-                </div>
-                { zipCodeError && <span className="error">Ugyldigt postnummer</span> }
-            </div>
-
-            <div>
+      </div>
+{ zipCodeError && <span className="error">Ugyldigt postnummer</span> }
+      <div>
                 <label>By:</label>
                 <input className="inputfelt" type="text" value={ city } readOnly/>
             </div>
 
-            <div>
-                <label>Land:</label>
-                <input className="inputfelt" type="text" required/>
-            </div>
+      <div>
+        <label>Land:</label>
+        <input className="inputfelt" type="text" required />
+      </div>
 
-            { showMessage && (
-                <div className="message">Udfyld venligst alle felterne</div>
-            ) }
+      {showMessage && <div className="message">Udfyld venligst alle felterne</div>}
 
-            <div>
-                <input className="inputbox" type="checkbox" onChange={ handleCheck }/>
-                <text>Jeg bekræfter at have læst og accepteret købsbetingelserne</text>
-            </div>
+      <div>
+        <input className="inputbox" type="checkbox" onChange={handleCheck} />
+        <text>Jeg bekræfter at have læst og accepteret købsbetingelserne</text>
+      </div>
 
-            { isCheckedMessage && (
+      { isCheckedMessage && (
                 <div className="message">Accepter venligst købsbetingelserne</div>
             ) }
+      <div>
+        <input className="inputbox" type="checkbox" />
+        <text>Jeg ønsker at modtage fremtidige mails med tilbud</text>
+      </div>
 
-            <div>
-                <input className="inputbox" type="checkbox"/>
-                <text>Jeg ønsker at modtage fremtidige mails med tilbud</text>
-            </div>
-
-            { isChecked ? (
-                <Link to={ isFormFilled && isZipCodeValid ? "/betaling" : "" }>
-                    <button className="til-betaling-btn" onClick={ handleSubmit }>
-                        Til Betaling
-                    </button>
-                </Link>
-            ) : (
-                <button className="til-betaling-btn-disabled">
-                    Til Betaling
-                </button>
-            ) }
-        </form>
-    );
+      <button className="til-betaling-btn" disabled={!isFormFilled && !isZipCodeValid} onClick={handleButtonClick}>
+        Til Betaling
+      </button>
+    </form>
+  );
 }
+

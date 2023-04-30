@@ -12,14 +12,37 @@ import {Register} from "./pages/Register";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [path, setPath] = useState(window.location.pathname);
+
+  useEffect(() => {
+    const handlePopstate = () => {
+      setPath(window.location.pathname);
+    };
+
+    window.addEventListener('popstate', handlePopstate);
+    return () => window.removeEventListener('popstate', handlePopstate);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 3000);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
+
+  const renderPage = () => {
+    switch (path) {
+      case '/levering':
+        return <Levering />;
+      case '/betaling':
+        return <Betaling />;
+      case '/logind': // added case for logind page
+        return <Logind />;
+      default:
+        return <Butik />;
+    }
+  };
 
   return (
     <CartProvider>
@@ -39,7 +62,7 @@ function App() {
           </div>
         </>
       )}
-    </CartProvider>
+    </KurvProvider>
   );
 }
 
