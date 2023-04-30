@@ -1,26 +1,26 @@
 import React, { useState } from "react";
-import { Logindvalidering } from "../utilities/Logindvalidering";
+import { ValidationLogin } from "../utilities/ValidationLogin";
 import "../styling/login.css";
 
 interface values {
   email: string;
-  kodeord: string;
+  password: string;
 }
 
-export function Logind() {
+export function Login() {
   const [values, setValues] = useState<values>({
     email: "",
-    kodeord: "",
+    password: "",
   });
 
   const [errors, setErrors] = useState({
     email: "",
-    kodeord: "",
+    password: "",
   });
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setErrors(Logindvalidering(values));
+    setErrors(ValidationLogin(values));
   };
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) =>
@@ -64,8 +64,8 @@ export function Logind() {
               onChange={handleInput}
               placeholder="Indtast Kodeord"
             />
-            {errors.kodeord && (
-              <span className="text-danger">{errors.kodeord}</span>
+            {errors.password && (
+              <span className="text-danger">{errors.password}</span>
             )}
           </div>
           <button type="submit" className="btn btn-success w-100">
@@ -74,7 +74,7 @@ export function Logind() {
           <p>Ved brug erklærer du dig enig i vores vilkår</p>
           <button
             className="btn btn-default border w-100"
-            onClick={() => (window.location.href = "/registrer")}
+            onClick={() => (window.location.href = "/register")}
           >
             Opret Bruger
           </button>

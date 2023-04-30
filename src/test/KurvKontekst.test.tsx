@@ -1,7 +1,7 @@
 import 'mock-local-storage';
 import { renderHook, act } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { KurvProvider, useKurv } from '../kontekst/KurvKontekst';
+import { KurvProvider, useKurv } from '../context/KurvKontekst';
 import React from 'react';
 
 

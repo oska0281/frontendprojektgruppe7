@@ -31,21 +31,24 @@ function App() {
 
   const renderPage = () => {
     switch (path) {
-      case '/levering':
-        return <Levering />;
-      case '/betaling':
-        return <Betaling />;
-      case '/logind': // added case for logind page
-        return <Logind />;
+      case '/delivery':
+        return <Delivery />;
+      case '/payment':
+        return <Payment />;
+      case '/login': // added case for login page
+        return <Login />;
+      case '/register':
+        return <Register />;
       default:
-        return <Butik />;
+        return <Store />;
         case '/ordersummary': // added case for ordersummary page
       return <OrderSummary />;
+
     }
   };
 
   return (
-    <KurvProvider>
+    <CartProvider>
       {isLoading ? (
         <Loading />
       ) : (
@@ -56,7 +59,7 @@ function App() {
           </div>
         </>
       )}
-    </KurvProvider>
+    </CartProvider>
   );
 }
 
