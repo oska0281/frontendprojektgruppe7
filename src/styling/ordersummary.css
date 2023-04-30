@@ -1,0 +1,87 @@
+.order-summary {
+  margin: 80px auto 0;
+  max-width: 800px;
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+  background-color: #f8f8f8;
+  color: #333;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+}
+
+.order-summary h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.order-summary__products {
+  margin-bottom: 2rem;
+}
+
+.order-summary__products table,
+.order-summary__totals table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.order-summary__products th,
+.order-summary__products td,
+.order-summary__totals th,
+.order-summary__totals td {
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.order-summary__products th,
+.order-summary__totals th {
+  font-weight: bold;
+}
+
+.order-summary__products thead th,
+.order-summary__products tbody td,
+.order-summary__totals tfoot td {
+  border-bottom: 2px solid #ddd;
+}
+
+.order-summary__totals tfoot td {
+  font-weight: bold;
+  padding-top: 0.75rem;
+}
+
+.order-summary__totals tfoot tr:last-child td {
+  padding-bottom: 0.75rem;
+}
+
+.order-summary__products tfoot td:first-child,
+.order-summary__products tbody td:first-child,
+.order-summary__totals tfoot td:first-child {
+  width: 50%;
+}
+
+.order-summary__products tfoot td:last-child,
+.order-summary__products tbody td:last-child,
+.order-summary__totals tfoot td:last-child {
+  text-align: right;
+}
+
+.order-summary__products tr:hover {
+  background-color: #f0f0f0;
+}
+
+.order-summary__totals {
+  margin-top: 2rem;
+}
+
+.continue-to-Payment__button {
+  margin-top: 120px;
+  background-color: #0070ba;
+  width: 400px;
+  padding: 10px;
+  margin: 10px auto 0;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+}

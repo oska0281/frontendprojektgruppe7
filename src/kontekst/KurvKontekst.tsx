@@ -23,6 +23,7 @@ type KurvKontekst = {
     increaseKurvAntal: (id:string) => void
     decreaseKurvAntal: (id:string) => void
     fjernFraKurv: (id:string) => void
+
 }
 
 type KurvVare= {
@@ -85,7 +86,7 @@ export function KurvProvider( { children }: KurvProviderProps ){
 
 
     return (
-        <KurvKontekst.Provider value = {{ getVareAntal,increaseKurvAntal, decreaseKurvAntal, fjernFraKurv, kurvVarer, kurvAntal, lukKurv,aabenKurv }}>
+        <KurvKontekst.Provider value = {{ getVareAntal,increaseKurvAntal, decreaseKurvAntal, fjernFraKurv, kurvVarer, kurvAntal, lukKurv,aabenKurv,  }}>
         {children}
             <Kurv erAaben = {erAaben} />
     </KurvKontekst.Provider>

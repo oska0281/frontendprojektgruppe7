@@ -87,10 +87,10 @@ export function Kurv({ erAaben }: ShoppingCartProps) {
   const rebate = adjustedTotal >= 300 ? adjustedTotal * 0.1 : 0;
   const totalPrice = adjustedTotal - rebate;
 
-  const handleCheckoutClick = () => {
-    lukKurv();
-    window.location.href = '/levering';
-  };
+ const handleCheckoutClick = () => {
+  lukKurv();
+  window.location.href = "/ordersummary";
+};
 
 
 

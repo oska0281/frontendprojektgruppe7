@@ -6,6 +6,7 @@ import { Butik } from "./pages/Butik";
 import { Betaling } from "./pages/Betaling";
 import Loading from './komponenter/Loading';
 import { Logind } from "./pages/Logind";
+import { OrderSummary } from "./pages/OrderSummary";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -38,6 +39,8 @@ function App() {
         return <Logind />;
       default:
         return <Butik />;
+        case '/ordersummary': // added case for ordersummary page
+      return <OrderSummary />;
     }
   };
 
