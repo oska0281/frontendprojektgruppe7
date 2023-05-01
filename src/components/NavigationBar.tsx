@@ -44,7 +44,7 @@ export function Navigationsbar(props: NavigationsbarProps) {
           <button onClick={openCart} className="navbar-btn-cart">
           <img
             className="navbar-shop-cart"
-            src="../public/images/shopping-cart.svg"
+            src="https://freesvg.org/img/1479847010.png"
             alt="Shopping-cart"
           />
           {cartQuantity > 0 && (
@@ -58,7 +58,7 @@ export function Navigationsbar(props: NavigationsbarProps) {
             href="/login"
             onClick={() => props.onNavClick("/login")}
             className="navbar-navlink-login">
-            <img className="navbar-user-login" src="../public/images/login.svg" alt="login" />
+            <img className="navbar-user-login" src="https://freesvg.org/img/abstract-user-flat-1.png" alt="login" />
           </a>
         </div>
 
