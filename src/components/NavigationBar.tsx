@@ -68,7 +68,7 @@ export function Navigationsbar(props: NavigationsbarProps) {
             >
               <img
                 className="navbar-user-login"
-                src="../public/images/login.svg"
+                src="https://freesvg.org/img/abstract-user-flat-1.png"
                 alt="login"
               />
             </a>
