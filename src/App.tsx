@@ -31,6 +31,11 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  const handleNavClick = (newPath: string) => {
+    setPath(newPath);
+    window.history.pushState(null, '', newPath);
+  };
+
   const renderPage = () => {
     switch (path) {
       case '/checkout':
@@ -39,8 +44,8 @@ function App() {
         return <Login />;
       case '/register':
         return <Register />;
-          case '/ordersummary':
-      return <OrderSummary />;
+      case '/ordersummary':
+        return <OrderSummary />;
       case '/mobilepay':
         return <Mobilepay />;
       default:
@@ -55,7 +60,7 @@ function App() {
         <Loading />
       ) : (
         <>
-          <Navigationsbar onNavClick={setPath} />
+          <Navigationsbar onNavClick={handleNavClick} />
           <div className="app-con">
             {renderPage()}
           </div>
