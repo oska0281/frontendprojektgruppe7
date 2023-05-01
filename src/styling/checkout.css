@@ -1,0 +1,310 @@
+.titel{
+  margin-bottom: 50px;
+}
+
+.del-form {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.del-label {
+  display: block;
+  margin-bottom: 5px;
+  width: 100px;
+}
+
+.inputfelt {
+  padding: 5px;
+  margin-bottom: 10px;
+  width: 300px;
+
+}
+
+.phone-input {
+  padding: 5px;
+  margin-bottom: 10px;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
+.del-text {
+  margin-left: 10px;
+  padding-top: 0px;
+}
+
+.del-continue-btn {
+  margin-top: 30px;
+  width: 500px;
+  border-radius: 10px;
+  background-color: #0d6efd;
+  border: 2px solid #0d6efd;
+  color: #fff;
+}
+
+
+.inputbox{
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.message{
+  color: #dc0b0b;
+}
+
+.PhoneInput {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: stretch;
+  background-color: #fff;
+  border: #505050 1px solid;
+}
+
+.PhoneInputCountry {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 0.5em;
+}
+
+.PhoneInputCountryIcon {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.PhoneInputCountryIcon img {
+    height: 1em;
+    width: 1.5em;
+}
+
+
+.PhoneInputCountrySelect {
+    display: none;
+}
+
+.PhoneInputInput {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+}
+
+.company-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.company-checkbox {
+  margin-right: 10px;
+}
+
+.del-cb-label {
+  display: block;
+  width: 100px;
+}
+
+
+
+.paym-root {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px; /* Add some space from the left edge */
+}
+
+.paym-heading {
+  padding: 5px 15px 5px;
+}
+
+.paym-input {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.paym-pay-btn{
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  margin-top: 20px;
+  width: 400px;
+  padding: 5px 5px;
+  color: white;
+  background-color: #0d6efd;
+  border: 1px solid #0d6efd;
+  border-radius: 10px;
+  font-size: 1.5rem;
+}
+
+.paym-pp-l,
+.paym-ap-l,
+.paym-mb-l {
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px 5px;
+  width: 100px;
+  height: 50px;
+}
+
+.paym-pp-l {
+  background-color: #0564bd;
+}
+
+.paym-ap-l {
+  background-color: #000000;
+}
+
+.paym-mb-l {
+  background-color: rgb(91, 113, 234);
+}
+
+.paym-pay-card {
+  margin: 70px 90px 0px 0px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 450px;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.paym-c-card {
+  margin-top: 30px;
+  background-color: #3e3e3e;
+  border: 1px solid #3e3e3e;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.paym-c-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.paym-input-row {
+  display: flex;
+  width: 100%;
+}
+
+.paym-input-ccn {
+  width: 80%;
+  margin-bottom: 10px;
+}
+
+.paym-input-chn {
+  width: 180%;
+  margin-bottom: 10px;
+
+}
+.paym-input-ed {
+  width: 10%;
+}
+
+.paym-input-ed1 {
+  margin-left: 10px;
+  width: 10%;
+}
+
+.paym-ed-fs {
+  color: #fff;
+  margin-left: 10px;
+}
+
+.paym-input-cvv {
+  margin-left: 90px;
+  width: 25%;
+}
+
+.paym-input-ccn,
+.paym-input-chn,
+.paym-input-ed,
+.paym-input-ed1,
+.paym-input-cvv {
+  color: #fff;
+  font-size: 13px;
+  background-color: #3e3e3e;
+  border: none;
+  border-bottom: 2px solid rgb(255, 255, 255);
+  height: 30px;
+}
+
+.paym-input-ccn:focus,
+.paym-input-chn:focus,
+.paym-input-ed:focus,
+.paym-input-cvv:focus{
+  border-color: transparent;
+  outline-color: transparent;
+}
+
+.paym-buttons-row {
+  display: flex;
+  justify-content: left;
+  flex-wrap: nowrap;
+  margin-top: 20px;
+}
+
+.paym-alt-pm {
+  border: none;
+  background: transparent;
+  margin: 0px 10px;
+  background-color: transparent;
+  border: 1px dotted white;
+  border-radius: 10px;
+}
+.paym-label {
+  display: block;
+  font-weight: bold;
+  margin: 5px 0px 5px;
+  color: #fff;
+  font-size: 10px;
+}
+
+.paym-label-cvv {
+  display: block;
+  font-weight: bold;
+  margin: 5px 0px 5px 90px;
+  color: #fff;
+  font-size: 10px;
+}
+
+.paym-del-card {
+  margin: 70px 0px 0px 40px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 650px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.paym-cards-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}

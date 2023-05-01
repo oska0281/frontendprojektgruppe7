@@ -2,7 +2,7 @@ import {format} from "../utilities/format";
 import {useCart} from "../context/CartContext";
 import '../styling/products.css';
 
-interface Product {
+export interface Product {
     id: string;
     name: string;
     price: number;

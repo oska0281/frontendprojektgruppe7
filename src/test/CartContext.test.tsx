@@ -5,7 +5,7 @@ import { CartProvider, useCart } from '../context/CartContext';
 import React from 'react';
 
 
-describe('KurvKontekst', () => {
+describe('CartContext', () => {
   it('should increase cart quantity', () => {
     const wrapper = ({ children }: { children: React.ReactNode }) => <CartProvider>{children}</CartProvider>;
     const { result } = renderHook(() => useCart(), { wrapper });
@@ -43,7 +43,7 @@ describe('KurvKontekst', () => {
         result.current.removeFromCart('1');
       });
       
-      expect(result.current.cartProducts).toEqual([{ id: '2', antal: 1 }]);
+      expect(result.current.cartProducts).toEqual([{ id: '2', quantity: 1 }]);
     });
    
     it('should update cart total correctly', () => {

@@ -82,7 +82,7 @@ export function OrderSummary() {
   const totalPrice = adjustedTotal - rebate;
 
     const handleButtonClick = async () => {
-      window.location.href = "/delivery";
+      window.location.href = "/checkout";
     }
 
  return (

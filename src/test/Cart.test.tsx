@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { Cart } from '../components/Cart';
 import { CartProvider } from '../context/CartContext';
 
+import { CartProvider } from '../context/CartContext';
 
 describe('Kurv', () => {
   it('renders cart with closed state', () => {
@@ -24,7 +25,7 @@ describe('Kurv', () => {
       </CartProvider>
     );
 
-    const cartTitle = screen.getByText('Kurv');
+    const cartTitle = screen.getByText('Cart');
     expect(cartTitle).toBeVisible();
   });
 
@@ -38,7 +39,7 @@ describe('Kurv', () => {
     const closeButton = screen.getByRole('button', { name: /close/i });
     fireEvent.click(closeButton);
 
-    const cartTitle = screen.queryByText('Kurv');
+    const cartTitle = screen.queryByText('Cart');
     expect(cartTitle).not.toBeInTheDocument();
   });
 });

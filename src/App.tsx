@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
 import { OrderSummary } from "./pages/OrderSummary";
-import { Delivery } from "./pages/Delivery";
-import { Payment } from "./pages/Payment";
+import { Checkout} from "./pages/Checkout";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { CartProvider } from "./context/CartContext";
 import { Store } from "./pages/Store";
 import Loading from "./components/Loading";
 import { Navigationsbar } from "./components/NavigationBar";
+import { Mobilepay} from "./pages/Mobilepay";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -33,17 +33,16 @@ function App() {
 
   const renderPage = () => {
     switch (path) {
-      case '/delivery':
-        return <Delivery />;
-      case '/payment':
-        return <Payment />;
+      case '/checkout':
+        return <Checkout />;
       case '/login':
         return <Login />;
       case '/register':
         return <Register />;
           case '/ordersummary':
       return <OrderSummary />;
-
+      case '/mobilepay':
+        return <Mobilepay />;
       default:
         return <Store />;
 
