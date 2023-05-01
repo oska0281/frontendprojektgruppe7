@@ -9,10 +9,9 @@
   margin: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  background-color: #0d6efd;
-  border: 1px solid #0d6efd;
+  background-color: #5f75fd;
+  border: 1px solid #5f75fd;
   padding: 20px;
   border-radius: 10px;
   width: 300px;
@@ -23,7 +22,7 @@
   width: 300px;
   height: auto;
   margin-bottom: 20px;
-  margin-top: 20px;
+  margin-top: 70px;
 }
 
 .phone-input-container {
@@ -36,8 +35,12 @@
 }
 
 .mp-phone-input {
-  width: 100%;
+  width: 150px;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 30px;
 }
+
 
 .error-message {
   color: #ff0000;

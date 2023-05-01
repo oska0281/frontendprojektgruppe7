@@ -24,7 +24,7 @@ export function Mobilepay() {
     <div className="containerMobilepay">
       <img
         className="mobilepay-logo"
-        src="../public/images/mobilepay-logo.svg"
+        src="https://terapeutbooking.dk/wp-content/uploads/2021/06/mobilepay-1.png"
         alt="Mobilepay Logo"
       />
       <p className="placeholder-text">Indtast telefonnummer nedenfor</p>
