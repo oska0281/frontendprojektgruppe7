@@ -28,58 +28,34 @@ export function Login() {
       ...prev,
       [event.target.name]: [event.target.value],
     }));
-  return (
-    <div className="d-flex justify-content-center align-items-center vh-100">
-      <div className="bg-white p-3 rounded w-25">
-        <h2>Log Ind</h2>
-        <form
-          action=""
-          onSubmit={handleSubmit}
-          method="post"
-          encType="application/x-www-form-urlencoded"
-        >
-          <div className="mb-3">
-            <label htmlFor="email">
-              <strong>Email</strong>
-            </label>
-            <input
-              className="form-control rouded-0"
-              type="email"
-              onChange={handleInput}
-              name="email"
-              placeholder="Indtast Email"
-            />
-            {errors.email && (
-              <span className="text-danger">{errors.email}</span>
-            )}
-          </div>
-          <div className="mb-3">
-            <label htmlFor="password">
-              <strong>Kodeord</strong>
-            </label>
-            <input
-              className="form-control rouded-0"
-              name="kodeord"
-              type="password"
-              onChange={handleInput}
-              placeholder="Indtast Kodeord"
-            />
-            {errors.password && (
-              <span className="text-danger">{errors.password}</span>
-            )}
-          </div>
-          <button type="submit" className="btn btn-success w-100">
-            Log Ind
-          </button>
-          <p>Ved brug erklærer du dig enig i vores vilkår</p>
-          <button
-            className="btn btn-default border w-100"
-            onClick={() => (window.location.href = "/register")}
-          >
-            Opret Bruger
-          </button>
-        </form>
-      </div>
+    return (
+    <div className="containerLoginz">
+      <h2>Log Ind</h2>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          onChange={handleInput}
+          name="email"
+          placeholder="Indtast Email"
+        />
+        {errors.email && <span className="text-danger">{errors.email}</span>}
+        <label htmlFor="password">Kodeord</label>
+        <input
+          name="password"
+          type="password"
+          onChange={handleInput}
+          placeholder="Indtast Kodeord"
+        />
+        {errors.password && (
+          <span className="text-danger">{errors.password}</span>
+        )}
+        <button type="submit">Log Ind</button>
+        <p>Ved brug erklærer du dig enig i vores vilkår</p>
+        <button type="button" onClick={() => (window.location.href = "/register")}>
+          Opret Bruger
+        </button>
+      </form>
     </div>
   );
 }

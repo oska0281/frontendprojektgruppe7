@@ -4,6 +4,8 @@ import { describe, expect, it } from 'vitest';
 import { Cart } from '../components/Cart';
 import { CartProvider } from '../context/CartContext';
 
+import { CartProvider } from '../context/CartContext';
+
 describe('Kurv', () => {
   it('renders cart with closed state', () => {
     render(

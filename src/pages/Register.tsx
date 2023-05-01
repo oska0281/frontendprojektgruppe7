@@ -37,67 +37,44 @@ export function Register() {
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) =>
     setValues((prev) => ({ ...prev, [event.target.name]: event.target.value }));
-  return (
-    <div className="d-flex justify-content-center align-items-center  vh-100">
-      <div className="bg-white p-3 rounded w-25">
-        <h2>Opret bruger</h2>
-        <form action="" onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="name">
-              <strong>navn</strong>
-            </label>
-            <input
-              onChange={handleInput}
-              name="name"
-              className="form-control rouded-0"
-              type="text"
-              placeholder="Indtast name"
-            />
-            {errors.name && <span className="text-danger">{errors.name}</span>}
-          </div>
-          <div className="mb-3">
-            <label htmlFor="email">
-              <strong>Email</strong>
-            </label>
-            <input
-              onChange={handleInput}
-              name="email"
-              className="form-control rouded-0"
-              type="email"
-              placeholder="Indtast Email"
-            />
-            {errors.email && (
-              <span className="text-danger">{errors.email}</span>
-            )}
-          </div>
-          <div className="mb-3">
-            <label htmlFor="password">
-              <strong>kodeord</strong>
-            </label>
-            <input
-              onChange={handleInput}
-              name="password"
-              className="form-control rouded-0"
-              type="password"
-              placeholder="Indtast password"
-            />
-            {errors.password && (
-              <span className="text-danger">{errors.password}</span>
-            )}
-          </div>
-          <button type="submit" className="btn btn-success w-100">
-            Opret Profil
-          </button>
-          <p>Ved brug erklærer du dig enig i vores vilkår</p>
-
-          <button
-            onClick={() => (window.location.href = "/login")}
-            className="btn btn-default border w-100"
-          >
-            Log Ind
-          </button>
-        </form>
-      </div>
+    return (
+    <div className="containerLogin">
+      <h2>Opret bruger</h2>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="name">navn</label>
+        <input
+          onChange={handleInput}
+          name="name"
+          type="text"
+          placeholder="Indtast name"
+        />
+        {errors.name && <span className="text-danger">{errors.name}</span>}
+        <label htmlFor="email">Email</label>
+        <input
+          onChange={handleInput}
+          name="email"
+          type="email"
+          placeholder="Indtast Email"
+        />
+        {errors.email && (
+          <span className="text-danger">{errors.email}</span>
+        )}
+        <label htmlFor="password">kodeord</label>
+        <input
+          onChange={handleInput}
+          name="password"
+          type="password"
+          placeholder="Indtast password"
+        />
+        {errors.password && (
+          <span className="text-danger">{errors.password}</span>
+        )}
+        <button type="submit">Opret Profil</button>
+        <p>Ved brug erklærer du dig enig i vores vilkår</p>
+        <button type="button" onClick={() => (window.location.href = "/login")}>
+          Log Ind
+        </button>
+      </form>
     </div>
   );
 }
