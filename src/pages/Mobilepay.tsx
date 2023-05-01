@@ -22,7 +22,7 @@ export function Mobilepay() {
       <p className="placeholder-text">Placeholder for Mobilepay API - altså bare en telefon nr godkender</p>
       <div className="phone-input-container">
         <PhoneInput
-          className="phone-input"
+          className="mp-phone-input"
           type="text"
           required
           maxLength={11}
