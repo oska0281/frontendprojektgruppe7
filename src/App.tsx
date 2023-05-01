@@ -9,8 +9,23 @@ import { Store } from "./pages/Store";
 import Loading from "./components/Loading";
 import { Navigationsbar } from "./components/NavigationBar";
 import { Mobilepay} from "./pages/Mobilepay";
+import { useUser } from "./context/UserContext";	
+import axios from "axios";	
+const fetchUser = async (setUser: (user: User | null) => void) => {	
+  try {	
+    const token = localStorage.getItem("token");	
+    if (!token) return;	
+    const res = await axios.get("http://localhost:3000/auth/me", {	
+      headers: { "x-auth-token": token },	
+    });	
+    setUser({ name: res.data.user.name });	
+  } catch (error) {	
+    console.error("Failed to fetch user:", error);	
+  }	
+};
 
 function App() {
+  const { setUser } = useUser();
   const [isLoading, setIsLoading] = useState(true);
   const [path, setPath] = useState(window.location.pathname);
 
@@ -22,6 +37,10 @@ function App() {
     window.addEventListener('popstate', handlePopstate);
     return () => window.removeEventListener('popstate', handlePopstate);
   }, []);
+
+  useEffect(() => {	
+    fetchUser(setUser);	
+  }, [setUser]);
 
   useEffect(() => {
     const timer = setTimeout(() => {

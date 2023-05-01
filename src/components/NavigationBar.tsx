@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { useCart } from "../context/CartContext";
 import "../styling/navigationbar.css";
+import { useUser } from "../context/UserContext";
 
 interface NavigationsbarProps {
   onNavClick: (newPath: string) => void;
 }
 
 export function Navigationsbar(props: NavigationsbarProps) {
+  const { user, logout } = useUser();
   const { openCart, cartQuantity } = useCart();
   const isOverNine = cartQuantity >= 10;
   const adjustedPadding = isOverNine ? { padding: "2px 5px" } : {};
@@ -54,15 +56,26 @@ export function Navigationsbar(props: NavigationsbarProps) {
           )}
         </button>
         
-          <a
-            href="/login"
-            onClick={() => props.onNavClick("/login")}
-            className="navbar-navlink-login">
-            <img className="navbar-user-login" src="https://freesvg.org/img/abstract-user-flat-1.png" alt="login" />
-          </a>
+        {user ? (
+            <button className="navbar-navlink-username" onClick={logout}>
+              Logout
+            </button>
+          ) : (
+            <a
+              href="/login"
+              onClick={() => props.onNavClick("/login")}
+              className="navbar-navlink-login"
+            >
+              <img
+                className="navbar-user-login"
+                src="../public/images/login.svg"
+                alt="login"
+              />
+            </a>
+          )}
+        
         </div>
 
-        
       </div>
     </nav>
   );

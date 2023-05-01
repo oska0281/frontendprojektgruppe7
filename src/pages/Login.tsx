@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { ValidationLogin } from "../utilities/ValidationLogin";
 import "../styling/login.css";
+import axios, { AxiosError } from "axios";
+import { useUser } from "../context/UserContext";
 
 interface values {
   email: string;
@@ -8,26 +10,49 @@ interface values {
 }
 
 export function Login() {
+  const { setUser } = useUser();
+
   const [values, setValues] = useState<values>({
     email: "",
     password: "",
   });
+
+  const [serverError, setServerError] = useState("");
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {	
+    event.preventDefault();	
+    setServerError(""); // Clear any existing server errors	
+    try {	
+      const res = await axios.post("http://localhost:3000/auth/signin", values);	
+      localStorage.setItem("token", res.data.token); // Save the token to localStorage	
+      setUser({ name: res.data.user.name }); // Set the user in the context	
+      window.location.href = "/"; // navigate to the home page using the native browser API	
+    } catch (err) {	
+      if (err.response) {	
+        setServerError(	
+          (err as AxiosError).response?.data.message ||	
+            "An error occurred. Please try again later."	
+        );	
+      } else {	
+        setServerError("An error occurred. Please try again later.");	
+      }	
+    }
+  };
+
+
 
   const [errors, setErrors] = useState({
     email: "",
     password: "",
   });
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setErrors(ValidationLogin(values));
-  };
 
-  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setValues((prev) => ({
-      ...prev,
-      [event.target.name]: [event.target.value],
+ const handleInput = (event: React.ChangeEvent<HTMLInputElement>) =>	
+    setValues((prev) => ({	
+      ...prev,	
+      [event.target.name]: event.target.value,	
     }));
+    
     return (
     <div className="containerLoginz">
       <h2>Log Ind</h2>
