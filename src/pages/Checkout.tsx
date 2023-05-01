@@ -357,21 +357,21 @@ export function Checkout() {
           <div className="paym-buttons-row">
             <button className="paym-alt-pm"onClick={handleMobilePayButton}>
               <img
-                src="../public/images/mobilepay-logo.svg"
+                src="https://terapeutbooking.dk/wp-content/uploads/2021/06/mobilepay-1.png"
                 alt="Mobile Pay"
                 className="paym-mb-l"
               />
             </button>
             <button className="paym-alt-pm">
               <img
-                src="../public/images/paypal-logo.svg"
+                src="https://cdn.pixabay.com/photo/2015/05/26/09/37/paypal-784404_1280.png"
                 alt="PayPal"
                 className="paym-pp-l"
               />
             </button>
             <button className="paym-alt-pm">
               <img
-                src="../public/images/applepay-logo.svg"
+                src="https://meremobil.dk/wp-content/uploads/2022/07/Apple-Pay.jpg"
                 alt="Apple Pay"
                 className="paym-ap-l"
               />
