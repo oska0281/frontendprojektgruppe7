@@ -8,6 +8,7 @@ import { CartProvider } from "./context/CartContext";
 import { Store } from "./pages/Store";
 import Loading from "./components/Loading";
 import { Navigationsbar } from "./components/NavigationBar";
+import { Mobilepay} from "./pages/Mobilepay";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -40,7 +41,8 @@ function App() {
         return <Register />;
           case '/ordersummary':
       return <OrderSummary />;
-
+      case '/mobilepay':
+        return <Mobilepay />;
       default:
         return <Store />;
 

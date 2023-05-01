@@ -1,7 +1,7 @@
-import "../styling/checkout.css";
+
 import React, { useEffect, useState } from "react";
 import PhoneInput from "react-phone-number-input";
-
+import "../styling/checkout.css";
 export function Checkout() {
   const [isChecked, setIsChecked] = useState(false);
   const [isFormFilled, setIsFormFilled] = useState(false);
@@ -58,7 +58,7 @@ export function Checkout() {
     }
   };
 
-  const handleButtonClick = async () => {
+  const handlePaymentButton = async () => {
     if (
       isFormFilled &&
       isChecked &&
@@ -139,11 +139,10 @@ export function Checkout() {
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const rawValue = e.target.value.replace(/\D/g, "");
-    const formattedValue =
-      rawValue
-        .match(/.{1,4}/g)
-        ?.join(" ")
-        .substr(0, 19) || "";
+    const formattedValue = rawValue
+      .match(/.{1,4}/g)
+      ?.join(" ")
+      .substr(0, 19) || "";
     setCreditCardNumber(formattedValue);
   };
 
@@ -152,24 +151,9 @@ export function Checkout() {
     return rawValue.length === 16;
   };
 
-  const handleExpirationDateChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const rawValue = e.target.value.replace(/\D/g, "");
-
-    let formattedValue = "";
-    if (rawValue.length >= 1) {
-      const month = Math.min(12, parseInt(rawValue.slice(0, 2)));
-      formattedValue = `${month.toString().padStart(2, "0")}`;
-
-      if (rawValue.length >= 3) {
-        const year = Math.max(23, parseInt(rawValue.slice(2, 4)));
-        formattedValue = `${formattedValue}/${year}`;
-      }
-    }
-
-    setExpirationDate(formattedValue);
-  };
+  const handleMobilePayButton = async () => {
+    window.location.href = "/mobilepay";
+  }
 
   return (
     <div className="paym-root">
@@ -299,25 +283,23 @@ export function Checkout() {
 
             {showMessage && (
               <div className="message">
-                Please fill out every field in the form
+                Udfyld venligst alle felterne
               </div>
             )}
 
             <div>
               <input type="checkbox" onChange={handleCheck} />
               <text className="del-text">
-                I confirm that I have read and accepted the terms of purchase
+                Jeg bekræfter at have læst købsbetingelserne
               </text>
             </div>
 
             {isCheckedMessage && (
-              <div className="message">Please accept the terms of purchase</div>
+              <div className="message">Jeg accepterer købsbetingelserne</div>
             )}
             <div>
               <input type="checkbox" />
-              <text className="del-text">
-                I want to receive future emails with offers
-              </text>
+              <text className="del-text">I want to receive future emails with offers</text>
             </div>
 
             <button
@@ -328,7 +310,7 @@ export function Checkout() {
                 !isPhoneNumberValid ||
                 (isCompany && !isCompanyVATNumberValid)
               }
-              onClick={handleButtonClick}
+              onClick={handlePaymentButton}
             >
               Fortsæt til betaling
             </button>
@@ -387,7 +369,7 @@ export function Checkout() {
                 className="paym-ap-l"
               />
             </button>
-            <button className="paym-alt-pm">
+            <button className="paym-alt-pm"onClick={handleMobilePayButton}>
               <img
                 src="../public/images/mobilepay-logo.svg"
                 alt="Mobile Pay"

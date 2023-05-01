@@ -1,0 +1,56 @@
+
+   .container {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #0d6efd;
+  border: 1px solid #0d6efd;
+  padding: 20px;
+  border-radius: 10px;
+  width: 200px;
+  height: 700px;
+}
+
+.mobilepay-logo {
+  width: 300px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.phone-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20%;
+  margin-top: 200px;
+}
+
+.phone-input {
+  width: 100%;
+}
+
+.error-message {
+  color: #ff0000;
+  font-size: 14px;
+  margin-top: 10px;
+}
+.success-button {
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  color: white;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 10px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.success-button:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
