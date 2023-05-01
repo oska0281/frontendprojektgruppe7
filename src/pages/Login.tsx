@@ -54,7 +54,7 @@ export function Login() {
     }));
     
     return (
-    <div className="containerLoginz">
+    <div className="containerLogin">
       <h2>Log Ind</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
