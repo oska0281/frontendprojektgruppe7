@@ -13,6 +13,9 @@ export function Checkout() {
   const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(false);
   const [isCompany, setIsCompany] = useState(false);
   const [isCompanyVATNumberValid, setIsCompanyVATNumberValid] = useState(false);
+  const [isPaymentEnabled, setIsPaymentEnabled] = useState(false);
+  const [creditCardNumber, setCreditCardNumber] = useState("");
+  const [expirationDate, setExpirationDate] = useState("");
   const [deliveryAddress, setDeliveryAddress] = useState({
     country: "Denmark",
     zipCode: "",
@@ -32,7 +35,9 @@ export function Checkout() {
   };
 
   const handleFormChange = async () => {
-    const formFields = document.querySelectorAll('input[type="text"]');
+    const formFields = document.querySelectorAll(
+      "input.delivery-address-field"
+    );
     const filledFields = Array.from(formFields).filter(
       (field) => (field as HTMLInputElement).value !== ""
     );
@@ -60,7 +65,7 @@ export function Checkout() {
       isZipCodeValid &&
       (!isCompany || isCompanyVATNumberValid)
     ) {
-      window.location.href = "/payment";
+      setIsPaymentEnabled(true);
     } else {
       setShowMessage(!isFormFilled);
       setIsCheckedMessage(!isChecked);
@@ -130,11 +135,48 @@ export function Checkout() {
     setIsCompanyVATNumberValid(isValidCompanyVATNumber);
   };
 
+  const handleCreditCardNumberChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const rawValue = e.target.value.replace(/\D/g, "");
+    const formattedValue =
+      rawValue
+        .match(/.{1,4}/g)
+        ?.join(" ")
+        .substr(0, 19) || "";
+    setCreditCardNumber(formattedValue);
+  };
+
+  const isCreditCardNumberValid = () => {
+    const rawValue = creditCardNumber.replace(/\D/g, "");
+    return rawValue.length === 16;
+  };
+
+  const handleExpirationDateChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const rawValue = e.target.value.replace(/\D/g, "");
+
+    let formattedValue = "";
+    if (rawValue.length >= 1) {
+      const month = Math.min(12, parseInt(rawValue.slice(0, 2)));
+      formattedValue = `${month.toString().padStart(2, "0")}`;
+
+      if (rawValue.length >= 3) {
+        const year = Math.max(23, parseInt(rawValue.slice(2, 4)));
+        formattedValue = `${formattedValue}/${year}`;
+      }
+    }
+
+    setExpirationDate(formattedValue);
+  };
+
   return (
     <div className="paym-root">
       <div className="paym-cards-wrapper">
-        <div className="paym-cart-card">
-          <form className="del-form"
+        <div className="paym-del-card">
+          <form
+            className="del-form"
             onChange={handleFormChange}
             onSubmit={(event) => event.preventDefault()}
           >
@@ -153,7 +195,7 @@ export function Checkout() {
               <div>
                 <label className="del-label">Navn:</label>
                 <input
-                  className="inputfelt"
+                  className="inputfelt delivery-address-field"
                   type="text"
                   value={deliveryAddress.name}
                   onChange={(e) =>
@@ -170,7 +212,11 @@ export function Checkout() {
             {isCompany && (
               <div>
                 <label className="del-label">Virksomhed:</label>
-                <input className="inputfelt" type="text" required />
+                <input
+                  className="inputfelt delivery-address-field"
+                  type="text"
+                  required
+                />
               </div>
             )}
 
@@ -178,7 +224,7 @@ export function Checkout() {
               <div>
                 <label className="del-label">CVR.:</label>
                 <input
-                  className="inputfelt"
+                  className="inputfelt delivery-address-field"
                   maxLength={8}
                   type="text"
                   required
@@ -189,13 +235,17 @@ export function Checkout() {
 
             <div>
               <label className="del-label">Email:</label>
-              <input className="inputfelt" type="text" required />
+              <input
+                className="inputfelt delivery-address-field"
+                type="text"
+                required
+              />
             </div>
 
             <div>
               <label className="del-label">Telefon:</label>
               <PhoneInput
-                className="phone-input"
+                className="delivery-address-field phone-input"
                 type="text"
                 required
                 maxLength={11}
@@ -209,14 +259,18 @@ export function Checkout() {
 
             <div>
               <label className="del-label">Adresse:</label>
-              <input className="inputfelt" type="text" required />
+              <input
+                className="inputfelt delivery-address-field"
+                type="text"
+                required
+              />
             </div>
 
             <div>
               <label className="del-label">Postnummer:</label>
               <input
                 id="zipcode"
-                className="inputfelt"
+                className="inputfelt delivery-address-field"
                 type="text"
                 name="zipcode"
                 required
@@ -226,12 +280,21 @@ export function Checkout() {
             {zipCodeError && <span className="error">Ugyldigt postnummer</span>}
             <div>
               <label className="del-label">By:</label>
-              <input className="inputfelt" type="text" value={city} readOnly />
+              <input
+                className="inputfelt delivery-address-field"
+                type="text"
+                value={city}
+                readOnly
+              />
             </div>
 
             <div>
               <label className="del-label">Land:</label>
-              <input className="inputfelt" type="text" required />
+              <input
+                className="inputfelt delivery-address-field"
+                type="text"
+                required
+              />
             </div>
 
             {showMessage && (
@@ -241,10 +304,7 @@ export function Checkout() {
             )}
 
             <div>
-              <input
-                type="checkbox"
-                onChange={handleCheck}
-              />
+              <input type="checkbox" onChange={handleCheck} />
               <text className="del-text">
                 I confirm that I have read and accepted the terms of purchase
               </text>
@@ -255,7 +315,9 @@ export function Checkout() {
             )}
             <div>
               <input type="checkbox" />
-              <text className="del-text">I want to receive future emails with offers</text>
+              <text className="del-text">
+                I want to receive future emails with offers
+              </text>
             </div>
 
             <button
@@ -272,31 +334,41 @@ export function Checkout() {
             </button>
           </form>
         </div>
-        <div className="paym-pay-card">
+        <div className={`paym-pay-card${isPaymentEnabled ? "" : " disabled"}`}>
           <h1 className="paym-heading">Betaling</h1>
           <div className="paym-c-card">
             <label htmlFor="ccn" className="paym-label">
               Kreditkortnummer
             </label>
-            <input type="text" id="ccn" className="paym-input-ccn" />
+            <input
+              type="text"
+              id="ccn"
+              className="paym-input-ccn"
+              value={creditCardNumber}
+              onChange={handleCreditCardNumberChange}
+            />
+            <div>
+              <label htmlFor="chn" className="paym-label">
+                Kortindhaver
+              </label>
+              <input type="text" id="chn" className="paym-input-chn" />
+            </div>
             <div className="paym-input-row">
-              <div>
-                <label htmlFor="chn" className="paym-label">
-                  Kortindhaver
-                </label>
-                <input type="text" id="chn" className="paym-input-chn" />
-              </div>
               <div>
                 <label htmlFor="ed" className="paym-label">
                   Udløbsdato
                 </label>
-                <input type="text" id="ed" className="paym-input-ed" />
+                <input type="text" maxLength={2} id="ed" className="paym-input-ed" />
+                <span className="paym-ed-fs">/</span>
+                <input type="text" maxLength={2} id="ed" className="paym-input-ed1" />
+              </div>
+              <div>
+                <label htmlFor="cvv" className="paym-label-cvv">
+                  CVV
+                </label>
+                <input type="text" maxLength={3} id="cvv" className="paym-input-cvv" />
               </div>
             </div>
-            <label htmlFor="cvv" className="paym-label">
-              CVV
-            </label>
-            <input type="text" id="cvv" className="paym-input-cvv" />
           </div>
 
           <button className="paym-pay-btn">Betal</button>

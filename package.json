@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
+    "fetch-mock": "^9.11.0",
     "jsdom": "^21.1.1",
     "mock-local-storage": "^1.1.23",
     "react-bootstrap": "^2.7.2",

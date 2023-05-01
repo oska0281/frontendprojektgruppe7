@@ -5,7 +5,7 @@ import { CartProvider, useCart } from '../context/CartContext';
 import React from 'react';
 
 
-describe('KurvKontekst', () => {
+describe('CartContext', () => {
   it('should increase cart quantity', () => {
     const wrapper = ({ children }: { children: React.ReactNode }) => <CartProvider>{children}</CartProvider>;
     const { result } = renderHook(() => useCart(), { wrapper });

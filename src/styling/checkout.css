@@ -210,27 +210,40 @@
 }
 
 .paym-input-chn {
-  width: 80%;
+  width: 180%;
+  margin-bottom: 10px;
 
 }
 .paym-input-ed {
-  width: 48%;
+  width: 10%;
+}
+
+.paym-input-ed1 {
+  margin-left: 10px;
+  width: 10%;
+}
+
+.paym-ed-fs {
+  color: #fff;
+  margin-left: 10px;
 }
 
 .paym-input-cvv {
-  width: 48%;
+  margin-left: 90px;
+  width: 25%;
 }
 
 .paym-input-ccn,
 .paym-input-chn,
 .paym-input-ed,
+.paym-input-ed1,
 .paym-input-cvv {
   color: #fff;
   font-size: 13px;
   background-color: #3e3e3e;
-  border: 1px dotted white;
+  border: none;
+  border-bottom: 2px solid rgb(255, 255, 255);
   height: 30px;
-  border-radius: 10px;
 }
 
 .paym-input-ccn:focus,
@@ -264,7 +277,15 @@
   font-size: 10px;
 }
 
-.paym-cart-card {
+.paym-label-cvv {
+  display: block;
+  font-weight: bold;
+  margin: 5px 0px 5px 90px;
+  color: #fff;
+  font-size: 10px;
+}
+
+.paym-del-card {
   margin: 70px 0px 0px 40px;
   background-color: #ffffff;
   border: 1px solid #ccc;
@@ -281,4 +302,9 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: nowrap;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
 }
