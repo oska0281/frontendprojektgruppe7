@@ -299,7 +299,7 @@ export function Checkout() {
             )}
             <div>
               <input type="checkbox" />
-              <text className="del-text">I want to receive future emails with offers</text>
+              <text className="del-text">Jeg vil gerne modtage mails med fremtidige tilbud</text>
             </div>
 
             <button
@@ -355,6 +355,13 @@ export function Checkout() {
 
           <button className="paym-pay-btn">Betal</button>
           <div className="paym-buttons-row">
+            <button className="paym-alt-pm"onClick={handleMobilePayButton}>
+              <img
+                src="../public/images/mobilepay-logo.svg"
+                alt="Mobile Pay"
+                className="paym-mb-l"
+              />
+            </button>
             <button className="paym-alt-pm">
               <img
                 src="../public/images/paypal-logo.svg"
@@ -367,13 +374,6 @@ export function Checkout() {
                 src="../public/images/applepay-logo.svg"
                 alt="Apple Pay"
                 className="paym-ap-l"
-              />
-            </button>
-            <button className="paym-alt-pm"onClick={handleMobilePayButton}>
-              <img
-                src="../public/images/mobilepay-logo.svg"
-                alt="Mobile Pay"
-                className="paym-mb-l"
               />
             </button>
           </div>

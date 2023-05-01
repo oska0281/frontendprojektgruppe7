@@ -37,6 +37,7 @@ export function OrderSummary() {
     return total + ( item?.price || 0 ) * cartProducts.quantity;
   } , 0 );
 
+
   const calculateTax = ( itemPrice : number ) => {
     const taxRate = 0.25; // 25% moms
     return itemPrice * taxRate;
@@ -79,7 +80,9 @@ export function OrderSummary() {
 
   const adjustedTotal = total - totalDiscount;
   const rebate = adjustedTotal >= 300 ? adjustedTotal * 0.1 : 0;
-  const totalPrice = adjustedTotal - rebate;
+  const totalPrice: number = adjustedTotal - rebate;
+
+
 
     const handleButtonClick = async () => {
       window.location.href = "/checkout";
@@ -145,5 +148,7 @@ export function OrderSummary() {
       <button className="continue-to-Delivery__button" onClick={handleButtonClick}>Forsæt til levering</button>
     </div>
   </div>
+
 );
+
 }
