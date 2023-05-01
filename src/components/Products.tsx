@@ -64,7 +64,7 @@ export function Products({
                             <div className="products-card-div-id">
                                 <button className="products-card-btn-decrease" onClick={() => decreaseCartQuantity(id)}>-</button>
                                 <div>
-                                    <span className="products-card-span-amount">{quantity}</span> in cart
+                                    <span className="products-card-span-amount">{quantity}</span> i kurven
                                 </div>
                                 <button className="products-card-btn-increase" onClick={() => increaseCartQuantity(id)}>+</button>
                             </div>

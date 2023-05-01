@@ -5,7 +5,7 @@ const Loading: React.FC = () => {
   return (
     <div className="loading-con">
       <div className="loading-spin"></div>
-      <p>Loading...</p>
+      <p>Indlæser...</p>
     </div>
   );
 }

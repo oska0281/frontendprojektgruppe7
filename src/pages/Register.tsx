@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ValidationRegister, { Registervalidering } from "../utilities/ValidationRegister";
 import axios from "axios";
+import "../styling/register.css";
 
 interface values {
   name: string;
@@ -47,120 +48,35 @@ export function Register() {
     setValues((prev) => ({ ...prev, [event.target.name]: event.target.value }));
     return (	
       <>	
-        <div className="d-flex justify-content-center align-items-center bg-primary ">	
-          <div className="bg-white p-3 rounded w-50 text-center mt-5 pt-5 pb-5 mb-5">	
-            <h2>Opret bruger</h2>	
-            <form action="" onSubmit={handleSubmit}>	
-              <div className="mb-3 mt-3">	
-                <label htmlFor="name">	
-                  <strong>Navn</strong>	
-                </label>	
-                <input	
-                  onChange={handleInput}	
-                  name="name"	
-                  className="form-control rounded-0"	
-                  type="text"	
-                  placeholder="Indtast navn"	
-                />	
-              </div>	
-              <div className="mb-3">	
-                <label htmlFor="email">	
-                  <strong>Email</strong>	
-                </label>	
-                <input	
-                  onChange={handleInput}	
-                  name="email"	
-                  className="form-control rounded-0"	
-                  type="email"	
-                  placeholder="Indtast email"	
-                />	
-              </div>	
-              <div className="mb-3">	
-                <label htmlFor="password">	
-                  <strong>password</strong>	
-                </label>	
-                <input	
-                  onChange={handleInput}	
-                  name="password"	
-                  className="form-control rouded-0"	
-                  type="password"	
-                  placeholder="Indtast password"	
-                />	
-              </div>	
-              <div className="mb-3">	
-                <label htmlFor="phoneNumber">	
-                  <strong>Phone Number</strong>	
-                </label>	
-                <input	
-                  onChange={handleInput}	
-                  name="phoneNumber"	
-                  className="form-control rouded-0"	
-                  type="tel"	
-                  placeholder="Enter Phone Number"	
-                />	
-              </div>	
-              <div className="mb-3">	
-                <label htmlFor="address">	
-                  <strong>Address</strong>	
-                </label>	
-                <input	
-                  onChange={handleInput}	
-                  name="address"	
-                  className="form-control rouded-0"	
-                  type="text"	
-                  placeholder="Enter Address"	
-                />	
-              </div>	
-              <div className="mb-3">	
-                <label htmlFor="zipCode">	
-                  <strong>Zip Code</strong>	
-                </label>	
-                <input	
-                  onChange={handleInput}	
-                  name="zipCode"	
-                  className="form-control rouded-0"	
-                  type="text"	
-                  placeholder="Enter Zip Code"	
-                />	
-              </div>	
-              <div className="mb-3">	
-                <label htmlFor="town">	
-                  <strong>Town</strong>	
-                </label>	
-                <input	
-                  onChange={handleInput}	
-                  name="town"	
-                  className="form-control rouded-0"	
-                  type="text"	
-                  placeholder="Enter Town"	
-                />	
-              </div>	
-              <div className="mb-3">	
-                <label htmlFor="country">	
-                  <strong>Country</strong>	
-                </label>	
-                <input	
-                  onChange={handleInput}	
-                  name="country"	
-                  className="form-control rouded-0"	
-                  type="text"	
-                  placeholder="Enter Country"	
-                />	
-              </div>	
-              <button type="submit" className="btn btn-success w-100">	
-                Create Profile	
-              </button>	
-              {serverError && <span className="text-danger">{serverError}</span>}	
-              <p>By using our service, you agree to our terms</p>	
-              <button	
-                onClick={() => (window.location.href = "/login")}	
-                className="btn btn-default border w-100"	
-              >	
-                Log In	
-              </button>	
-            </form>	
-          </div>	
-        </div>	
+       <div className="containerRegister">
+      <h2>Log Ind</h2>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          onChange={handleInput}
+          name="email"
+          placeholder="Indtast Email"
+        />
+        <label htmlFor="password">Kodeord</label>
+        <input
+          name="password"
+          type="password"
+          onChange={handleInput}
+          placeholder="Indtast Kodeord"
+        />
+        <label htmlFor="password">Gentag kodeord</label>
+        <input
+          name="password"
+          type="password"
+          onChange={handleInput}
+          placeholder="Indtast Kodeord"
+        />
+        <p>Ved brug erklærer du dig enig i vores vilkår</p>
+        <button type="submit" onClick={() => (window.location.href = "/store")}>Opret bruger</button>
+
+      </form>
+    </div>
       </>	
     );	
   }
