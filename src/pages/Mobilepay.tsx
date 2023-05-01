@@ -13,7 +13,7 @@ export function Mobilepay() {
   };
 
   return (
-    <div className="container">
+    <div className="containerMobilepay">
       <img
         className="mobilepay-logo"
         src="../public/images/mobilepay-logo.svg"
